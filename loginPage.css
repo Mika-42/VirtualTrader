@@ -55,6 +55,21 @@ body {
     font-size: 15px;
     color: #ffee00;
 }
+
+@keyframes pulseGlow {
+    0%, 100% {
+        text-shadow: 0 0 1px #ffee00, 0 0 10px rgba(255, 238, 0, 0.91), 0 0 20px rgba(255, 238, 0, 0.88);
+    }
+    50% {
+        text-shadow: 0 0 1px #ffee00, 0 0 20px rgba(255, 238, 0, 0.84), 0 0 40px rgba(255, 238, 0, 0.65);
+    }
+}
+
+#sign-in-link:hover
+{
+    color: #ffee00;
+    animation: pulseGlow 1s infinite;
+}
 /*===Lvl 3===*/
 .log-field, .sign-field {
     display: flex;
@@ -101,7 +116,7 @@ body {
     outline: none;
 }
 
-#login-btn
+#log-in-btn, #sign-in-btn
 {
     margin-top: 15px;
     width: 120px;
@@ -112,6 +127,12 @@ body {
     background: linear-gradient(45deg, #63ffac, #ffee00);
     color: white;
 }
+
+#log-in-btn:hover, #sign-in-btn:hover
+{
+    width: 125px;
+}
+
 /*!*Center div*!*/
 /*#login, #signin, main, body, aside*/
 /*{*/

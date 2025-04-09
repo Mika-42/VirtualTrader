@@ -1,2 +1,2 @@
-+ [loginPage.html](login/sign-in.html) - add menu to reset password
-+ [loginPage.html](login/sign-in.html) - add menu to sign-in
++ [log-in.html](log-in.html) - add popup on log-in failed
++ [sign-in.html](sign-in.html) - add popup on sign-in failed
