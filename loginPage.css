@@ -8,7 +8,7 @@ html, body {
 }
 
 body {
-    background-image: url('../images/background.png');
+    background-image: url('images/background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -56,7 +56,7 @@ body {
     color: #ffee00;
 }
 /*===Lvl 3===*/
-.log-field {
+.log-field, .sign-field {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
@@ -81,7 +81,7 @@ body {
 }
 
 /*===Lvl 4===*/
-.log-label
+.log-label, .sign-label
 {
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     font-size: 12px;
@@ -89,7 +89,7 @@ body {
     margin-bottom: 5px;
 }
 
-.log-input
+.log-input, .sign-input
 {
     width: 100%;
     height:  46px;
