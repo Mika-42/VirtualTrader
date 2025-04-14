@@ -38,10 +38,16 @@ body {
     margin-bottom: 50px;
 }
 
-#log-form
+#log-form, #menu-form
 {
     max-width: 360px;
     width: 100%;
+}
+
+#menu-form
+{
+    flex-direction: row;
+    gap: 20px;
 }
 
 #sign-in
@@ -71,12 +77,18 @@ body {
     animation: pulseGlow 1s infinite;
 }
 /*===Lvl 3===*/
-.log-field, .sign-field {
+.log-field, .sign-field, .menu-field {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
     border: none;
     padding: 0;
+}
+
+.menu-field
+{
+    flex-direction: row;
+    align-items: center;
 }
 
 #login-btn-field
@@ -116,7 +128,7 @@ body {
     outline: none;
 }
 
-#log-in-btn, #sign-in-btn
+#log-in-btn, #sign-in-btn, .menu-btn
 {
     margin-top: 15px;
     width: 120px;
@@ -133,6 +145,32 @@ body {
     width: 125px;
 }
 
+.menu-btn
+{
+    margin: 15px auto auto;
+    width: 47%;
+    height: 60px;
+    font-weight: 900;
+    font-size: 20px;
+}
+
+#log-out
+{
+    margin: 15px auto auto;
+    width: 120px;
+    height: 30px;
+    border-radius: 15px;
+    border: solid 1px white;
+    background: none;
+    font-weight: 900;
+    color: white;
+}
+
+#welcome
+{
+    font-size: 40px;
+    color: white;
+}
 /*!*Center div*!*/
 /*#login, #signin, main, body, aside*/
 /*{*/
