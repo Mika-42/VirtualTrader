@@ -1,3 +1,25 @@
+<?php
+//on se coo
+require_once('bd_connexion.php');
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    $query = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
+
+    $result = mysqli_query($connect, $query);
+
+    if(mysqli_num_rows($result) > 0) {
+        header('location: http://localhost/dev/menu.php', true, 307);
+    }
+    else{
+        echo "pseudo ou mot de passe incorrect";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +32,7 @@
 <aside id="login-view">
     <img id="title" src="images/VT.png" alt="VirtualTrading">
 
-    <form id="log-form" method="post">
+    <form id="log-form" method="post" action="log-in.php">
 
         <fieldset id="email" class="log-field">
             <label class="log-label">Email</label>
@@ -31,7 +53,7 @@
     </form>
 
     <div id="sign-in">
-        <a id="sign-in-link" href="sign-in.html">Sign-in</a>
+        <a id="sign-in-link" href="sign-in.php">Sign-in</a>
     </div>
 </aside>
 

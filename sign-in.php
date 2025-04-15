@@ -39,7 +39,7 @@
     </form>
 
     <div id="sign-in">
-        <a id="sign-in-link" href="log-in.html">Log-in</a>
+        <a id="sign-in-link" href="log-in.php">Log-in</a>
     </div>
 </aside>
 
