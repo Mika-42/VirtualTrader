@@ -17,4 +17,3 @@ if (!$connect) {
 
 // deco de la base pour debug
 // mysqli_close($connect);
-?>
