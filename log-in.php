@@ -1,14 +1,13 @@
 <?php
 
-//on se coo
-require_once('bd_connexion.php');
+include('bd_connexion.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-    $username = $_POST["username"];
+    $email = $_POST["email"];
     $password = $_POST["password"];
 
-    $query = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
+    $query = "SELECT * FROM user WHERE email = '$email' AND password = '$password'";
 
     $result = mysqli_query($connect, $query);
 
@@ -20,3 +19,4 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         echo "pseudo ou mot de passe incorrect";
     }
 }
+?>
