@@ -19,4 +19,3 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         echo "pseudo ou mot de passe incorrect";
     }
 }
-?>
