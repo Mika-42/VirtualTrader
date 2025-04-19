@@ -14,7 +14,7 @@ body {
     background-repeat: no-repeat;
 }
 /*===Lvl 1===*/
-#login-view {
+#login-view, #game-over-view {
 
     height: 100%;
 
@@ -152,6 +152,9 @@ body {
     height: 60px;
     font-weight: 900;
     font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #log-out
@@ -166,10 +169,23 @@ body {
     color: white;
 }
 
-#welcome
+#welcome, #game-over-msg
 {
     font-size: 40px;
     color: white;
+}
+
+#go-to-menu
+{
+    text-decoration: none;
+    text-align: center;
+    color: white;
+}
+
+#game-over-view
+{
+    justify-content: center;
+    align-items: center;
 }
 /*!*Center div*!*/
 /*#login, #signin, main, body, aside*/
