@@ -130,3 +130,13 @@ main
 {
     mask: url('images/sell.svg') no-repeat center;
 }
+
+.action-sell:hover
+{
+    background: #ff6161;
+}
+
+.action-sell:disabled
+{
+    background: #424242;
+}
