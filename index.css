@@ -22,6 +22,7 @@ main
 #action-panel
 {
     width: 20%;
+    min-width: 335px;
     /*background: #b2b2ff;*/
     background: transparent;
     backdrop-filter: blur(50px) brightness(0.7) contrast(0.9);
