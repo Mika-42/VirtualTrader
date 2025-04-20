@@ -15,25 +15,40 @@
     <canvas id="graph"></canvas>
 </main>
 <aside id="action-panel">
-
-<!--    test-->
-    <div id="test1" class="action">
-        <h1 class="action-name">Carrefour</h1>
-        <h2 class="action-price">442€</h2>
-        <h3 class="action-price-evolution">+5%</h3>
-    </div>
-
-    <div id="test2" class="action">
-        <h1 class="action-name">Decathlon</h1>
-        <h2 class="action-price">800€</h2>
-        <h3 class="action-price-evolution">-2%</h3>
-    </div>
-
-    <div id="test3" class="action">
-        <h1 class="action-name">Monoprix</h1>
-        <h2 class="action-price">716€</h2>
-        <h3 class="action-price-evolution">+3%</h3>
-    </div>
 </aside>
 </body>
+
+<script>
+    const newAction = (parentId, id, name, code, price, description, evolution) => {
+            let el = document.createElement('div');
+            el.className = 'action';
+            el.id = id;
+
+            el.innerHTML = `
+                <div class="action-name">${name}</div>
+                <div class="action-code">(${code})</div>
+                <div class="action-price">${price}€</div>
+                <div class="action-price-evolution">${(evolution >= 0) ? '+' : '-'}${Math.abs(evolution) + '%'}</div>
+                <div class="action-description">${description}</div>
+                <button class="action-buy"></button>
+                <button class="action-sell"></button>`;
+
+            let p = document.getElementById(parentId);
+            p.appendChild(el);
+
+        }
+
+    const pid = 'action-panel'
+
+    newAction(pid, 'apple-action', 'Apple Inc.', 'AAPL', 5, 'Technologie, fabricant de produits électroniques.', 5);
+    newAction(pid, 'tesla-action', 'Tesla Inc.', 'TSLA', 10, 'Automobile, spécialisé dans les véhicules électriques.', 2);
+    newAction(pid, 'amazon-action', 'Amazon.com Inc.', 'AMZN', 7, 'E-commerce, services cloud.', -1);
+    newAction(pid, 'microsoft-action', 'Microsoft Corp.', 'MSFT', 15, 'Technologie, logiciels et services cloud.', 1.5);
+    newAction(pid, 'alphabet-action', 'Alphabet Inc.', 'GOOGL', 5.5, 'Secteur technologique, maison-mère de Google.', -2);
+    newAction(pid, 'cocacola-action', 'Coca-Cola Co.', 'KO', 4, 'Boissons non alcoolisées.', 3);
+    newAction(pid, 'nike-action', 'Nike Inc.', 'KO', 8, 'Vêtements et équipements sportifs.', -3.8);
+    newAction(pid, 'intel-action', 'Intel Corp.', 'INTC', 8, 'Fabricant de processeur et semi-conducteurs.', 1.5);
+    newAction(pid, 'boeing-action', 'Boeing Co.', 'BA', 5, 'Aéronautique et défense.', 1.5);
+    newAction(pid, 'visa-action', 'Visa Inc.', 'V', 6, 'Services financiers et paiements électroniques.', 4);
+</script>
 </html>
