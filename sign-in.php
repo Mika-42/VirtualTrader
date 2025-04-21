@@ -1,5 +1,4 @@
 <?php
-
 include('bd_connexion.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -19,8 +18,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     else{
         mysqli_query($connect, $insert);
+        session_destroy();
         header('location: http://localhost/dev/log-in.php', true, 307);
     }
 }
+
+
 
 
