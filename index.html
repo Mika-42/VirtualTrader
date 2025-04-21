@@ -8,7 +8,7 @@
 <body>
 <main>
     <header id="info">
-        <h2 id="date" class="user-data">01/2042</h2>
+        <h2 id="date" class="user-data"></h2>
         <h2 id="username" class="user-data">Foo</h2>
         <h2 id="balance-account" class="user-data">10 000.00€</h2>
     </header>
@@ -52,44 +52,5 @@
     newAction(pid, 'visa-action', 'Visa Inc.', 'V', 6, 'Services financiers et paiements électroniques.', 4);
     </script>
 
-<script>
-    const balanceAccount = document.getElementById('balance-account');
-    let balanceAccountValue = 10000.00; // todo get this value from php !
-
-    const ids = ['apple-action', 'tesla-action', 'amazon-action', 'microsoft-action', 'alphabet-action', 'cocacola-action', 'nike-action', 'intel-action', 'boeing-action', 'visa-action',];
-    for(const id of ids)
-    {
-        const btnSell = document.querySelector(`#${id} .action-sell`);
-        const btnBuy = document.querySelector(`#${id} .action-buy`);
-
-        /**
-         * todo get this from php
-         * query the good id then access to name in html
-         * check if the name match with name in table
-        */
-        let price = document.querySelector(`#${id} .action-price`).innerHTML;
-
-        btnSell.addEventListener('click', () => {
-            btnSell.disabled = true;
-            btnBuy.disabled = false;
-            balanceAccountValue += parseFloat(price);
-            console.log(balanceAccountValue)
-            const formatedIntValue = new Intl.NumberFormat('fr-FR').format(parseInt(balanceAccountValue));
-            const decimalValue = balanceAccountValue.toFixed(2).split('.')[1];
-            balanceAccount.innerText =  `${formatedIntValue}.${decimalValue}€`;
-        });
-
-        btnBuy.addEventListener('click', () => {
-            btnSell.disabled = false;
-            btnBuy.disabled = true;
-
-            balanceAccountValue -= parseFloat(price);
-            console.log(balanceAccountValue)
-            const formatedIntValue = new Intl.NumberFormat('fr-FR').format(parseInt(balanceAccountValue));
-            const decimalValue = balanceAccountValue.toFixed(2).split('.')[1];
-            balanceAccount.innerText =  `${formatedIntValue}.${decimalValue}€`;
-        })
-    }
-
-</script>
+<script src="actions.js"></script>
 </html>
