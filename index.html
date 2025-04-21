@@ -31,7 +31,7 @@
                 <div class="action-price-evolution">${(evolution >= 0) ? '+' : '-'}${Math.abs(evolution) + '%'}</div>
                 <div class="action-description">${description}</div>
                 <button class="action-buy" title="buy"></button>
-                <button class="action-sell" title="sell"></button>`;
+                <button disabled class="action-sell" title="sell"></button>`;
 
             let p = document.getElementById(parentId);
             p.appendChild(el);
@@ -61,6 +61,12 @@
     {
         const btnSell = document.querySelector(`#${id} .action-sell`);
         const btnBuy = document.querySelector(`#${id} .action-buy`);
+
+        /**
+         * todo get this from php
+         * query the good id then access to name in html
+         * check if the name match with name in table
+        */
         let price = document.querySelector(`#${id} .action-price`).innerHTML;
 
         btnSell.addEventListener('click', () => {
@@ -72,6 +78,17 @@
             const decimalValue = balanceAccountValue.toFixed(2).split('.')[1];
             balanceAccount.innerText =  `${formatedIntValue}.${decimalValue}€`;
         });
+
+        btnBuy.addEventListener('click', () => {
+            btnSell.disabled = false;
+            btnBuy.disabled = true;
+
+            balanceAccountValue -= parseFloat(price);
+            console.log(balanceAccountValue)
+            const formatedIntValue = new Intl.NumberFormat('fr-FR').format(parseInt(balanceAccountValue));
+            const decimalValue = balanceAccountValue.toFixed(2).split('.')[1];
+            balanceAccount.innerText =  `${formatedIntValue}.${decimalValue}€`;
+        })
     }
 
 </script>

@@ -137,7 +137,13 @@ main
     background: #ff6161;
 }
 
-.action-sell:disabled
+.action-buy:hover
+{
+    background: #9fff89;
+}
+
+.action-sell:disabled, .action-buy:disabled
 {
     background: #424242;
 }
+
