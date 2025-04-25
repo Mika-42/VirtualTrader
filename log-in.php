@@ -11,8 +11,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $result = mysqli_query($connect, $query);
 
     if(mysqli_num_rows($result) > 0) {
-        session_destroy();
         header('location: menu.html', true, 307);
+        session_destroy();
     }
     else{
         //mathis renvoie l'erreur en html
