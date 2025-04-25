@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "admin";
+$username = "root";
 $password = "";
-$databaseName = "user";
+$databaseName = "test_projet";
 
 //on se connecte a la base de donnée
 $connect = mysqli_connect($servername, $username, $password, $databaseName);
@@ -25,4 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action_type'])) {
     $query = "INSERT INTO transactions (user_id, action_type, quantity) VALUES ($user_id, $action_type, $quantity )";
     mysqli_query($connect, $query);
 }
+
+header('location: menu.html', true, 307);
+
 ?>
