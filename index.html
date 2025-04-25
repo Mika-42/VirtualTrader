@@ -10,7 +10,7 @@
     <header id="info">
         <h2 id="date" class="user-data"></h2>
         <h2 id="username" class="user-data">Foo</h2>
-        <h2 id="balance-account" class="user-data">10 000.00€</h2>
+        <h2 id="balance-account" class="user-data"></h2>
     </header>
     <canvas id="graph"></canvas>
 </main>
@@ -29,9 +29,10 @@
                 <div class="action-code">(${code})</div>
                 <div class="action-price">${price}€</div>
                 <div class="action-price-evolution">${(evolution >= 0) ? '+' : '-'}${Math.abs(evolution) + '%'}</div>
-                <div class="action-description">${description}</div>
                 <button class="action-buy" title="buy"></button>
-                <button disabled class="action-sell" title="sell"></button>`;
+                <button disabled class="action-sell" title="sell"></button>
+                <div class="action-description">${description}</div>
+            `;
 
             let p = document.getElementById(parentId);
             p.appendChild(el);

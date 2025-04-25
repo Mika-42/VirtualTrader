@@ -3,19 +3,25 @@ const dateToString = (date) => {
     return date.toLocaleDateString('fr-FR', options);
 }
 
-    const ids = ['apple-action', 'tesla-action', 'amazon-action', 'microsoft-action', 'alphabet-action', 'cocacola-action', 'nike-action', 'intel-action', 'boeing-action', 'visa-action',];
-    let startDate = new Date(2025, 0);
-    const dateEl = document.getElementById('date');
+const formatBalanceAccount = (balanceAccount) =>
+{
+    const formatedIntValue = new Intl.NumberFormat('fr-FR').format(parseInt(balanceAccount));
+    const decimalValue = balanceAccount.toFixed(2).split('.')[1];
+    return `${formatedIntValue}.${decimalValue}€`;
+};
 
-    dateEl.innerText = dateToString(startDate);
+const ids = ['apple-action', 'tesla-action', 'amazon-action', 'microsoft-action', 'alphabet-action', 'cocacola-action', 'nike-action', 'intel-action', 'boeing-action', 'visa-action',];
 
-    //---function
-    const formatBalanceAccount = (balanceAccount) =>
-    {
-        const formatedIntValue = new Intl.NumberFormat('fr-FR').format(parseInt(balanceAccount));
-        const decimalValue = balanceAccount.toFixed(2).split('.')[1];
-        return `${formatedIntValue}.${decimalValue}€`;
-    };
+let startDate = new Date(2025, 0);
+const dateEl = document.getElementById('date');
+dateEl.innerText = dateToString(startDate);
+
+const balanceAccount = document.getElementById('balance-account');
+let balanceAccountValue = 10000.00; // todo get this value from php !
+balanceAccount.innerText =  formatBalanceAccount(balanceAccountValue);
+
+
+
 
     const updatePrice = (price, evolutionPreviousMoth) => {
 
@@ -44,9 +50,6 @@ const dateToString = (date) => {
             updatePrice();
         }
     }
-
-    const balanceAccount = document.getElementById('balance-account');
-    let balanceAccountValue = 10000.00; // todo get this value from php !
 
     for(const id of ids)
     {
