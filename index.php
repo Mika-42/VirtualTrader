@@ -26,6 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action_type'])) {
     mysqli_query($connect, $query);
 }
 
-header('location: menu.html', true, 307);
+header('location: log-in.html', true, 307);
 
 ?>
