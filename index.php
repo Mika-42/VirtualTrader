@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action_type'])) {
     $action_type = $_POST['action_type'];
     $quantity = $_POST['quantity'];
 
-    $query = "INSERT INTO transactions (user_id, action_type, quantity) VALUES ("francois", "met", "cet merde")";
+    $query = "INSERT INTO transactions (user_id, action_type, quantity) VALUES ($user_id, $action_type, $quantity )";
     mysqli_query($connect, $query);
 }
 ?>
