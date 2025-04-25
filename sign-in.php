@@ -11,6 +11,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $query = "SELECT * FROM user WHERE username = '$username'";
     $insert = "INSERT INTO user (username, email, password) VALUES ('$username', '$email', '$password')";
 
+    mysqli_query($connect, $insert);
     $check = mysqli_query($connect, $query);
 
     if(mysqli_num_rows($check) > 0) {
