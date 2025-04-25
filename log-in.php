@@ -6,7 +6,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    $query = "SELECT * FROM user WHERE email = '$email' AND password = '$password'";
+    $query = "SELECT * FROM Player WHERE email = '$email' AND password = '$password'";
 
     $result = mysqli_query($connect, $query);
 
