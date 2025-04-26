@@ -5,7 +5,7 @@ html,body {
     display: flex;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 
-    background: linear-gradient(45deg, rgba(99, 255, 172), rgba(255, 238, 0));
+    background: rgba(255, 251, 210, 0.88);
 }
 main, #action-panel {
     border: none;
@@ -101,7 +101,7 @@ main
 {
     width: 60px;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .action-price, .action-price-evolution
@@ -114,14 +114,15 @@ main
 {
     width: 35px;
     height: 30px;
+    background: white;
 }
 
 .action-description
 {
-    padding-top: 5px;
+    padding-top: 1px;
     padding-bottom: 5px;
     width: 100%;
-    font-size: 13px;
+    font-size: 11px;
     font-style: italic;
     color: #dadada;
 }
@@ -151,3 +152,34 @@ main
     background: #424242;
 }
 
+#filter
+{
+    margin-top: 5px;
+    margin-left: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+#filterText
+{
+    text-align: center;
+    padding: 3px;
+}
+
+.toggle-input {
+    display: none;
+}
+
+.toggle-label
+{
+    background: rgba(0, 0, 0, 0.11);
+    border-radius: 5px;
+    padding: 3px;
+    min-width: 30px;
+    text-align: center;
+    color: white;
+}
+
+.toggle-input:checked + .toggle-label {
+    background-color: #4caf50;
+}

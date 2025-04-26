@@ -15,6 +15,17 @@
     <canvas id="graph"></canvas>
 </main>
 <aside id="action-panel">
+    <div id="filter">
+        <span id="filterText">Filter:</span>
+        <input type="radio" id="filter-all-btn" name="filter" class="toggle-input" checked>
+        <label for="filter-all-btn" class="toggle-label">All</label>
+
+        <input type="radio" id="filter-buy-btn" name="filter" class="toggle-input">
+        <label for="filter-buy-btn" class="toggle-label">Buy</label>
+
+        <input type="radio" id="filter-sold-btn" name="filter" class="toggle-input">
+        <label for="filter-sold-btn" class="toggle-label">Sold</label>
+    </div>
 </aside>
 </body>
 
@@ -54,4 +65,5 @@
     </script>
 
 <script src="actions.js"></script>
+<script src="filter.js"></script>
 </html>
