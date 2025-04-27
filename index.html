@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="index.css">
     <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
+
 </head>
 <body>
 <main>
@@ -12,7 +15,9 @@
         <h2 id="username" class="user-data">Foo</h2>
         <h2 id="balance-account" class="user-data"></h2>
     </header>
+    <div id="graph-container">
     <canvas id="graph"></canvas>
+    </div>
 </main>
 <aside id="action-panel">
     <div id="filter">
@@ -52,18 +57,23 @@
 
     const pid = 'action-panel';
 
-    newAction(pid, 'apple-action', 'Apple Inc.', 'AAPL', 5, 'Technologie, fabricant de produits électroniques.', 5);
-    newAction(pid, 'tesla-action', 'Tesla Inc.', 'TSLA', 10, 'Automobile, spécialisé dans les véhicules électriques.', 2);
-    newAction(pid, 'amazon-action', 'Amazon.com Inc.', 'AMZN', 7, 'E-commerce, services cloud.', -1);
-    newAction(pid, 'microsoft-action', 'Microsoft Corp.', 'MSFT', 15, 'Technologie, logiciels et services cloud.', 1.5);
-    newAction(pid, 'alphabet-action', 'Alphabet Inc.', 'GOOGL', 5.5, 'Secteur technologique, maison-mère de Google.', -2);
-    newAction(pid, 'cocacola-action', 'Coca-Cola Co.', 'KO', 4.1, 'Boissons non alcoolisées.', 3);
-    newAction(pid, 'nike-action', 'Nike Inc.', 'KO', 8, 'Vêtements et équipements sportifs.', -3.8);
-    newAction(pid, 'intel-action', 'Intel Corp.', 'INTC', 8, 'Fabricant de processeur et semi-conducteurs.', 1.5);
-    newAction(pid, 'boeing-action', 'Boeing Co.', 'BA', 5, 'Aéronautique et défense.', 1.5);
-    newAction(pid, 'visa-action', 'Visa Inc.', 'V', 6, 'Services financiers et paiements électroniques.', 4);
+    newAction(pid, 'apple-action', 'Apple Inc.', 'AAPL', 500, 'Technologie, fabricant de produits électroniques.', 5);
+    newAction(pid, 'tesla-action', 'Tesla Inc.', 'TSLA', 100, 'Automobile, spécialisé dans les véhicules électriques.', 2);
+    newAction(pid, 'amazon-action', 'Amazon.com Inc.', 'AMZN', 700, 'E-commerce, services cloud.', -1);
+    newAction(pid, 'microsoft-action', 'Microsoft Corp.', 'MSFT', 150, 'Technologie, logiciels et services cloud.', 1.5);
+    newAction(pid, 'alphabet-action', 'Alphabet Inc.', 'GOOGL', 500.5, 'Secteur technologique, maison-mère de Google.', -2);
+    newAction(pid, 'cocacola-action', 'Coca-Cola Co.', 'KO', 407.1, 'Boissons non alcoolisées.', 3);
+    newAction(pid, 'nike-action', 'Nike Inc.', 'KO', 800, 'Vêtements et équipements sportifs.', -3.8);
+    newAction(pid, 'intel-action', 'Intel Corp.', 'INTC', 80, 'Fabricant de processeur et semi-conducteurs.', 1.5);
+    newAction(pid, 'boeing-action', 'Boeing Co.', 'BA', 550, 'Aéronautique et défense.', 1.5);
+    newAction(pid, 'visa-action', 'Visa Inc.', 'V', 660, 'Services financiers et paiements électroniques.', 4);
     </script>
 
+<script>
+    let startDate = new Date(2025, 0);
+</script>
+<script src="graph.js"></script>
 <script src="actions.js"></script>
 <script src="filter.js"></script>
+
 </html>

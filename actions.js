@@ -12,7 +12,6 @@ const formatBalanceAccount = (balanceAccount) =>
 
 const ids = ['apple-action', 'tesla-action', 'amazon-action', 'microsoft-action', 'alphabet-action', 'cocacola-action', 'nike-action', 'intel-action', 'boeing-action', 'visa-action',];
 
-let startDate = new Date(2025, 0);
 const dateEl = document.getElementById('date');
 dateEl.innerText = dateToString(startDate);
 
@@ -20,9 +19,7 @@ const balanceAccount = document.getElementById('balance-account');
 let balanceAccountValue = 10000.00; // todo get this value from php !
 balanceAccount.innerText =  formatBalanceAccount(balanceAccountValue);
 
-
-
-
+updateChart(startDate, balanceAccountValue );
     const updatePrice = (price, evolutionPreviousMoth) => {
 
             const variation = (Math.random() * 6) - 3; // [-3, 3]
@@ -44,11 +41,15 @@ balanceAccount.innerText =  formatBalanceAccount(balanceAccountValue);
     const daily = () => {
         startDate.setMonth(startDate.getMonth() + 1);
         dateEl.innerText = dateToString(startDate);
+
+        updateChart(startDate, balanceAccountValue );
+
         for(const id of ids)
         {
             //todo query price and previous evolution
             updatePrice();
         }
+
     }
 
     for(const id of ids)
@@ -78,4 +79,7 @@ balanceAccount.innerText =  formatBalanceAccount(balanceAccountValue);
         });
     }
 
-setInterval(daily, 60000);
+const timeout = 600; //60000
+
+setInterval(daily, timeout);
+

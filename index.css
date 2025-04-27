@@ -10,13 +10,16 @@ html,body {
 main, #action-panel {
     border: none;
     border-radius: 7px;
-    height: auto;
     margin: 7px;
+    height: auto;
+
 }
 
 main
 {
     width: 80%;
+    display: flex;
+    flex-direction: column;
 }
 
 #action-panel
@@ -31,7 +34,7 @@ main
 #info
 {
     width: 100%;
-    height: 7%;
+    height: 6%;
     min-height: 50px;
     background: transparent;
     backdrop-filter: blur(50px) brightness(0.6) contrast(0.9);
@@ -43,10 +46,16 @@ main
 #graph
 {
     width: 100%;
-    height: 93%;
+    height: auto;
     background: transparent;
     backdrop-filter: blur(50px) brightness(0.7) contrast(0.9);
     border-radius: 0 0 7px 7px;
+}
+
+#graph-container
+{
+    width: 100%;
+    height: 93%;
 }
 
 .user-data
