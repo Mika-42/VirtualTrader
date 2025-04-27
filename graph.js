@@ -1,15 +1,14 @@
 
-// Create the chart
 const ctx = document.getElementById('graph').getContext('2d');
 const walletChart = new Chart(ctx, {
-    type: 'line', // Line chart
+    type: 'line',
     data: {
         labels: ['','','','','','','','','','','','',''],
         datasets: [{
             label: '',
             data: [NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN],
             borderColor: 'rgb(133,255,118)',
-            backgroundColor: 'rgb(112,181,100)',
+            backgroundColor: 'rgba(112,181,100,0.03)',
             fill: true,
             tension: 0.1 // Smooth the line
         }]

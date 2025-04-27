@@ -1,8 +1,3 @@
-const dateToString = (date) => {
-    const options = {year: 'numeric', month: 'long'};
-    return date.toLocaleDateString('fr-FR', options);
-}
-
 const formatBalanceAccount = (balanceAccount) =>
 {
     const formatedIntValue = new Intl.NumberFormat('fr-FR').format(parseInt(balanceAccount));
@@ -13,7 +8,7 @@ const formatBalanceAccount = (balanceAccount) =>
 const ids = ['apple-action', 'tesla-action', 'amazon-action', 'microsoft-action', 'alphabet-action', 'cocacola-action', 'nike-action', 'intel-action', 'boeing-action', 'visa-action',];
 
 const dateEl = document.getElementById('date');
-dateEl.innerText = dateToString(startDate);
+dateEl.innerText = startDate.toLocaleDateString();
 
 const balanceAccount = document.getElementById('balance-account');
 let balanceAccountValue = 10000.00; // todo get this value from php !
@@ -39,11 +34,15 @@ updateChart(startDate, balanceAccountValue );
     }
 
     const daily = () => {
-        startDate.setMonth(startDate.getMonth() + 1);
-        dateEl.innerText = dateToString(startDate);
+        startDate.setDate(startDate.getDate() + 1);
+        dateEl.innerText = startDate.toLocaleDateString();
 
         updateChart(startDate, balanceAccountValue );
 
+        for(let i = 0; i < 3; ++i)
+        {
+            updateActionsChart(graphAct[i], startDate, 100);
+        }
         for(const id of ids)
         {
             //todo query price and previous evolution
@@ -79,7 +78,6 @@ updateChart(startDate, balanceAccountValue );
         });
     }
 
-const timeout = 600; //60000
-
+const timeout = 500;
 setInterval(daily, timeout);
 

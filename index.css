@@ -5,7 +5,7 @@ html,body {
     display: flex;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 
-    background: rgba(255, 251, 210, 0.88);
+    background: rgb(255, 217, 217);
 }
 main, #action-panel {
     border: none;
@@ -20,6 +20,7 @@ main
     width: 80%;
     display: flex;
     flex-direction: column;
+    gap: 5px;
 }
 
 #action-panel
@@ -34,51 +35,65 @@ main
 #info
 {
     width: 100%;
-    height: 6%;
-    min-height: 50px;
+    height: 4%;
+    min-height: 40px;
     background: transparent;
     backdrop-filter: blur(50px) brightness(0.6) contrast(0.9);
-    border-radius: 7px 7px 0 0;
+    border-radius: 7px;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 }
 
-#graph
+#graph-widget
+{
+    width: 100%;
+    height: 96%;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.chart
 {
     width: 100%;
     height: auto;
     background: transparent;
     backdrop-filter: blur(50px) brightness(0.7) contrast(0.9);
-    border-radius: 0 0 7px 7px;
+    border-radius: 7px;
 }
 
-#graph-container
+.graph-container
 {
     width: 100%;
-    height: 93%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#group
+{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.sub-graph
+{
+    /*height: ;*/
+    /*width: 100%;*/
 }
 
 .user-data
 {
     align-content: center;
     margin: 0;
-    font-size: 40px;
-    padding-left: 15px;
+    font-size: 25px;
 }
 
-#date
-{
-    width: 50%;
-}
-#username
-{
-    width: 25%;
-}
-#balance-account
-{
-    width: 25%;
-    min-width: 210px;
-}
+
 
 .action
 {
@@ -191,4 +206,16 @@ main
 
 .toggle-input:checked + .toggle-label {
     background-color: #4caf50;
+}
+
+.chart-container
+{
+    width: 100%;
+    height: 33%;
+    display: flex;
+    flex-direction: column;
+}
+.action-graph
+{
+    width: 100%;
 }
