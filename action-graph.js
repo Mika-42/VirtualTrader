@@ -9,14 +9,14 @@ let graphAct = [];
 
 const newChart = (g) => {
     return new Chart(g, {
-        type: 'line',
+        type: 'bar',
         data: {
             labels: ['', '', '', '', '', '', '', '', '', '', '', '', ''],
             datasets: [{
                 label: '',
                 data: [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN],
                 borderColor: 'rgb(255,159,34)',
-                backgroundColor: 'rgba(112,181,100,0.03)',
+                backgroundColor: 'rgba(255,238,0,0.84)',
                 fill: true,
                 tension: 0.1 // Smooth the line
             }]

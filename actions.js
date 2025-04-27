@@ -41,7 +41,7 @@ updateChart(startDate, balanceAccountValue );
 
         for(let i = 0; i < 3; ++i)
         {
-            updateActionsChart(graphAct[i], startDate, 100);
+            updateActionsChart(graphAct[i], startDate,  Math.floor(Math.random() * (200 - 50 + 1)) + 50); //todo remove fake value
         }
         for(const id of ids)
         {
