@@ -3,9 +3,9 @@ include('index.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action']) && $_POST['action'] = 'LOGOUT') {
-        session_destroy();
-        header('Location: log-in.php');
-        exit();
+//        session_destroy();
+//        header('Location: log-in.php');
+//        exit();
     }
     if (isset($_POST['action']) && $_POST['action'] = 'RESET') {
         if (isset($_SESSION['user_id'])) {
@@ -13,8 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             mysqli_query($connect,$query);
             session_destroy();
-            header('location: menu.php', true, 307);
-            exit();
         }
     }
     if (isset($_POST['action']) && $_POST['action'] = 'CONTINUE') {
@@ -23,8 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $result=mysqli_query($connect,$query);
             if(mysqli_num_rows($result) > 0) {
-                session_destroy();
-                header('location: menu.php', true, 307);
+
             }
         }
     }

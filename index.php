@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$databaseName = "VirtualTrader_Projet";
+$databaseName = "VirtualTrader";
 
 //on se connecte a la base de donnée
 $connect = mysqli_connect($servername, $username, $password, $databaseName);
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action_type'])) {
 }
 
 header('location: log-in.php', true, 307);
-
+exit();
 ?>
 
 <!DOCTYPE html>
