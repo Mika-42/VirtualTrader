@@ -18,3 +18,44 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         //todo mathis de mauvais mot de passe / username renvoie l'erreur en html
     }
 }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="loginPage.css">
+    <title>Log-in</title>
+</head>
+<body>
+
+<aside id="login-view">
+    <img id="title" src="images/VT.png" alt="VirtualTrading">
+
+    <form id="log-form" method="post" action="log-in.php">
+        <fieldset id="email" class="log-field">
+            <label for="email-entry" class="log-label">Email</label>
+            <input id="email-entry" class="log-input" type="email" name="email" required>
+        </fieldset>
+
+        <fieldset id="password" class="log-field">
+            <label for="password-entry" class="log-label">Password</label>
+            <input id="password-entry" class="log-input" type="password" name="password" required>
+        </fieldset>
+
+        <fieldset id="login-btn-field">
+            <input id="log-in-btn" type="submit" value="LOGIN">
+        </fieldset>
+
+        <!--        <a id="forgotten-password-link">forgotten password ?</a>-->
+
+    </form>
+
+    <div id="sign-in">
+        <a id="sign-in-link" href="sign-in.php">Sign-in</a>
+    </div>
+</aside>
+
+
+</body>
+</html>

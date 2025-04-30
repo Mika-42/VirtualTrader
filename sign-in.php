@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (mysqli_query($connect, $insert)) {
             session_destroy();
-            header('Location: log-in.html', true, 307);
+            header('Location: log-in.php', true, 307);
             exit;
         } else {
             // Gérer l'erreur d'insertion
@@ -76,7 +76,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
 
     <div id="sign-in">
-        <a id="sign-in-link" href="log-in.html">Log-in</a>
+        <a id="sign-in-link" href="log-in.php">Log-in</a>
     </div>
 </aside>
 
