@@ -29,3 +29,154 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action_type'])) {
 header('location: log-in.html', true, 307);
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="index.css">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
+
+</head>
+<body>
+<main>
+    <header id="info">
+        <h2 id="date" class="user-data"></h2>
+        <h2 id="username" class="user-data">Foo</h2>
+        <h2 id="balance-account" class="user-data"></h2>
+    </header>
+
+    <div id="graph-widget">
+
+        <div class="graph-container">
+            <canvas id="graph" class="chart"></canvas>
+        </div>
+
+        <div id="group">
+            <div class="chart-container">
+                <div class="graph-container sub-graph">
+                    <canvas id="action-chart-1" class="chart action-graph"></canvas>
+                </div>
+
+                <span>
+                <label for="actionSelect-1">Action: </label>
+                    <!--                todo add actions in js-->
+                <select id="actionSelect-1">
+                    <option value="apple">Apple</option>
+                    <option value="banana">Banana</option>
+                    <option value="cherry">Cherry</option>
+                    <option value="date">Date</option>
+                    <option value="elderberry">Elderberry</option>
+                </select>
+                    </span>
+            </div>
+
+
+            <div class="chart-container">
+                <div class="graph-container sub-graph">
+                    <canvas id="action-chart-2" class="chart action-graph"></canvas>
+                </div>
+
+                <span>
+                <label for="actionSelect-2">Action: </label>
+                    <!--                todo add actions in js-->
+                <select id="actionSelect-2">
+                    <option value="apple">Apple</option>
+                    <option value="banana">Banana</option>
+                    <option value="cherry">Cherry</option>
+                    <option value="date">Date</option>
+                    <option value="elderberry">Elderberry</option>
+                </select>
+                    </span>
+            </div>
+
+
+            <div class="chart-container">
+                <div class="graph-container sub-graph">
+                    <canvas id="action-chart-3" class="chart action-graph"></canvas>
+                </div>
+
+                <span>
+                <label for="actionSelect-3">Action: </label>
+                    <!--                todo add actions in js-->
+                <select id="actionSelect-3">
+                    <option value="apple">Apple</option>
+                    <option value="banana">Banana</option>
+                    <option value="cherry">Cherry</option>
+                    <option value="date">Date</option>
+                    <option value="elderberry">Elderberry</option>
+                </select>
+                    </span>
+            </div>
+
+            <!--            <div class="graph-container sub-graph">-->
+            <!--                <canvas id="action-chart-2" class="chart action-graph"></canvas>-->
+            <!--            </div>-->
+
+            <!--            <div class="graph-container sub-graph">-->
+            <!--                <canvas id="action-chart-3" class="chart action-graph"></canvas>-->
+            <!--            </div>-->
+        </div>
+    </div>
+</main>
+<aside id="action-panel">
+    <div id="filter">
+        <span id="filterText">Filter:</span>
+        <input type="radio" id="filter-all-btn" name="filter" class="toggle-input" checked>
+        <label for="filter-all-btn" class="toggle-label">All</label>
+
+        <input type="radio" id="filter-buy-btn" name="filter" class="toggle-input">
+        <label for="filter-buy-btn" class="toggle-label">Buy</label>
+
+        <input type="radio" id="filter-sold-btn" name="filter" class="toggle-input">
+        <label for="filter-sold-btn" class="toggle-label">Sold</label>
+    </div>
+</aside>
+</body>
+
+<script>
+    const newAction = (parentId, id, name, code, price, description, evolution) => {
+        let el = document.createElement('div');
+        el.className = 'action';
+        el.id = id;
+
+        el.innerHTML = `
+                <div class="action-name">${name}</div>
+                <div class="action-code">(${code})</div>
+                <div class="action-price">${price}€</div>
+                <div class="action-price-evolution">${(evolution >= 0) ? '+' : '-'}${Math.abs(evolution) + '%'}</div>
+                <button class="action-buy" title="buy"></button>
+                <button disabled class="action-sell" title="sell"></button>
+                <div class="action-description">${description}</div>
+            `;
+
+        let p = document.getElementById(parentId);
+        p.appendChild(el);
+
+    }
+
+    const pid = 'action-panel';
+
+    newAction(pid, 'apple-action', 'Apple Inc.', 'AAPL', 500, 'Technologie, fabricant de produits électroniques.', 5);
+    newAction(pid, 'tesla-action', 'Tesla Inc.', 'TSLA', 100, 'Automobile, spécialisé dans les véhicules électriques.', 2);
+    newAction(pid, 'amazon-action', 'Amazon.com Inc.', 'AMZN', 700, 'E-commerce, services cloud.', -1);
+    newAction(pid, 'microsoft-action', 'Microsoft Corp.', 'MSFT', 150, 'Technologie, logiciels et services cloud.', 1.5);
+    newAction(pid, 'alphabet-action', 'Alphabet Inc.', 'GOOGL', 500.5, 'Secteur technologique, maison-mère de Google.', -2);
+    newAction(pid, 'cocacola-action', 'Coca-Cola Co.', 'COCA', 407.1, 'Boissons non alcoolisées.', 3);
+    newAction(pid, 'nike-action', 'Nike Inc.', 'KO', 800, 'Vêtements et équipements sportifs.', -3.8);
+    newAction(pid, 'intel-action', 'Intel Corp.', 'INTC', 80, 'Fabricant de processeur et semi-conducteurs.', 1.5);
+    newAction(pid, 'boeing-action', 'Boeing Co.', 'BA', 550, 'Aéronautique et défense.', 1.5);
+    newAction(pid, 'visa-action', 'Visa Inc.', 'V', 660, 'Services financiers et paiements électroniques.', 4);
+</script>
+
+<script>
+    let startDate = new Date('01/01/2025');
+</script>
+<script src="action-graph.js"></script>
+<script src="graph.js"></script>
+<script src="actions.js"></script>
+<script src="filter.js"></script>
+
+</html>
