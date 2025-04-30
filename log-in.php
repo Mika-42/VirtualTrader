@@ -1,25 +1,3 @@
-<?php
-include('db_connexion.php');
-
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-
-    $query = "SELECT * FROM Player WHERE email = '$email' AND password = '$password'";
-
-    $result = mysqli_query($connect, $query);
-
-    if(mysqli_num_rows($result) > 0) {
-        header('location: menu.php', true, 307);
-        exit();
-    }
-    else{
-        //todo mathis de mauvais mot de passe / username renvoie l'erreur en html
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,6 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             <input id="log-in-btn" type="submit" value="LOGIN">
         </fieldset>
 
+        <div id="error-msg"></div>
         <!--        <a id="forgotten-password-link">forgotten password ?</a>-->
 
     </form>
@@ -56,6 +35,36 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     </div>
 </aside>
 
+<?php
+include('db_connexion.php');
 
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    $query = "SELECT * FROM Player WHERE email = '$email' AND password = '$password'";
+
+    $result = mysqli_query($connect, $query);
+
+    if(mysqli_num_rows($result) > 0) {
+        header('location: menu.php', true, 307);
+        echo /** @lang javascript */
+        "<script>
+            const el = document.getElementById('error-msg');
+            el.innerText = '';
+        </script>";
+
+        exit();
+    }
+    else{
+        echo /** @lang javascript */
+        "<script>
+            const el = document.getElementById('error-msg');
+            el.innerText = 'Email or password is incorrect';
+        </script>";
+    }
+}
+?>
 </body>
 </html>

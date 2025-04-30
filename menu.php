@@ -2,12 +2,12 @@
 include('db_connexion.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['action']) && $_POST['action'] = 'LOGOUT') {
-//        session_destroy();
-//        header('Location: log-in.php');
-//        exit();
+    if (isset($_POST['action']) && $_POST['action'] === 'LOGOUT') {
+        //session_destroy();
+        header('location: log-in.php');
+        exit();
     }
-    if (isset($_POST['action']) && $_POST['action'] = 'RESET') {
+    if (isset($_POST['action']) && $_POST['action'] === 'RESET') {
         if (isset($_SESSION['user_id'])) {
             $userId = $_SESSION['user_id'];
 
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_destroy();
         }
     }
-    if (isset($_POST['action']) && $_POST['action'] = 'CONTINUE') {
+    if (isset($_POST['action']) && $_POST['action'] === 'CONTINUE') {
         if (isset($_SESSION['user_id'])) {
             $userId = $_SESSION['user_id'];
 
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <aside id="login-view">
     <h1 id="welcome">Hi Foo !</h1> <!-- todo insert username -->
 
-    <form id="menu-form" method="post">
+    <form id="menu-form" method="POST">
 
         <fieldset class="menu-field">
             <input id="continue" class="menu-btn" type="submit" value="CONTINUE">
