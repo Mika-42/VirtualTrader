@@ -10,7 +10,7 @@
 <aside id="login-view">
     <img id="title" src="images/VT.png" alt="VirtualTrading">
 
-    <form id="log-form" method="post" action="sign-in.php">
+    <form id="log-form" method="post">
 
         <fieldset id="username" class="sign-field">
             <label for="username-entry" class="sign-label">Username</label>
@@ -33,7 +33,7 @@
         </fieldset>
 
         <fieldset id="login-btn-field">
-            <input id="sign-in-btn" type="submit" value="SIGN-IN">
+            <input id="sign-in-btn" class="button" type="submit" value="SIGN-IN">
         </fieldset>
 
         <div id="error-msg"></div>

@@ -143,7 +143,7 @@
 </script>
 <script src="action-graph.js"></script>
 <script src="graph.js"></script>
-<script src="actions.js"></script>
+<script src="index.js"></script>
 <script src="filter.js"></script>
 
 </html>

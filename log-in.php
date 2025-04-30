@@ -10,7 +10,7 @@
 <aside id="login-view">
     <img id="title" src="images/VT.png" alt="VirtualTrading">
 
-    <form id="log-form" method="post" action="log-in.php">
+    <form id="log-form" method="post">
         <fieldset id="email" class="log-field">
             <label for="email-entry" class="log-label">Email</label>
             <input id="email-entry" class="log-input" type="email" name="email" required>
@@ -22,7 +22,7 @@
         </fieldset>
 
         <fieldset id="login-btn-field">
-            <input id="log-in-btn" type="submit" value="LOGIN">
+            <input id="log-in-btn" type="submit" class="button" value="LOGIN">
         </fieldset>
 
         <div id="forgotten-container"><a href="reset-password.php" id="forgotten-password-link">Reset password</a></div>

@@ -15,23 +15,6 @@ let balanceAccountValue = 10000.00; // todo get this value from php !
 balanceAccount.innerText =  formatBalanceAccount(balanceAccountValue);
 
 updateChart(startDate, balanceAccountValue );
-    const updatePrice = (price, evolutionPreviousMoth) => {
-
-            const variation = (Math.random() * 6) - 3; // [-3, 3]
-
-            let evolution = evolutionPreviousMoth + variation;
-
-            evolution = Math.max(-10, Math.min(10, evolution));
-
-            let p = price * (1 + evolution / 100);
-
-            p = Math.max(1, p);
-
-            return {
-                price: Math.round(p * 100) / 100,
-                evolution: Math.round(evolution * 100) / 100
-            };
-    }
 
     const daily = () => {
         startDate.setDate(startDate.getDate() + 1);
@@ -46,7 +29,7 @@ updateChart(startDate, balanceAccountValue );
         for(const id of ids)
         {
             //todo query price and previous evolution
-            updatePrice();
+            //updatePrice();
         }
 
     }

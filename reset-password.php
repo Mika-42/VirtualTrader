@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="loginPage.css">
-    <title>Log-in</title>
+    <title>Reset password</title>
 </head>
 <body>
 
 <aside id="login-view">
     <h1 class="big-title">Reset password</h1>
 
-    <form id="log-form" method="post" action="log-in.php">
+    <form id="log-form" method="POST">
         <fieldset id="email" class="log-field">
             <label for="email-entry" class="log-label">Email</label>
             <input id="email-entry" class="log-input" type="email" name="email" required>
@@ -30,15 +30,15 @@
         </fieldset>
 
         <fieldset id="login-btn-field">
-            <input id="log-in-btn" type="submit" value="RESET">
+            <input id="reset-btn"  class="button" type="submit" value="RESET">
         </fieldset>
 
         <div id="error-msg"></div>
-
+        <div id="info-msg"></div>
     </form>
 
     <div id="sign-in">
-        <a id="sign-in-link" href="sign-in.php">Sign-in</a>
+        <a id="sign-in-link" href="log-in.php">Log-in</a>
     </div>
 </aside>
 
@@ -48,21 +48,49 @@ include('db_connexion.php');
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $email = $_POST["email"];
-    $old_password = $_POST["*password"];
-    $New_password = $_POST["new_password"];
-    $confirm_password = $_POST["confirm_password"];
+    $old_password = $_POST["old-password"];
+    $new_password = $_POST["new-password"];
+    $confirm_password = $_POST["confirm-new-password"];
 
     $query = "SELECT * FROM Player WHERE email = '$email' AND password = '$old_password'";
 
     $result = mysqli_query($connect, $query);
 
     if(mysqli_num_rows($result) > 0) {
-        $mama = "UPDATE Player SET password = '$New_password' WHERE email = '$email'";
-        mysqli_query($connect, $mama);
-        header('location: menu.php', true, 307);
+
+        if($new_password === $confirm_password){
+
+            $query = "UPDATE Player SET password = '$new_password' WHERE email = '$email'";
+            mysqli_query($connect, $query);
+
+            echo /** @lang javascript */
+            "<script>
+                const el = document.getElementById('error-msg');
+                const ef = document.getElementById('info-msg');
+                ef.innerText = 'Password successfully reset!';
+                el.innerText = '';
+            </script>";
+
+            exit;
+        }
+        else{
+            echo /** @lang javascript */
+            "<script>
+                const el = document.getElementById('error-msg');
+                const ef = document.getElementById('info-msg');
+                el.innerText = 'The confirm password does not match.';
+                ef.innerText = '';
+            </script>";
+        }
     }
     else{
-        /// todo mathis renvoie l'erreur
+        echo /** @lang javascript */
+        "<script>
+            const el = document.getElementById('error-msg');
+            const ef = document.getElementById('info-msg');
+            el.innerText = 'Email or old password do not exist.';
+            ef.innerText = '';
+        </script>";
     }
 }
 ?>

@@ -135,7 +135,7 @@ body {
     outline: none;
 }
 
-#log-in-btn, #sign-in-btn, .menu-btn
+.button, .menu-btn
 {
     margin-top: 15px;
     width: 120px;
@@ -147,7 +147,7 @@ body {
     color: white;
 }
 
-#log-in-btn:hover, #sign-in-btn:hover
+.button:hover
 {
     width: 125px;
 }
@@ -199,6 +199,14 @@ body {
 {
     color: red;
     background: rgba(255, 0, 0, 0.07);
+    border-radius: 10px;
+    text-align: center;
+}
+
+#info-msg
+{
+    color: #63ffac;
+    background: rgba(99, 255, 172, 0.09);
     border-radius: 10px;
     text-align: center;
 }
