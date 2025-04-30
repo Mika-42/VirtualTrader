@@ -1,5 +1,6 @@
 const updateActionsInHTML = (data) =>
 {
+    console.log(data)
     data['actions'].forEach(e => {
         const price = document.querySelector(`#${e.code} .action-price`);
         const evolution = document.querySelector(`#${e.code} .action-price`); // todo set the innerText
@@ -18,7 +19,7 @@ const updateActionsInHTML = (data) =>
         btnBuy.addEventListener('click', () => {
             btnSell.disabled = false;
             btnBuy.disabled = true;
-            balanceAccountValue -= parseFloat(e.value);
+            balanceAccountValue = parseFloat(e.value);
             balanceAccount.innerText = formatBalanceAccount(balanceAccountValue);
         });
     });
@@ -48,9 +49,6 @@ const addActionsToHTML = (data) =>
         let p = document.getElementById(pid);
         p.appendChild(el);
     });
-
-
-
 }
 const updatePrices = () => {
 
@@ -73,5 +71,5 @@ const updatePrices = () => {
 }
 
 //----
-getFromPHP('fetch_data.php',addActionsToHTML);
-getFromPHP('fetch_data.php',updateActionsInHTML);
+getFromPHP(addActionsToHTML);
+getFromPHP(updateActionsInHTML);

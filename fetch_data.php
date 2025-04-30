@@ -1,5 +1,4 @@
 <?php
-global $userId;
 include("db_connexion.php");
 header('Content-Type: application/json');
 
@@ -13,7 +12,8 @@ if(mysqli_num_rows($result) > 0){
     }
 }
 
-$balanceAccounts = mysqli_query($connect, "SELECT Balance FROM player WHERE id='$userId'");
+$ID = getCurrentUser_Id();
+$balanceAccounts = $ID < 0 ? 0 : mysqli_query($connect, "SELECT Balance FROM player WHERE id='$ID'");
 
 $data = [
     'actions' => $actions,

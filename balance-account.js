@@ -12,5 +12,6 @@ const formatBalanceAccount = (num) => {
     return `${formattedInteger}.${decimalPart}€`;
 }
 const balanceAccount = document.getElementById('balance-account');
-let balanceAccountValue = 10000.00; // todo get this value from php !
+let balanceAccountValue = 0;
+getFromPHP((data) => balanceAccountValue = data['balanceAccount'])
 balanceAccount.innerText =  formatBalanceAccount(balanceAccountValue);

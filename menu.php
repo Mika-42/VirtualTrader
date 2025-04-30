@@ -12,7 +12,6 @@ if (getCurrentUser_Id() !== null) {
     $playerName = $result ? htmlspecialchars(mysqli_fetch_assoc($result)["username"]) : "";
 }
 
-
 ?>
 
 <!DOCTYPE html>
