@@ -5,7 +5,7 @@ const formatBalanceAccount = (balanceAccount) =>
     return `${formatedIntValue}.${decimalValue}€`;
 };
 
-const ids = ['apple-action', 'tesla-action', 'amazon-action', 'microsoft-action', 'alphabet-action', 'cocacola-action', 'nike-action', 'intel-action', 'boeing-action', 'visa-action',];
+const ids = Array.from(document.querySelectorAll('.action')).map(i => i.id);
 
 const dateEl = document.getElementById('date');
 dateEl.innerText = startDate.toLocaleDateString();
@@ -34,32 +34,6 @@ updateChart(startDate, balanceAccountValue );
 
     }
 
-    for(const id of ids)
-    {
-        const btnSell = document.querySelector(`#${id} .action-sell`);
-        const btnBuy = document.querySelector(`#${id} .action-buy`);
-
-        /**
-         * todo get this from php
-         * query the good id then access to name in html
-         * check if the name match with name in table
-         */
-        let price = document.querySelector(`#${id} .action-price`).innerHTML;
-
-        btnSell.addEventListener('click', () => {
-            btnSell.disabled = true;
-            btnBuy.disabled = false;
-            balanceAccountValue += parseFloat(price);
-            balanceAccount.innerText =  formatBalanceAccount(balanceAccountValue);
-        });
-
-        btnBuy.addEventListener('click', () => {
-            btnSell.disabled = false;
-            btnBuy.disabled = true;
-            balanceAccountValue -= parseFloat(price);
-            balanceAccount.innerText =  formatBalanceAccount(balanceAccountValue);
-        });
-    }
 
 const timeout = 500;
 setInterval(daily, timeout);

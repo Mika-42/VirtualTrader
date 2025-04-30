@@ -1,6 +1,74 @@
+const accessToActions = (func) => {
+    fetch('fetch_actions.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            func(data);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+};
+
+const updateActionsInHTML = (data) =>
+{
+    data.forEach(e => {
+        const price = document.querySelector(`#${e.code} .action-price`);
+        const evolution = document.querySelector(`#${e.code} .action-price`); // todo set the innerText
+        const btnSell = document.querySelector(`#${e.code} .action-sell`);
+        const btnBuy = document.querySelector(`#${e.code} .action-buy`);
+
+        price.innerText = `${e.value}€`;
+
+        btnSell.addEventListener('click', () => {
+            btnSell.disabled = true;
+            btnBuy.disabled = false;
+            balanceAccountValue += parseFloat(e.value);
+            balanceAccount.innerText = formatBalanceAccount(balanceAccountValue);
+        });
+
+        btnBuy.addEventListener('click', () => {
+            btnSell.disabled = false;
+            btnBuy.disabled = true;
+            balanceAccountValue -= parseFloat(e.value);
+            balanceAccount.innerText = formatBalanceAccount(balanceAccountValue);
+        });
+    });
+}
+const addActionsToHTML = (data) =>
+{
+    let evolution = 5; // todo replace this variable by e.evolution
+
+    const pid = 'action-panel';
+
+    data.forEach(e =>
+    {
+        let el = document.createElement('div');
+        el.className = 'action';
+        el.id = e.code;
+
+        el.innerHTML = `
+                <div class="action-name">${e.name}</div>
+                <div class="action-code">(${e.code})</div>
+                <div class="action-price">${e.value}€</div>
+                <div class="action-price-evolution">${(evolution >= 0) ? '+' : '-'}${Math.abs(evolution) + '%'}</div>
+                <button class="action-buy" title="buy"></button>
+                <button disabled class="action-sell" title="sell"></button>
+                <div class="action-description">${e.description}</div>
+            `;
+
+        let p = document.getElementById(pid);
+        p.appendChild(el);
+    });
+
+
+
+}
 const updatePrices = () => {
 
-    let price, old_evolution;
+    let price = 0, old_evolution = 0;
 
     const variation = (Math.random() * 6) - 3; // [-3, 3]
 
@@ -17,3 +85,7 @@ const updatePrices = () => {
         evolution: Math.round(evolution * 100) / 100
     };
 }
+
+//----
+accessToActions(addActionsToHTML);
+accessToActions(updateActionsInHTML);

@@ -79,13 +79,6 @@
                     </span>
       </div>
 
-      <!--            <div class="graph-container sub-graph">-->
-      <!--                <canvas id="action-chart-2" class="chart action-graph"></canvas>-->
-      <!--            </div>-->
-
-      <!--            <div class="graph-container sub-graph">-->
-      <!--                <canvas id="action-chart-3" class="chart action-graph"></canvas>-->
-      <!--            </div>-->
     </div>
   </div>
 </main>
@@ -105,42 +98,10 @@
 </body>
 
 <script>
-  const newAction = (parentId, id, name, code, price, description, evolution) => {
-    let el = document.createElement('div');
-    el.className = 'action';
-    el.id = id;
-
-    el.innerHTML = `
-                <div class="action-name">${name}</div>
-                <div class="action-code">(${code})</div>
-                <div class="action-price">${price}€</div>
-                <div class="action-price-evolution">${(evolution >= 0) ? '+' : '-'}${Math.abs(evolution) + '%'}</div>
-                <button class="action-buy" title="buy"></button>
-                <button disabled class="action-sell" title="sell"></button>
-                <div class="action-description">${description}</div>
-            `;
-
-    let p = document.getElementById(parentId);
-    p.appendChild(el);
-
-  }
-
-  const pid = 'action-panel';
-  newAction(pid, 'apple-action', 'Apple Inc.', 'AAPL', 500, 'Technologie, fabricant de produits électroniques.', 5);
-  newAction(pid, 'tesla-action', 'Tesla Inc.', 'TSLA', 100, 'Automobile, spécialisé dans les véhicules électriques.', 2);
-  newAction(pid, 'amazon-action', 'Amazon.com Inc.', 'AMZN', 700, 'E-commerce, services cloud.', -1);
-  newAction(pid, 'microsoft-action', 'Microsoft Corp.', 'MSFT', 150, 'Technologie, logiciels et services cloud.', 1.5);
-  newAction(pid, 'alphabet-action', 'Alphabet Inc.', 'GOOGL', 500.5, 'Secteur technologique, maison-mère de Google.', -2);
-  newAction(pid, 'cocacola-action', 'Coca-Cola Co.', 'COCA', 407.1, 'Boissons non alcoolisées.', 3);
-  newAction(pid, 'nike-action', 'Nike Inc.', 'KO', 800, 'Vêtements et équipements sportifs.', -3.8);
-  newAction(pid, 'intel-action', 'Intel Corp.', 'INTC', 80, 'Fabricant de processeur et semi-conducteurs.', 1.5);
-  newAction(pid, 'boeing-action', 'Boeing Co.', 'BA', 550, 'Aéronautique et défense.', 1.5);
-  newAction(pid, 'visa-action', 'Visa Inc.', 'V', 660, 'Services financiers et paiements électroniques.', 4);
-</script>
-
-<script>
   let startDate = new Date('01/01/2025');
 </script>
+
+<script src="action.js"></script>
 <script src="action-graph.js"></script>
 <script src="graph.js"></script>
 <script src="index.js"></script>
