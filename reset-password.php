@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="loginPage.css">
-    <title>Reset password</title>
+    <title>Log-in</title>
 </head>
 <body>
 
@@ -38,40 +38,34 @@
     </form>
 
     <div id="sign-in">
-        <a id="sign-in-link" href="log-in.php">Log-in</a>
+        <a id="sign-in-link" href="sign-in.php">Sign-in</a>
     </div>
 </aside>
 
 <?php
-//include('db_connexion.php');
-//
-//if($_SERVER['REQUEST_METHOD'] == 'POST'){
-//
-//    $email = $_POST["email"];
-//    $password = $_POST["password"];
-//
-//    $query = "SELECT * FROM Player WHERE email = '$email' AND password = '$password'";
-//
-//    $result = mysqli_query($connect, $query);
-//
-//    if(mysqli_num_rows($result) > 0) {
-//        header('location: menu.php', true, 307);
-//        echo /** @lang javascript */
-//        "<script>
-//            const el = document.getElementById('error-msg');
-//            el.innerText = '';
-//        </script>";
-//
-//        exit();
-//    }
-//    else{
-//        echo /** @lang javascript */
-//        "<script>
-//            const el = document.getElementById('error-msg');
-//            el.innerText = 'Email or password is incorrect.';
-//        </script>";
-//    }
-//}
-//?>
+include('db_connexion.php');
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+    $email = $_POST["email"];
+    $old_password = $_POST["*password"];
+    $New_password = $_POST["new_password"];
+    $confirm_password = $_POST["confirm_password"];
+
+    $query = "SELECT * FROM Player WHERE email = '$email' AND password = '$old_password'";
+
+    $result = mysqli_query($connect, $query);
+
+    if(mysqli_num_rows($result) > 0) {
+        $mama = "UPDATE Player SET password = '$New_password' WHERE email = '$email'";
+        mysqli_query($connect, $mama);
+        header('location: menu.php', true, 307);
+    }
+    else{
+        /// todo mathis renvoie l'erreur
+    }
+}
+?>
+
 </body>
 </html>
