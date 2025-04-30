@@ -102,9 +102,16 @@ body {
 
 #forgotten-password-link
 {
+    justify-items: right;
     text-decoration: underline;
     font-size: 12px;
     color: rgba(255,255,255,0.5);
+}
+
+#forgotten-container
+{
+    display: flex;
+    justify-content: right;
 }
 
 /*===Lvl 4===*/
@@ -169,7 +176,7 @@ body {
     color: white;
 }
 
-#welcome, #game-over-msg
+.big-title, #game-over-msg
 {
     font-size: 40px;
     color: white;

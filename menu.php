@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
 <aside id="login-view">
-    <h1 id="welcome">Hi Foo !</h1> <!-- todo insert username -->
+    <h1 id="welcome" class="big-title">Hi Foo !</h1> <!-- todo insert username -->
 
     <form id="menu-form" method="POST">
 

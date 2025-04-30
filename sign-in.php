@@ -32,16 +32,21 @@
             <input id="confirm-password-entry" class="sign-input" type="password" name="confirm_password" required>
         </fieldset>
 
+
+        <div id="forgotten-container"><a href="reset-password.php" id="forgotten-password-link">Reset password</a></div>
+
         <fieldset id="login-btn-field">
             <input id="sign-in-btn" type="submit" value="SIGN-IN">
         </fieldset>
 
         <div id="error-msg"></div>
+
     </form>
 
     <div id="sign-in">
         <a id="sign-in-link" href="log-in.php">Log-in</a>
     </div>
+
 </aside>
 
 <?php
@@ -79,7 +84,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $insert = "INSERT INTO Player (username, email, password) VALUES ('$username', '$email', '$password')";
 
         if (mysqli_query($connect, $insert)) {
-            session_destroy();
             header('Location: log-in.php', true, 307);
 
             echo /** @lang javascript */
