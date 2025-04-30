@@ -11,10 +11,51 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $result = mysqli_query($connect, $query);
 
     if(mysqli_num_rows($result) > 0) {
-        header('location: menu.html', true, 307);
+        header('location: menu.php', true, 307);
         session_destroy();
     }
     else{
-        //mathis renvoie l'erreur en html
+        //todo mathis de mauvais mot de passe / username renvoie l'erreur en html
     }
 }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="loginPage.css">
+    <title>Log-in</title>
+</head>
+<body>
+
+<aside id="login-view">
+    <img id="title" src="images/VT.png" alt="VirtualTrading">
+
+    <form id="log-form" method="post" action="log-in.php">
+        <fieldset id="email" class="log-field">
+            <label class="log-label">Email</label>
+            <input class="log-input" type="email" required>
+        </fieldset>
+
+        <fieldset id="password" class="log-field">
+            <label class="log-label">Password</label>
+            <input class="log-input" type="password" required>
+        </fieldset>
+
+        <fieldset id="login-btn-field">
+            <input id="log-in-btn" type="submit" value="LOGIN">
+        </fieldset>
+
+<!--        <a id="forgotten-password-link">forgotten password ?</a>-->
+
+    </form>
+
+    <div id="sign-in">
+        <a id="sign-in-link" href="sign-in.html">Sign-in</a>
+    </div>
+</aside>
+
+
+</body>
+</html>
