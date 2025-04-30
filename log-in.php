@@ -25,6 +25,8 @@
             <input id="log-in-btn" type="submit" value="LOGIN">
         </fieldset>
 
+        <div id="forgotten-container"><a href="reset-password.php" id="forgotten-password-link">Reset password</a></div>
+
         <div id="error-msg"></div>
 
     </form>

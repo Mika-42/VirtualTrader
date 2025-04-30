@@ -32,9 +32,6 @@
             <input id="confirm-password-entry" class="sign-input" type="password" name="confirm_password" required>
         </fieldset>
 
-
-        <div id="forgotten-container"><a href="reset-password.php" id="forgotten-password-link">Reset password</a></div>
-
         <fieldset id="login-btn-field">
             <input id="sign-in-btn" type="submit" value="SIGN-IN">
         </fieldset>

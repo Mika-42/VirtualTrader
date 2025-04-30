@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$databaseName = "VirtualTrader_projet";
+$databaseName = "VirtualTrader";
 
 //on se connecte a la base de donnée
 $connect = mysqli_connect($servername, $username, $password, $databaseName);

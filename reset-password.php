@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="loginPage.css">
-    <title>Log-in</title>
+    <title>Reset password</title>
 </head>
 <body>
 
@@ -38,7 +38,7 @@
     </form>
 
     <div id="sign-in">
-        <a id="sign-in-link" href="sign-in.php">Sign-in</a>
+        <a id="sign-in-link" href="log-in.php">Log-in</a>
     </div>
 </aside>
 
