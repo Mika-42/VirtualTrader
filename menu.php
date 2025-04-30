@@ -1,10 +1,17 @@
 <?php
 include('db_connexion.php');
+
+$id = -1;
+$playerName = "";
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
+    $getUsername = "SELECT username FROM Player WHERE id = '$id'";
+    $result = mysqli_query($connect, $getUsername);
+
+    $playerName = $result ? htmlspecialchars(mysqli_fetch_assoc($result)["username"]) : "";
 }
-$getUsername = "SELECT username FROM Player WHERE id = '$id'";
-$username = mysqli_query($connect, $getUsername);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +24,7 @@ $username = mysqli_query($connect, $getUsername);
 <body>
 
 <aside id="login-view">
-    <h1 id="welcome">Hi <?php echo $id ;?> !</h1> <!-- todo insert username -->
+    <h1 id="welcome" class="big-title">Hi <?php echo $playerName;?> !</h1> <!-- todo insert username -->
 
     <form id="menu-form" method="POST">
 
