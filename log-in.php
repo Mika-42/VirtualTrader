@@ -49,7 +49,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $result = mysqli_query($connect, $query);
 
     if(mysqli_num_rows($result) > 0) {
-        header('location: menu.php', true, 307);
+        $row = mysqli_fetch_assoc($result);
+        $userId = $row['id'];
+        header("location: menu.php?id=".urlencode($userId) , true, 307);
         echo /** @lang javascript */
         "<script>
             const el = document.getElementById('error-msg');

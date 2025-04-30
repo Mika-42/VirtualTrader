@@ -1,3 +1,12 @@
+<?php
+include('db_connexion.php');
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+}
+$getUsername = "SELECT username FROM Player WHERE id = '$id'";
+$username = mysqli_query($connect, $getUsername);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +17,7 @@
 <body>
 
 <aside id="login-view">
-    <h1 id="welcome" class="big-title">Hi Foo !</h1> <!-- todo insert username -->
+    <h1 id="welcome">Hi <?php echo $id ;?> !</h1> <!-- todo insert username -->
 
     <form id="menu-form" method="POST">
 
@@ -27,8 +36,6 @@
 </html>
 
 <?php
-include('db_connexion.php');
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action']) && $_POST['action'] == 'LOGOUT') {
         header('location: log-in.php');
