@@ -1,4 +1,5 @@
 <?php
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -25,5 +26,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action_type'])) {
     $query = "INSERT INTO action (user_id, action_type, quantity) VALUES ($user_id, $action_type, $quantity )";
     mysqli_query($connect, $query);
 }
-?>
 

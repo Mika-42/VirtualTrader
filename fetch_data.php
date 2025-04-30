@@ -1,23 +1,37 @@
 <?php
-global $userId;
+global $connect;
+session_start();
 include("db_connexion.php");
-header('Content-Type: application/json');
 
-$actions = [];
-
-$result = mysqli_query($connect, "SELECT * FROM action");
-
-if(mysqli_num_rows($result) > 0){
-    while ($row = $result->fetch_assoc()) {
-        $actions[] = $row;
+function getTable($table): array
+{
+    global $connect;
+    $temp = [];
+    $query = "SELECT * FROM $table";
+    $result = mysqli_query($connect, $query);
+    if(mysqli_num_rows($result) > 0){
+        while ($row = $result->fetch_assoc()) {
+            $temp[] = $row;
+        }
     }
+    return $temp;
 }
 
-$balanceAccounts = $userId < 0 ? 0 : mysqli_query($connect, "SELECT Balance FROM player WHERE id='$userId'");
+$logged = null;
+$query = "SELECT * FROM player WHERE id = '".$_SESSION['id']."'";
+$result = mysqli_query($connect, $query);
+if(mysqli_num_rows($result) > 0){
+    $logged = $result->fetch_assoc();
+}
+
+$action = getTable('action');
+$player = getTable('player');
 
 $data = [
-    'actions' => $actions,
-    'balanceAccount' => $balanceAccounts
+    'actions' => $action,
+    'players' => $player,
+    'logged' => $logged
 ];
 
+header('Content-Type: application/json');
 echo json_encode($data);

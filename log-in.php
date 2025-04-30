@@ -37,7 +37,8 @@
 </aside>
 
 <?php
-global $userId;
+session_start();
+
 include('db_connexion.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -51,8 +52,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     if(mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-        $userId = $row['id'];
-        header("location: menu.php?id=".urlencode($userId) , true, 307);
+
+        $_SESSION['id'] = $row['id'];
+        header("location: menu.php?id=".urlencode($_SESSION['id']) , true, 307);
         echo /** @lang javascript */
         "<script>
             const el = document.getElementById('error-msg');

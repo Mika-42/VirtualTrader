@@ -1,15 +1,15 @@
 <?php
+session_start();
 include('db_connexion.php');
 
-$id = -1;
 $playerName = "";
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+
+    $id = $_SESSION['id'];
     $getUsername = "SELECT username FROM Player WHERE id = '$id'";
     $result = mysqli_query($connect, $getUsername);
 
     $playerName = $result ? htmlspecialchars(mysqli_fetch_assoc($result)["username"]) : "";
-}
+
 
 ?>
 
@@ -44,6 +44,9 @@ if (isset($_GET['id'])) {
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action']) && $_POST['action'] == 'LOGOUT') {
+        session_start();
+        session_unset();
+        session_destroy();
         header('location: log-in.php');
         exit();
     }
@@ -51,11 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ///$userId = $_SESSION['user_id'];
             ///$query = "UPDATE Player SET capital = 10000 WHERE id = '$id'" AND "// todo faire le reste de la requete";
             ///mysqli_query($connect,$query);
-            header('location: game.php');
-            exit();
+        header('location: game.php?id='.urlencode($_GET['id']));
+        exit();
     }
     if (isset($_POST['action']) && $_POST['action'] == 'CONTINUE') {
-        header('location: game.php');
+        header('location: game.php?id='.urlencode($_GET['id']));
         exit();
     }
 }
