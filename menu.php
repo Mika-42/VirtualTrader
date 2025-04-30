@@ -1,4 +1,5 @@
 <?php
+global $connect;
 session_start();
 include('db_connexion.php');
 
