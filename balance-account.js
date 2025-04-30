@@ -13,5 +13,5 @@ const formatBalanceAccount = (num) => {
 }
 const balanceAccount = document.getElementById('balance-account');
 let balanceAccountValue = 0;
-getFromPHP((data) => balanceAccountValue = data['balanceAccount'])
+getFromPHP((data) => balanceAccountValue = data['balanceAccount']);
 balanceAccount.innerText =  formatBalanceAccount(balanceAccountValue);

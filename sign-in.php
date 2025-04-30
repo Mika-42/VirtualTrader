@@ -82,7 +82,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (mysqli_query($connect, $insert)) {
             header('Location: log-in.php', true, 307);
-
             echo /** @lang javascript */
             "<script>
             const el = document.getElementById('error-msg');

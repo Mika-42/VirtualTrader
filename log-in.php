@@ -37,6 +37,7 @@
 </aside>
 
 <?php
+global $userId;
 include('db_connexion.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){

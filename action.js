@@ -19,7 +19,7 @@ const updateActionsInHTML = (data) =>
         btnBuy.addEventListener('click', () => {
             btnSell.disabled = false;
             btnBuy.disabled = true;
-            balanceAccountValue = parseFloat(e.value);
+            balanceAccountValue -= parseFloat(e.value);
             balanceAccount.innerText = formatBalanceAccount(balanceAccountValue);
         });
     });

@@ -1,4 +1,5 @@
 <?php
+global $userId;
 include("db_connexion.php");
 header('Content-Type: application/json');
 
@@ -12,12 +13,11 @@ if(mysqli_num_rows($result) > 0){
     }
 }
 
-$ID = getCurrentUser_Id();
-$balanceAccounts = $ID < 0 ? 0 : mysqli_query($connect, "SELECT Balance FROM player WHERE id='$ID'");
+$balanceAccounts = $userId < 0 ? 0 : mysqli_query($connect, "SELECT Balance FROM player WHERE id='$userId'");
 
 $data = [
     'actions' => $actions,
-    'balanceAccounts' => $balanceAccounts
+    'balanceAccount' => $balanceAccounts
 ];
 
 echo json_encode($data);
