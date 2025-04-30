@@ -26,7 +26,6 @@
         </fieldset>
 
         <div id="error-msg"></div>
-        <!--        <a id="forgotten-password-link">forgotten password ?</a>-->
 
     </form>
 
@@ -61,7 +60,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         echo /** @lang javascript */
         "<script>
             const el = document.getElementById('error-msg');
-            el.innerText = 'Email or password is incorrect';
+            el.innerText = 'Email or password is incorrect.';
         </script>";
     }
 }

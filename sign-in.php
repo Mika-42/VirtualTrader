@@ -1,40 +1,3 @@
-<?php
-include('db_connexion.php');
-
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    $username = $_POST["username"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $confirm_password = $_POST["confirm_password"];
-
-    if ($password !== $confirm_password) {
-        // Renvoie une erreur
-        die("Les mots de passe ne correspondent pas.");
-    }
-
-    $query = "SELECT * FROM Player WHERE username = '$username'";
-    $check = mysqli_query($connect, $query);
-
-    if(mysqli_num_rows($check) > 0) {
-        //mathis renvoie l'erreur en html
-        die("Le nom d'utilisateur est déjà pris.");
-    }
-    else{
-        $insert = "INSERT INTO Player (username, email, password) VALUES ('$username', '$email', '$password')";
-
-        if (mysqli_query($connect, $insert)) {
-            session_destroy();
-            header('Location: log-in.php', true, 307);
-            exit;
-        } else {
-            // Gérer l'erreur d'insertion
-            die("Erreur lors de l'insertion dans la base de données.");
-        }
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,6 +36,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input id="sign-in-btn" type="submit" value="SIGN-IN">
         </fieldset>
 
+        <div id="error-msg"></div>
     </form>
 
     <div id="sign-in">
@@ -80,6 +44,62 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </aside>
 
+<?php
+include('db_connexion.php');
+
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $username = $_POST["username"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $confirm_password = $_POST["confirm_password"];
+
+    if ($password !== $confirm_password) {
+        echo /** @lang javascript */
+        "<script>
+            const el = document.getElementById('error-msg');
+            el.innerText = 'Passwords do not match.';
+        </script>";
+        exit;
+    }
+
+    $query = "SELECT * FROM Player WHERE email = '$email'";
+    $check = mysqli_query($connect, $query);
+
+    if(mysqli_num_rows($check) > 0) {
+        echo /** @lang javascript */
+        "<script>
+            const el = document.getElementById('error-msg');
+            el.innerText = 'This email is already registered.';
+        </script>";
+
+        die("email already taken.");
+    }
+    else{
+        $insert = "INSERT INTO Player (username, email, password) VALUES ('$username', '$email', '$password')";
+
+        if (mysqli_query($connect, $insert)) {
+            session_destroy();
+            header('Location: log-in.php', true, 307);
+
+            echo /** @lang javascript */
+            "<script>
+            const el = document.getElementById('error-msg');
+            el.innerText = '';
+            </script>";
+
+            exit;
+        } else {
+            echo /** @lang javascript */
+            "<script>
+            const el = document.getElementById('error-msg');
+            el.innerText = 'Failed to insert data in database.';
+            </script>";
+            die("Erreur lors de l'insertion dans la base de données.");
+        }
+    }
+}
+?>
 
 </body>
 </html>
