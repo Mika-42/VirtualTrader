@@ -9,7 +9,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $confirm_password = $_POST["confirm_password"];
 
     if ($password !== $confirm_password) {
-        // Renvoie une erreur
+        //todo Renvoie une erreur mathis
         die("Les mots de passe ne correspondent pas.");
     }
 
@@ -17,7 +17,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $check = mysqli_query($connect, $query);
 
     if(mysqli_num_rows($check) > 0) {
-        //mathis renvoie l'erreur en html
+        //todo mathis renvoie l'erreur en html
         die("Le nom d'utilisateur est déjà pris.");
     }
     else{
@@ -25,11 +25,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (mysqli_query($connect, $insert)) {
             session_destroy();
-            header('Location: http://localhost/VirtualTrader/log-in.html', true, 307);
+            header('Location: log-in.php', true, 307);
             exit;
-        } else {
-            // Gérer l'erreur d'insertion
-            die("Erreur lors de l'insertion dans la base de données.");
         }
     }
 }

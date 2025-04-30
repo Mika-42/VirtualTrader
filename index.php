@@ -13,7 +13,7 @@ if (!$connect) {
 }
 
 if (isset($_SESSION['game_status']) && $_SESSION['game_status'] == 'lost') {
-    header("Location: game-over.html");
+    header("Location: game-over.php");
     exit();
 }
 
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action_type'])) {
     mysqli_query($connect, $query);
 }
 
-header('location: log-in.html', true, 307);
+header('location: log-in.php', true, 307);
 
 ?>
 

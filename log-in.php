@@ -11,11 +11,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $result = mysqli_query($connect, $query);
 
     if(mysqli_num_rows($result) > 0) {
-        header('location: menu.html', true, 307);
+        header('location: menu.php', true, 307);
         session_destroy();
     }
     else{
-        //mathis renvoie l'erreur en html
+        //todo mathis de mauvais mot de passe / username renvoie l'erreur en html
     }
 }
 ?>
