@@ -1,9 +1,8 @@
 <?php
-
 $servername = "localhost";
 $username = "root";
 $password = "";
-$databaseName = "virtualTrader";
+$databaseName = "VirtualTrader";
 
 //on se connecte a la base de donnée
 $connect = mysqli_connect($servername, $username, $password, $databaseName);
@@ -18,18 +17,13 @@ if (isset($_SESSION['game_status']) && $_SESSION['game_status'] == 'lost') {
     exit();
 }
 
-function getCurrentUser_Id() {
- return $_GET['id']; // Retourner l'ID de l'utilisateur
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action_type'])) {
+    $user_id = $_SESSION['user_id'];
+    $action_type = $_POST['action_type'];
+    $quantity = $_POST['quantity'];
+
+    $query = "INSERT INTO action (user_id, action_type, quantity) VALUES ($user_id, $action_type, $quantity )";
+    mysqli_query($connect, $query);
 }
-
-//if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action_type'])) {
-//    $user_id = $_SESSION['user_id'];
-//   $action_type = $_POST['action_type'];
-//   $quantity = $_POST['quantity'];
-//
-//   $query = "INSERT INTO action (user_id, action_type, quantity) VALUES ($user_id, $action_type, $quantity )";
-//    mysqli_query($connect, $query);
-//}
-
 ?>
 
