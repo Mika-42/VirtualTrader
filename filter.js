@@ -1,4 +1,4 @@
-const actions = document.getElementsByClassName('action');
+const actions = document.querySelectorAll('.action');
 
 //---
 const filterAllBtn = document.getElementById('filter-all-btn');

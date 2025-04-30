@@ -1,20 +1,6 @@
-const accessToActions = (func) => {
-    fetch('fetch_actions.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            func(data);
-        })
-        .catch(error => console.error('Error fetching data:', error));
-};
-
 const updateActionsInHTML = (data) =>
 {
-    data.forEach(e => {
+    data['actions'].forEach(e => {
         const price = document.querySelector(`#${e.code} .action-price`);
         const evolution = document.querySelector(`#${e.code} .action-price`); // todo set the innerText
         const btnSell = document.querySelector(`#${e.code} .action-sell`);
@@ -43,7 +29,7 @@ const addActionsToHTML = (data) =>
 
     const pid = 'action-panel';
 
-    data.forEach(e =>
+    data['actions'].forEach(e =>
     {
         let el = document.createElement('div');
         el.className = 'action';
@@ -87,5 +73,5 @@ const updatePrices = () => {
 }
 
 //----
-accessToActions(addActionsToHTML);
-accessToActions(updateActionsInHTML);
+getFromPHP('fetch_data.php',addActionsToHTML);
+getFromPHP('fetch_data.php',updateActionsInHTML);

@@ -101,6 +101,8 @@
   let startDate = new Date('01/01/2025');
 </script>
 
+<script src="fetch-data.js"></script>
+<script src="balance-account.js"></script>
 <script src="action.js"></script>
 <script src="action-graph.js"></script>
 <script src="graph.js"></script>

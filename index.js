@@ -1,22 +1,15 @@
-const formatBalanceAccount = (balanceAccount) =>
-{
-    const formatedIntValue = new Intl.NumberFormat('fr-FR').format(parseInt(balanceAccount));
-    const decimalValue = balanceAccount.toFixed(2).split('.')[1];
-    return `${formatedIntValue}.${decimalValue}€`;
-};
+
 
 const ids = Array.from(document.querySelectorAll('.action')).map(i => i.id);
 
 const dateEl = document.getElementById('date');
 dateEl.innerText = startDate.toLocaleDateString();
 
-const balanceAccount = document.getElementById('balance-account');
-let balanceAccountValue = 10000.00; // todo get this value from php !
-balanceAccount.innerText =  formatBalanceAccount(balanceAccountValue);
+
 
 updateChart(startDate, balanceAccountValue );
 
-    const daily = () => {
+const daily = () => {
         startDate.setDate(startDate.getDate() + 1);
         dateEl.innerText = startDate.toLocaleDateString();
 
