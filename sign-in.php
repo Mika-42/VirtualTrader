@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (mysqli_query($connect, $insert)) {
             session_destroy();
-            header('Location: http://localhost/VirtualTrader/log-in.html', true, 307);
+            header('Location: log-in.html', true, 307);
             exit;
         } else {
             // Gérer l'erreur d'insertion
@@ -33,56 +33,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="loginPage.css">
-    <title>Sign-in</title>
-</head>
-<body>
-
-<aside id="login-view">
-    <img id="title" src="images/VT.png" alt="VirtualTrading">
-
-    <form id="log-form" method="post" action="sign-in.php">
-
-        <fieldset id="username" class="sign-field">
-            <label class="sign-label">Username</label>
-            <input class="sign-input" type="text" name="username">
-        </fieldset>
-
-        <fieldset id="email" class="sign-field">
-            <label class="sign-label">Email</label>
-            <input class="sign-input" type="email" name="email" required>
-        </fieldset>
-
-        <fieldset id="password" class="sign-field">
-            <label class="sign-label">Password</label>
-            <input class="sign-input" type="password" name="password" required>
-        </fieldset>
-
-        <fieldset id="confirm_password" class="sign-field">
-            <label class="sign-label">confirm password</label>
-            <input class="sign-input" type="password" name="confirm_password" required>
-        </fieldset>
-
-        <fieldset id="login-btn-field">
-            <input id="sign-in-btn" type="submit" value="SIGN-IN">
-        </fieldset>
-
-    </form>
-
-    <div id="sign-in">
-        <a id="sign-in-link" href="log-in.html">Log-in</a>
-    </div>
-</aside>
-
-
-</body>
-</html>
 
 
 
