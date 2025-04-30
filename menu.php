@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
 <body>
 
 <aside id="login-view">
-    <h1 id="welcome" class="big-title">Hi <?php echo $playerName;?> !</h1> <!-- todo insert username -->
+    <h1 id="welcome" class="big-title">Hi <?php echo $playerName;?> !</h1>
 
     <form id="menu-form" method="POST">
 
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     if (isset($_POST['action']) && $_POST['action'] == 'RESET') {
             ///$userId = $_SESSION['user_id'];
-            ///$query = "UPDATE users SET capital = 10000 WHERE user_id = $userId" AND "// todo faire le reste de la requete";
+            ///$query = "UPDATE Player SET capital = 10000 WHERE id = '$id'" AND "// todo faire le reste de la requete";
             ///mysqli_query($connect,$query);
             header('location: game.php');
             exit();

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 29 avr. 2025 à 13:58
+-- Généré le : mer. 30 avr. 2025 à 18:38
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `VirtualTrader_Projet`
+-- Base de données : `virtualproject`
 --
 
 -- --------------------------------------------------------
@@ -33,24 +33,25 @@ CREATE TABLE `action` (
   `description` text DEFAULT NULL,
   `value` int(11) DEFAULT NULL,
   `distribDate` date DEFAULT NULL,
-  `nbDetenue` int(11) DEFAULT 0
+  `nbDetenue` int(11) DEFAULT 0,
+  `evolution` float DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `action`
 --
 
-INSERT INTO `action` (`code`, `name`, `description`, `value`, `distribDate`, `nbDetenue`) VALUES
-('AAPL', 'Apple Inc.', 'Technologie, fabricant de produits électroniques.', 200, '2025-04-21', 0),
-('AMZN', 'Amazon.com Inc.', 'E-commerce, services cloud.', 175, '2025-04-21', 0),
-('BA', 'Boeing Co.', 'Aéronautique et défense.', 160, '2025-04-21', 0),
-('GOOGL', 'Alphabet Inc.', 'Secteur technologique, maison-mère de Google.', 155, '2025-04-21', 0),
-('JNJ', 'Johnson & Johnson', 'Secteur pharmaceutique et produits de soins de santé.', 160, '2025-04-21', 0),
-('KO', 'Coca-Cola Company', 'Boissons non alcoolisées.', 75, '2025-04-21', 0),
-('MSFT', 'Microsoft Corporatio', 'Technologie, logiciels et services cloud.', 370, '2025-04-21', 0),
-('NKE', 'Nike Inc.', 'Vêtements et équipements sportifs.', 55, '2025-04-21', 0),
-('TSLA', 'Tesla', ' Automobile, spécialisé dans les véhicules électriques.', 240, '2025-04-21', 0),
-('V', 'Visa Inc.', 'Services financiers et paiements électroniques.', 330, '2025-04-21', 0);
+INSERT INTO `action` (`code`, `name`, `description`, `value`, `distribDate`, `nbDetenue`, `evolution`) VALUES
+('AAPL', 'Apple Inc.', 'Technologie, fabricant de produits électroniques.', 200, '2025-04-21', 0, 0),
+('AMZN', 'Amazon.com Inc.', 'E-commerce, services cloud.', 175, '2025-04-21', 0, 0),
+('BA', 'Boeing Co.', 'Aéronautique et défense.', 160, '2025-04-21', 0, 0),
+('GOOGL', 'Alphabet Inc.', 'Secteur technologique, maison-mère de Google.', 155, '2025-04-21', 0, 0),
+('JNJ', 'Johnson & Johnson', 'Secteur pharmaceutique et produits de soins de santé.', 160, '2025-04-21', 0, 0),
+('KO', 'Coca-Cola Company', 'Boissons non alcoolisées.', 75, '2025-04-21', 0, 0),
+('MSFT', 'Microsoft Corporatio', 'Technologie, logiciels et services cloud.', 370, '2025-04-21', 0, 0),
+('NKE', 'Nike Inc.', 'Vêtements et équipements sportifs.', 55, '2025-04-21', 0, 0),
+('TSLA', 'Tesla', ' Automobile, spécialisé dans les véhicules électriques.', 240, '2025-04-21', 0, 0),
+('V', 'Visa Inc.', 'Services financiers et paiements électroniques.', 330, '2025-04-21', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -75,14 +76,14 @@ CREATE TABLE `player` (
   `email` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
   `username` varchar(20) NOT NULL,
-  `Balance` int(11) DEFAULT NULL
+  `balance` int(11) DEFAULT 10000
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `player`
 --
 
-INSERT INTO `player` (`id`, `email`, `password`, `username`, `Balance`) VALUES
+INSERT INTO `player` (`id`, `email`, `password`, `username`, `balance`) VALUES
 (9, 'email@email.com', '1234', 'user', NULL);
 
 --
@@ -115,7 +116,7 @@ ALTER TABLE `player`
 -- AUTO_INCREMENT pour la table `player`
 --
 ALTER TABLE `player`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Contraintes pour les tables déchargées
