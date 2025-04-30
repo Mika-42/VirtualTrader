@@ -1,5 +1,5 @@
 const balanceAccount = document.getElementById('balance-account');
-let balanceAccountValue = 0;
+let balanceAccountValue = 10000;
 
 const formatBalanceAccount = (num) => {
     const roundedNum = parseFloat(num).toFixed(2);

@@ -1,13 +1,13 @@
 const updateActionsInHTML = (data) =>
 {
-    console.log(data)
     data['actions'].forEach(e => {
         const price = document.querySelector(`#${e.code} .action-price`);
-        const evolution = document.querySelector(`#${e.code} .action-price`); // todo set the innerText
+        const evolution = document.querySelector(`#${e.code} .action-price`);
         const btnSell = document.querySelector(`#${e.code} .action-sell`);
         const btnBuy = document.querySelector(`#${e.code} .action-buy`);
 
         price.innerText = `${e.value}€`;
+        evolution.innerText `${(e.evolution >= 0) ? '+' : '-'}${Math.abs(e.evolution)}'%'`;
 
         btnSell.addEventListener('click', () => {
             btnSell.disabled = true;

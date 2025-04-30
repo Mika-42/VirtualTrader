@@ -3,7 +3,7 @@ const ctx = document.getElementById('graph').getContext('2d');
 const walletChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: ['','','','','','','','','','','','',''],
+        labels: ['','','','','','','','','','','',''],
         datasets: [{
             label: '',
             data: [NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN],
@@ -41,9 +41,10 @@ const walletChart = new Chart(ctx, {
 
 const updateChart = (v_date, v_balance) =>
 {
-    let i = v_date.getMonth();
+    walletChart.data.datasets[0].data.shift();
+    walletChart.data.datasets[0].data.push(v_balance)
 
-    walletChart.data.datasets[0].data[i] = v_balance;
-    walletChart.data.labels[i] = v_date.toLocaleDateString('fr-FR');
+    walletChart.data.labels.shift();
+    walletChart.data.labels.push(v_date.toLocaleDateString('fr-FR'));
     walletChart.update();
 };
