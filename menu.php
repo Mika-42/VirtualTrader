@@ -1,10 +1,11 @@
 <?php
 include('db_connexion.php');
 
+
 $id = -1;
 $playerName = "";
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+if (getCurrentUser_Id() !== null) {
+    $id = getCurrentUser_Id();
     $getUsername = "SELECT username FROM Player WHERE id = '$id'";
     $result = mysqli_query($connect, $getUsername);
 
