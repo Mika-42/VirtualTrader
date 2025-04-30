@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$databaseName = "VirtualTrader";
+$databaseName = "VirtualTrader_projet";
 
 //on se connecte a la base de donnée
 $connect = mysqli_connect($servername, $username, $password, $databaseName);
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action_type'])) {
     $action_type = $_POST['action_type'];
     $quantity = $_POST['quantity'];
 
-    $query = "INSERT INTO transactions (user_id, action_type, quantity) VALUES ($user_id, $action_type, $quantity )";
+    $query = "INSERT INTO action (user_id, action_type, quantity) VALUES ($user_id, $action_type, $quantity )";
     mysqli_query($connect, $query);
 }
 ?>
