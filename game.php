@@ -16,7 +16,7 @@ include('db_connexion.php');
 <main>
   <header id="info">
     <h2 id="date" class="user-data"></h2>
-    <h2 id="username" class="user-data">Foo</h2>
+    <h2 id="username" class="user-data"></h2>
     <h2 id="balance-account" class="user-data"></h2>
   </header>
 

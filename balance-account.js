@@ -17,3 +17,7 @@ const updateBalance = (data) => {
 }
 
 getFromPHP(updateBalance);
+getFromPHP((data) => {
+    const e = document.getElementById('username');
+    e.innerText = data['logged'].username;
+});
