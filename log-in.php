@@ -1,4 +1,4 @@
-global$connect; <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -38,7 +38,7 @@ global$connect; <!DOCTYPE html>
 
 <?php
 session_start();
-
+global $connect;
 include('db_connexion.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
