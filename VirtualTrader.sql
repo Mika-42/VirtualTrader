@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 30 avr. 2025 à 18:38
+-- Généré le : mer. 30 avr. 2025 à 20:00
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `virtualproject`
+-- Base de données : `virtualtrader`
 --
 
 -- --------------------------------------------------------
@@ -31,7 +31,7 @@ CREATE TABLE `action` (
   `code` varchar(5) NOT NULL,
   `name` varchar(20) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `value` int(11) DEFAULT NULL,
+  `value` float DEFAULT NULL,
   `distribDate` date DEFAULT NULL,
   `nbDetenue` int(11) DEFAULT 0,
   `evolution` float DEFAULT 0
@@ -76,15 +76,8 @@ CREATE TABLE `player` (
   `email` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
   `username` varchar(20) NOT NULL,
-  `balance` int(11) DEFAULT 10000
+  `balance` float DEFAULT 10000
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `player`
---
-
-INSERT INTO `player` (`id`, `email`, `password`, `username`, `balance`) VALUES
-(9, 'email@email.com', '1234', 'user', NULL);
 
 --
 -- Index pour les tables déchargées
@@ -116,7 +109,7 @@ ALTER TABLE `player`
 -- AUTO_INCREMENT pour la table `player`
 --
 ALTER TABLE `player`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Contraintes pour les tables déchargées
