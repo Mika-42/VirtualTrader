@@ -130,7 +130,7 @@ main
 
 .action-price, .action-price-evolution
 {
-    width: 50px;
+    width: 55px;
     font-size: 12px;
 }
 
@@ -218,4 +218,24 @@ main
 .action-graph
 {
     width: 100%;
+}
+
+#menu-container
+{
+    height: 100%;
+    width: 100px;
+    background: rgba(255, 0, 0, 0.41);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+#menu-btn
+{
+    text-decoration: none;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+
+    font-size: 25px;
+    font-weight: 900;
 }

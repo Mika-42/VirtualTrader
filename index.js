@@ -17,23 +17,18 @@ const daily = () => {
         startDate.setDate(startDate.getDate() + 1);
         dateEl.innerText = startDate.toLocaleDateString();
 
-        action_update();
-        balance_update();
+
 
         if(startDate.getDate() === getLastDayOfMonth(startDate.getFullYear(), startDate.getMonth()))
         {
                 updateChart(startDate, balanceAccountValue );
-        }
+                action_update();
+                balance_update();
 
-        for(let i = 0; i < 3; ++i)
-        {
-
-            updateActionsChart(graphAct[i], startDate,  Math.floor(Math.random() * (200 - 50 + 1)) + 50); //todo remove fake value
-        }
-        for(const id of ids)
-        {
-            //todo query price and previous evolution
-            //updatePrice();
+                for(let i = 0; i < 3; ++i)
+                {
+                        updateActionsChart(graphAct[i], startDate,  Math.floor(Math.random() * (200 - 50 + 1)) + 50); //todo remove fake value
+                }
         }
 
     }

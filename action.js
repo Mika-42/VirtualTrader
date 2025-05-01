@@ -2,11 +2,11 @@ const updatePrices = (price, old_evolution) => {
 
     const variation = (Math.random() * 6) - 3; // [-3, 3]
 
-    let evolution = old_evolution + variation;
+    let evolution = parseFloat(old_evolution) + variation;
 
     evolution = Math.max(-10, Math.min(10, evolution));
 
-    let p = price * (1 + evolution / 100);
+    let p = parseFloat(price) * (1 + evolution / 100);
 
     p = Math.max(1, p);
 
@@ -25,7 +25,6 @@ const action_update = () =>
         let _ = updatePrices(e.value, e.evolution);
         e.value = _.price;
         e.evolution = _.evolution;
-
         price.innerText = `${e.value}€`;
         evolution.innerText = `${(e.evolution >= 0) ? '+' : '-'}${Math.abs(e.evolution)}%`;
 
