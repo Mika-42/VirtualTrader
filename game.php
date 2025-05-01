@@ -54,17 +54,30 @@ include('fetch_data.php');
   </div>
 </main>
 <aside id="action-panel">
-  <div id="filter">
-    <span id="filterText">Filter:</span>
-    <input type="radio" id="filter-all-btn" name="filter" class="toggle-input" checked>
-    <label for="filter-all-btn" class="toggle-label">All</label>
+    <div class="filter">
+        <span class="filterText">Filter:</span>
+        <input type="radio" id="filter-all-btn" name="filter" class="toggle-input" checked>
+        <label for="filter-all-btn" class="toggle-label">All</label>
 
-    <input type="radio" id="filter-buy-btn" name="filter" class="toggle-input">
-    <label for="filter-buy-btn" class="toggle-label">Buy</label>
+        <input type="radio" id="filter-buy-btn" name="filter" class="toggle-input">
+        <label for="filter-buy-btn" class="toggle-label">Buy</label>
 
-    <input type="radio" id="filter-sold-btn" name="filter" class="toggle-input">
-    <label for="filter-sold-btn" class="toggle-label">Sold</label>
-  </div>
+        <input type="radio" id="filter-sold-btn" name="filter" class="toggle-input">
+        <label for="filter-sold-btn" class="toggle-label">Sold</label>
+    </div>
+
+    <div class="filter">
+        <span class="filterText">Sort:</span>
+
+        <input type="radio" id="filter-name-btn" name="sub-filter" class="toggle-input" checked>
+        <label for="filter-name-btn" class="toggle-label">Name</label>
+
+        <input type="radio" id="filter-price-btn" name="sub-filter" class="toggle-input">
+        <label for="filter-price-btn" class="toggle-label">Price</label>
+
+        <input type="radio" id="filter-progression-btn" name="sub-filter" class="toggle-input">
+        <label for="filter-progression-btn" class="toggle-label">Progression</label>
+    </div>
 </aside>
 </body>
 

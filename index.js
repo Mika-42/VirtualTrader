@@ -31,9 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-
-
-
 const timeout = 100 //500;
 setInterval(daily, timeout);
 

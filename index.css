@@ -182,7 +182,7 @@ main
     background: #424242;
 }
 
-#filter
+.filter
 {
     margin-top: 5px;
     margin-left: 10px;
@@ -190,7 +190,7 @@ main
     gap: 10px;
 }
 
-#filterText
+.filterText
 {
     text-align: center;
     padding: 3px;

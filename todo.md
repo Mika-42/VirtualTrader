@@ -2,4 +2,4 @@
 - remplacer la date JS par une date de la db
 - stocker les actions achetées par quelques
 - remettre le timeout a 500
-- réparer les filtres 
+- déclencher le game over si WALLET < 1000
