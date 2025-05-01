@@ -29,7 +29,8 @@ const action_update = () =>
         price.innerText = `${e.value}€`;
         evolution.innerText = `${(e.evolution >= 0) ? '+' : '-'}${Math.abs(e.evolution)}%`;
 
-        previous12.get(e.code)[startDate.getMonth()] = e.value;
+        previous12.get(e.code).push(e.value);
+        previous12.get(e.code).shift();
     });
 
 
@@ -77,7 +78,6 @@ const actions_init = () =>
 
         previous12.set(e.code,[NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN]);
     });
-    action_update();
 }
 
 

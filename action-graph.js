@@ -11,7 +11,7 @@ const newChart = (g) => {
     return new Chart(g, {
         type: 'bar',
         data: {
-            labels: ['', '', '', '', '', '', '', '', '', '', '', '', ''],
+            labels: ['', '', '', '', '', '', '', '', '', '', '', ''],
             datasets: [{
                 label: '',
                 data: [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN],
@@ -53,13 +53,15 @@ for(let i = 0; i < 3; ++i)
     graphAct[i] = newChart(graphActEl[i]);
 }
 
-const updateActionsChart = (index, v_date, e) =>
+const updateActionsChart = (v_date) =>
 {
-    let i = v_date.getMonth();
+    const codes = get_chart_selector_id();
 
-    let arr = previous12.get(e.code);
-    arr[i] = e.value;
-    graphAct[index].data.datasets[0].data = arr;
-    graphAct[index].data.labels[i] = v_date.toLocaleDateString('fr-FR');
-    graphAct[index].update();
+    graphAct.forEach((f, i) => {
+        f.data.datasets[0].data = previous12.get(codes[i]);
+
+        f.data.labels.push(v_date.toLocaleDateString('fr-FR'));
+        f.data.labels.shift();
+        f.update();
+    });
 };

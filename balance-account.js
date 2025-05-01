@@ -11,7 +11,7 @@ const formatBalanceAccount = (num) => {
     return `${formattedInteger}.${decimalPart}€`;
 }
 
-const balance_update = (data) => {
+const balance_update = () => {
     const e = document.getElementById('balance-account');
     e.innerText =  formatBalanceAccount(balanceAccountValue);
 }

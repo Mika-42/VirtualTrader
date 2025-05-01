@@ -19,7 +19,8 @@ const chart_selector_init = () => {
         el.appendChild(select);
         e.appendChild(el);
         e.addEventListener('change', () => {
-            updateActionsChart(i, startDate, Array.from(SESSION_DATA['actions']).find(f => f.code === e.value));
+            graphAct[i].data.datasets[0].data = previous12.get(select.value);
+            graphAct[i].update();
         });
     });
 
