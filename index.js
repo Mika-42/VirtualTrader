@@ -18,6 +18,10 @@ const daily = () => {
                 updateChart();
                 action_update();
                 updateActionsChart();
+                if(filterPriceBtn.checked)
+                {
+                        sortByPrice();
+                }
         }
 
     }

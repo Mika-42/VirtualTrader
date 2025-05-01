@@ -42,12 +42,15 @@ filterNameBtn.addEventListener('click', () => {
 
 ///---
 const filterPriceBtn = document.getElementById('filter-price-btn');
-filterPriceBtn.addEventListener('click', () => {
-    const parent = document.getElementById('action-panel');
-    const orderByName = actionsData.sort((a, b) => b.price - a.price).map(e => e.code)
 
-    orderByName.forEach((id) => {
+const sortByPrice = () => {
+    const parent = document.getElementById('action-panel');
+    const orderByPrice = actionsData.sort((a, b) => a.value - b.value).map(e => e.code)
+
+    orderByPrice.forEach((id) => {
         const _ = document.getElementById(id);
         parent.appendChild(_);
     });
-});
+};
+
+filterPriceBtn.addEventListener('click', sortByPrice);
