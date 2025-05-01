@@ -27,7 +27,9 @@ const daily = () => {
 
                 for(let i = 0; i < 3; ++i)
                 {
-                        updateActionsChart(graphAct[i], startDate,  Math.floor(Math.random() * (200 - 50 + 1)) + 50); //todo remove fake value
+                        let codes = get_chart_selector_id();
+                        const act = Array.from(SESSION_DATA['actions']).find(e => e.code === codes[i]);
+                        updateActionsChart(i, startDate,  act);
                 }
         }
 
@@ -43,6 +45,6 @@ balance_update();
 
 
 
-const timeout = 500;
+const timeout = 100 //500;
 setInterval(daily, timeout);
 

@@ -53,11 +53,13 @@ for(let i = 0; i < 3; ++i)
     graphAct[i] = newChart(graphActEl[i]);
 }
 
-const updateActionsChart = (actionGraph, v_date, v_balance) =>
+const updateActionsChart = (index, v_date, e) =>
 {
     let i = v_date.getMonth();
 
-    actionGraph.data.datasets[0].data[i] = v_balance;
-    actionGraph.data.labels[i] = v_date.toLocaleDateString('fr-FR');
-    actionGraph.update();
+    let arr = previous12.get(e.code);
+    arr[i] = e.value;
+    graphAct[index].data.datasets[0].data = arr;
+    graphAct[index].data.labels[i] = v_date.toLocaleDateString('fr-FR');
+    graphAct[index].update();
 };

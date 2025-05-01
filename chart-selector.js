@@ -11,13 +11,26 @@ const chart_selector_init = () => {
 
         select.id = `actionSelect-${i+1}`;
 
-        SESSION_DATA['actions'].forEach(e => {
-            select.add(new Option(e.name, e.code));
+        SESSION_DATA['actions'].forEach(f => {
+            select.add(new Option(f.name, f.code));
         });
 
         el.appendChild(lbl);
         el.appendChild(select);
         e.appendChild(el);
+        e.addEventListener('change', () => {
+            updateActionsChart(i, startDate, Array.from(SESSION_DATA['actions']).find(f => f.code === e.value));
         });
+    });
 
 }
+
+const get_chart_selector_id = () =>
+{
+ return [
+     document.getElementById('actionSelect-1').value,
+    document.getElementById('actionSelect-2').value,
+    document.getElementById('actionSelect-3').value,
+ ];
+}
+

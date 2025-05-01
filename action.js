@@ -1,3 +1,4 @@
+let previous12 = new Map;
 const updatePrices = (price, old_evolution) => {
 
     const variation = (Math.random() * 6) - 3; // [-3, 3]
@@ -28,8 +29,10 @@ const action_update = () =>
         price.innerText = `${e.value}€`;
         evolution.innerText = `${(e.evolution >= 0) ? '+' : '-'}${Math.abs(e.evolution)}%`;
 
-
+        previous12.get(e.code)[startDate.getMonth()] = e.value;
     });
+
+
 }
 const actions_init = () =>
 {
@@ -71,6 +74,8 @@ const actions_init = () =>
             balanceAccountValue -= parseFloat(e.value);
             balance_update();
         });
+
+        previous12.set(e.code,[NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN]);
     });
     action_update();
 }
