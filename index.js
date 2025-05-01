@@ -33,9 +33,15 @@ const daily = () => {
 
     }
 
+document.addEventListener('DOMContentLoaded', () => {
+        chart_selector_init();
+        actions_init();
+        show_username();
+})
 balance_update();
-show_username();
-actions_init();
+
+
+
 
 const timeout = 500;
 setInterval(daily, timeout);

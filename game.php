@@ -34,17 +34,7 @@ include('fetch_data.php');
           <canvas id="action-chart-1" class="chart action-graph"></canvas>
         </div>
 
-        <span>
-                <label for="actionSelect-1">Action: </label>
-          <!--                todo add actions in js-->
-                <select id="actionSelect-1">
-                    <option value="apple">Apple</option>
-                    <option value="banana">Banana</option>
-                    <option value="cherry">Cherry</option>
-                    <option value="date">Date</option>
-                    <option value="elderberry">Elderberry</option>
-                </select>
-                    </span>
+
       </div>
 
 
@@ -52,37 +42,12 @@ include('fetch_data.php');
         <div class="graph-container sub-graph">
           <canvas id="action-chart-2" class="chart action-graph"></canvas>
         </div>
-
-        <span>
-                <label for="actionSelect-2">Action: </label>
-          <!--                todo add actions in js-->
-                <select id="actionSelect-2">
-                    <option value="apple">Apple</option>
-                    <option value="banana">Banana</option>
-                    <option value="cherry">Cherry</option>
-                    <option value="date">Date</option>
-                    <option value="elderberry">Elderberry</option>
-                </select>
-                    </span>
       </div>
-
 
       <div class="chart-container">
         <div class="graph-container sub-graph">
           <canvas id="action-chart-3" class="chart action-graph"></canvas>
         </div>
-
-        <span>
-                <label for="actionSelect-3">Action: </label>
-          <!--                todo add actions in js-->
-                <select id="actionSelect-3">
-                    <option value="apple">Apple</option>
-                    <option value="banana">Banana</option>
-                    <option value="cherry">Cherry</option>
-                    <option value="date">Date</option>
-                    <option value="elderberry">Elderberry</option>
-                </select>
-                    </span>
       </div>
 
     </div>
@@ -108,8 +73,8 @@ include('fetch_data.php');
   let SESSION_DATA = <?php echo json_encode($data); ?>;
 </script>
 
-<!--<script src="fetch-data.js"></script>-->
 <script src="balance-account.js"></script>
+<script src="chart-selector.js"></script>
 <script src="action.js"></script>
 <script src="action-graph.js"></script>
 <script src="graph.js"></script>
