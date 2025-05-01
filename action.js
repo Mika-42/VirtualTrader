@@ -64,7 +64,10 @@ const actions_init = () =>
         btnSell.addEventListener('click', () => {
             btnSell.disabled = true;
             btnBuy.disabled = false;
-            console.log(e.value)
+
+            userActionsCodes = userActionsCodes.filter(f => {
+                return f === e.code;
+            });
             balanceAccountValue += parseFloat(e.value);
             balance_update();
         });
@@ -72,6 +75,8 @@ const actions_init = () =>
         btnBuy.addEventListener('click', () => {
             btnSell.disabled = false;
             btnBuy.disabled = true;
+
+            userActionsCodes.push(e.code);
             balanceAccountValue -= parseFloat(e.value);
             balance_update();
         });

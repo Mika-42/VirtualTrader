@@ -128,9 +128,15 @@ main
     font-size: 11px;
 }
 
-.action-price, .action-price-evolution
+.action-price
 {
-    width: 55px;
+    width: 70px;
+    font-size: 12px;
+}
+
+.action-price-evolution
+{
+    width: 40px;
     font-size: 12px;
 }
 

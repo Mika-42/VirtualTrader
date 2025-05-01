@@ -1,3 +1,5 @@
-ajouter un bouton au menu
-écrire les données dans la db
-remplacer la date JS par une date de la db
+- écrire les données dans la db quand on accède au menu
+- remplacer la date JS par une date de la db
+- stocker les actions achetées par quelques
+- remettre le timeout a 500
+- réparer les filtres 

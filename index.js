@@ -1,7 +1,4 @@
 
-
-const ids = Array.from(document.querySelectorAll('.action')).map(i => i.id);
-
 const dateEl = document.getElementById('date');
 dateEl.innerText = startDate.toLocaleDateString();
 
@@ -17,20 +14,20 @@ const daily = () => {
 
         if(startDate.getDate() === getLastDayOfMonth(startDate.getFullYear(), startDate.getMonth()))
         {
-                updateChart(startDate, balanceAccountValue );
-                action_update();
                 balance_update();
-                updateActionsChart(startDate);
+                updateChart();
+                action_update();
+                updateActionsChart();
         }
 
     }
 
 document.addEventListener('DOMContentLoaded', () => {
-        updateChart(startDate, balanceAccountValue );
+        balance_update();
+        updateChart();
         chart_selector_init();
         actions_init();
         show_username();
-        balance_update();
 })
 
 

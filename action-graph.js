@@ -32,7 +32,7 @@ const newChart = (g) => {
                 y: {
                     title: {
                         display: true,
-                        text: 'Balance'
+                        text: ''
                     },
                     beginAtZero: true
                 }
@@ -53,14 +53,14 @@ for(let i = 0; i < 3; ++i)
     graphAct[i] = newChart(graphActEl[i]);
 }
 
-const updateActionsChart = (v_date) =>
+const updateActionsChart = () =>
 {
     const codes = get_chart_selector_id();
 
     graphAct.forEach((f, i) => {
         f.data.datasets[0].data = previous12.get(codes[i]);
 
-        f.data.labels.push(v_date.toLocaleDateString('fr-FR'));
+        f.data.labels.push(startDate.toLocaleDateString('fr-FR'));
         f.data.labels.shift();
         f.update();
     });
