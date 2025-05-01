@@ -54,3 +54,17 @@ const sortByPrice = () => {
 };
 
 filterPriceBtn.addEventListener('click', sortByPrice);
+///---
+const filterEvolutionBtn = document.getElementById('filter-progression-btn');
+
+const sortByEvolution = () => {
+    const parent = document.getElementById('action-panel');
+    const orderByEvolution = actionsData.sort((a, b) => a.evolution - b.evolution).map(e => e.code)
+
+    orderByEvolution.forEach((id) => {
+        const _ = document.getElementById(id);
+        parent.appendChild(_);
+    });
+};
+
+filterEvolutionBtn.addEventListener('click', sortByEvolution);
