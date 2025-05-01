@@ -2,12 +2,12 @@ const updateActionsInHTML = (data) =>
 {
     data['actions'].forEach(e => {
         const price = document.querySelector(`#${e.code} .action-price`);
-        const evolution = document.querySelector(`#${e.code} .action-price`);
+        const evolution = document.querySelector(`#${e.code} .action-price-evolution`);
         const btnSell = document.querySelector(`#${e.code} .action-sell`);
         const btnBuy = document.querySelector(`#${e.code} .action-buy`);
 
         price.innerText = `${e.value}€`;
-        evolution.innerText `${(e.evolution >= 0) ? '+' : '-'}${Math.abs(e.evolution)}'%'`;
+        evolution.innerText = `${(e.evolution >= 0) ? '+' : '-'}${Math.abs(e.evolution)}%`;
 
         btnSell.addEventListener('click', () => {
             btnSell.disabled = true;
@@ -50,9 +50,7 @@ const addActionsToHTML = (data) =>
         p.appendChild(el);
     });
 }
-const updatePrices = () => {
-
-    let price = 0, old_evolution = 0;
+const updatePrices = (price, old_evolution) => { // todo
 
     const variation = (Math.random() * 6) - 3; // [-3, 3]
 
@@ -72,4 +70,3 @@ const updatePrices = () => {
 
 //----
 getFromPHP(addActionsToHTML);
-getFromPHP(updateActionsInHTML);

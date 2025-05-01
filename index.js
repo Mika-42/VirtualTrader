@@ -17,6 +17,8 @@ const daily = () => {
         startDate.setDate(startDate.getDate() + 1);
         dateEl.innerText = startDate.toLocaleDateString();
 
+        getFromPHP(updateActionsInHTML);
+
         if(startDate.getDate() === getLastDayOfMonth(startDate.getFullYear(), startDate.getMonth()))
         {
                 updateChart(startDate, balanceAccountValue );

@@ -38,7 +38,7 @@
 
 <?php
 session_start();
-global $connect;
+
 include('db_connexion.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -47,7 +47,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $password = $_POST["password"];
 
     $query = "SELECT * FROM Player WHERE email = '$email' AND password = '$password'";
-
+    global $connect;
     $result = mysqli_query($connect, $query);
 
     if(mysqli_num_rows($result) > 0) {

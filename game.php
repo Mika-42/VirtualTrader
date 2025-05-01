@@ -103,7 +103,6 @@ include('db_connexion.php');
 
 <script>
   let startDate = new Date('01/01/2025');
-  const CONNECTED_ID = <?php echo 1; ?>;
 </script>
 
 <script src="fetch-data.js"></script>
