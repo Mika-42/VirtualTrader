@@ -1,56 +1,4 @@
-const updateActionsInHTML = (data) =>
-{
-    data['actions'].forEach(e => {
-        const price = document.querySelector(`#${e.code} .action-price`);
-        const evolution = document.querySelector(`#${e.code} .action-price-evolution`);
-        const btnSell = document.querySelector(`#${e.code} .action-sell`);
-        const btnBuy = document.querySelector(`#${e.code} .action-buy`);
-
-        price.innerText = `${e.value}€`;
-        evolution.innerText = `${(e.evolution >= 0) ? '+' : '-'}${Math.abs(e.evolution)}%`;
-
-        btnSell.addEventListener('click', () => {
-            btnSell.disabled = true;
-            btnBuy.disabled = false;
-            balanceAccountValue += parseFloat(e.value);
-            balanceAccount.innerText = formatBalanceAccount(balanceAccountValue);
-        });
-
-        btnBuy.addEventListener('click', () => {
-            btnSell.disabled = false;
-            btnBuy.disabled = true;
-            balanceAccountValue -= parseFloat(e.value);
-            balanceAccount.innerText = formatBalanceAccount(balanceAccountValue);
-        });
-    });
-}
-const addActionsToHTML = (data) =>
-{
-    let evolution = 5; // todo replace this variable by e.evolution
-
-    const pid = 'action-panel';
-
-    data['actions'].forEach(e =>
-    {
-        let el = document.createElement('div');
-        el.className = 'action';
-        el.id = e.code;
-
-        el.innerHTML = `
-                <div class="action-name">${e.name}</div>
-                <div class="action-code">(${e.code})</div>
-                <div class="action-price">${e.value}€</div>
-                <div class="action-price-evolution">${(evolution >= 0) ? '+' : '-'}${Math.abs(evolution) + '%'}</div>
-                <button class="action-buy" title="buy"></button>
-                <button disabled class="action-sell" title="sell"></button>
-                <div class="action-description">${e.description}</div>
-            `;
-
-        let p = document.getElementById(pid);
-        p.appendChild(el);
-    });
-}
-const updatePrices = (price, old_evolution) => { // todo
+const updatePrices = (price, old_evolution) => {
 
     const variation = (Math.random() * 6) - 3; // [-3, 3]
 
@@ -68,5 +16,64 @@ const updatePrices = (price, old_evolution) => { // todo
     };
 }
 
-//----
-getFromPHP(addActionsToHTML);
+const action_update = () =>
+{
+    SESSION_DATA['actions'].forEach(e => {
+        const price = document.querySelector(`#${e.code} .action-price`);
+        const evolution = document.querySelector(`#${e.code} .action-price-evolution`);
+
+        let _ = updatePrices(e.value, e.evolution);
+        e.value = _.price;
+        e.evolution = _.evolution;
+
+        price.innerText = `${e.value}€`;
+        evolution.innerText = `${(e.evolution >= 0) ? '+' : '-'}${Math.abs(e.evolution)}%`;
+
+
+    });
+}
+const actions_init = () =>
+{
+    const pid = 'action-panel';
+
+    SESSION_DATA['actions'].forEach(e =>
+    {
+        let el = document.createElement('div');
+        el.className = 'action';
+        el.id = e.code;
+
+        el.innerHTML = `
+                <div class="action-name">${e.name}</div>
+                <div class="action-code">(${e.code})</div>
+                <div class="action-price">${e.value}€</div>
+                <div class="action-price-evolution">${(e.evolution >= 0) ? '+' : '-'}${Math.abs(e.evolution) + '%'}</div>
+                <button class="action-buy" title="buy"></button>
+                <button disabled class="action-sell" title="sell"></button>
+                <div class="action-description">${e.description}</div>
+            `;
+
+        let p = document.getElementById(pid);
+        p.appendChild(el);
+
+        const btnSell = el.querySelector(`.action-sell`);
+        const btnBuy = el.querySelector(`.action-buy`);
+
+        btnSell.addEventListener('click', () => {
+            btnSell.disabled = true;
+            btnBuy.disabled = false;
+            console.log(e.value)
+            balanceAccountValue += parseFloat(e.value);
+            balance_update();
+        });
+
+        btnBuy.addEventListener('click', () => {
+            btnSell.disabled = false;
+            btnBuy.disabled = true;
+            balanceAccountValue -= parseFloat(e.value);
+            balance_update();
+        });
+    });
+    action_update();
+}
+
+

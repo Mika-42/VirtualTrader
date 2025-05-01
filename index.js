@@ -17,7 +17,8 @@ const daily = () => {
         startDate.setDate(startDate.getDate() + 1);
         dateEl.innerText = startDate.toLocaleDateString();
 
-        getFromPHP(updateActionsInHTML);
+        action_update();
+        balance_update();
 
         if(startDate.getDate() === getLastDayOfMonth(startDate.getFullYear(), startDate.getMonth()))
         {
@@ -37,6 +38,9 @@ const daily = () => {
 
     }
 
+balance_update();
+show_username();
+actions_init();
 
 const timeout = 500;
 setInterval(daily, timeout);

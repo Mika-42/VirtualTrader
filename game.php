@@ -1,5 +1,6 @@
 <?php
 include('db_connexion.php');
+include('fetch_data.php');
 ?>
 
 <!DOCTYPE html>
@@ -103,9 +104,10 @@ include('db_connexion.php');
 
 <script>
   let startDate = new Date('01/01/2025');
+  let SESSION_DATA = <?php echo json_encode($data); ?>;
 </script>
 
-<script src="fetch-data.js"></script>
+<!--<script src="fetch-data.js"></script>-->
 <script src="balance-account.js"></script>
 <script src="action.js"></script>
 <script src="action-graph.js"></script>

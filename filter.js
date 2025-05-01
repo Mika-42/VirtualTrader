@@ -3,7 +3,6 @@ const actions = document.querySelectorAll('.action');
 //---
 const filterAllBtn = document.getElementById('filter-all-btn');
 filterAllBtn.addEventListener('click', () => {
-    console.log(actions)
     actions.forEach((i) => i.style.display = "flex");
 });
 

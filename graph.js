@@ -16,6 +16,12 @@ const walletChart = new Chart(ctx, {
     options: {
         scales: {
             x: {
+                ticks: {
+                    maxRotation: 45,
+                    minRotation: 45,
+                    align: 'start'
+                },
+
                 title: {
                     display: true,
                     text: 'Date'

@@ -1,5 +1,5 @@
-const balanceAccount = document.getElementById('balance-account');
-let balanceAccountValue = 10000;
+
+let balanceAccountValue = SESSION_DATA['logged'].balance;
 
 const formatBalanceAccount = (num) => {
     const roundedNum = parseFloat(num).toFixed(2);
@@ -11,13 +11,12 @@ const formatBalanceAccount = (num) => {
     return `${formattedInteger}.${decimalPart}€`;
 }
 
-const updateBalance = (data) => {
-    balanceAccountValue = data['logged'].balance;
-    balanceAccount.innerText =  formatBalanceAccount(balanceAccountValue);
+const balance_update = (data) => {
+    const e = document.getElementById('balance-account');
+    e.innerText =  formatBalanceAccount(balanceAccountValue);
 }
 
-getFromPHP(updateBalance);
-getFromPHP((data) => {
+const show_username = () => {
     const e = document.getElementById('username');
-    e.innerText = data['logged'].username;
-});
+    e.innerText = SESSION_DATA['logged'].username;
+}

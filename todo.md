@@ -1,2 +1,2 @@
-récuperer la dernière valeur du wallet sans latence
-réparer les filtres
+ajouter un bouton au menu
+écrire les données dans la db
