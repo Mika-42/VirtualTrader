@@ -9,7 +9,7 @@ include('fetch_data.php');
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="index.css">
-  <title>Title</title>
+  <title>VirtualTrader</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
 
@@ -83,7 +83,12 @@ include('fetch_data.php');
     </div>
     </div>
     <div id="ranking-panel" style="display: none;">
-        Lorem ipsum dolor sit amet
+
+        <div class="rank">
+            <span class="index">1</span>
+            <span class="username">Mika</span>
+            <span class="balance">10 000€</span>
+        </div>
     </div>
     <div id="switch">
         <input type="radio" id="action-btn" name="switch" class="toggle-input" checked>
@@ -104,6 +109,7 @@ include('fetch_data.php');
 <script src="view-switch.js"></script>
 <script src="balance-account.js"></script>
 <script src="chart-selector.js"></script>
+<script src="ranking.js"></script>
 <script src="action.js"></script>
 <script src="action-graph.js"></script>
 <script src="graph.js"></script>

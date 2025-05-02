@@ -39,6 +39,12 @@ main
     height: 97%;
 }
 
+#ranking-panel
+{
+    display: flex;
+    flex-direction: column;
+}
+
 #switch{
     height: 3%;
     display: flex;
@@ -281,4 +287,22 @@ main
 
     font-size: 25px;
     font-weight: 900;
+}
+
+.rank
+{
+    background: rgba(0, 0, 0, 0.13);
+    margin: 5px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    color: white;
+}
+
+.username, .balance, .index
+{
+    font-size: 20px;
+    width: 33.33%;
+    text-align: center;
 }
