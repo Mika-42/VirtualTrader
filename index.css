@@ -7,7 +7,7 @@ html,body {
 
     background: rgb(255, 217, 217);
 }
-main, #action-panel {
+main, #side-panel {
     border: none;
     border-radius: 7px;
     margin: 7px;
@@ -23,13 +23,50 @@ main
     gap: 5px;
 }
 
-#action-panel
+#side-panel
 {
     width: 22%;
     min-width: 335px;
     /*background: #b2b2ff;*/
     background: transparent;
     backdrop-filter: blur(50px) brightness(0.7) contrast(0.9);
+    display: flex;
+    flex-direction: column;
+}
+
+#action-panel
+{
+    height: 97%;
+}
+
+#switch{
+    height: 3%;
+    display: flex;
+    margin: 0;
+}
+
+.switch-label
+{
+    width: 50%;
+    background: rgba(0, 0, 0, 0.11);
+    font-size: 17px;
+    color: white;
+    text-align: center;
+}
+
+#act-lbl
+{
+    border-bottom-left-radius: 10px;
+}
+
+#ranking-lbl
+{
+    border-bottom-right-radius: 10px;
+}
+
+.toggle-input:checked + .switch-label
+{
+    background-color: #4caf50;
 }
 
 #info

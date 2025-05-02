@@ -1,4 +1,5 @@
 <?php
+global $data;
 include('db_connexion.php');
 include('fetch_data.php');
 ?>
@@ -53,8 +54,10 @@ include('fetch_data.php');
     </div>
   </div>
 </main>
-<aside id="action-panel">
-    <div class="filter">
+
+<aside id="side-panel">
+    <div id="action-panel">
+        <div class="filter">
         <span class="filterText">Filter:</span>
         <input type="radio" id="filter-all-btn" name="filter" class="toggle-input" checked>
         <label for="filter-all-btn" class="toggle-label">All</label>
@@ -66,7 +69,7 @@ include('fetch_data.php');
         <label for="filter-sold-btn" class="toggle-label">Sold</label>
     </div>
 
-    <div class="filter">
+        <div class="filter">
         <span class="filterText">Sort:</span>
 
         <input type="radio" id="filter-name-btn" name="sub-filter" class="toggle-input" checked>
@@ -78,7 +81,17 @@ include('fetch_data.php');
         <input type="radio" id="filter-progression-btn" name="sub-filter" class="toggle-input">
         <label for="filter-progression-btn" class="toggle-label">Progression</label>
     </div>
+    </div>
+
+    <div id="switch">
+        <input type="radio" id="action-btn" name="switch" class="toggle-input" checked>
+        <label id="act-lbl" for="action-btn" class="switch-label">Action</label>
+
+        <input type="radio" id="ranking-btn" name="switch" class="toggle-input">
+        <label id="ranking-lbl" for="ranking-btn" class="switch-label">Ranking</label>
+    </div>
 </aside>
+
 </body>
 
 <script>
