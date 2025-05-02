@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 30 avr. 2025 à 20:00
+-- Généré le : ven. 02 mai 2025 à 08:29
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -76,7 +76,8 @@ CREATE TABLE `player` (
   `email` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
   `username` varchar(20) NOT NULL,
-  `balance` float DEFAULT 10000
+  `balance` float DEFAULT 10000,
+  `balanceAction` float DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
