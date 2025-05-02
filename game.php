@@ -82,7 +82,9 @@ include('fetch_data.php');
         <label for="filter-progression-btn" class="toggle-label">Progression</label>
     </div>
     </div>
-
+    <div id="ranking-panel" style="display: none;">
+        Lorem ipsum dolor sit amet
+    </div>
     <div id="switch">
         <input type="radio" id="action-btn" name="switch" class="toggle-input" checked>
         <label id="act-lbl" for="action-btn" class="switch-label">Action</label>
@@ -99,6 +101,7 @@ include('fetch_data.php');
   let SESSION_DATA = <?php echo json_encode($data); ?>;
 </script>
 
+<script src="view-switch.js"></script>
 <script src="balance-account.js"></script>
 <script src="chart-selector.js"></script>
 <script src="action.js"></script>

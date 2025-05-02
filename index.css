@@ -34,7 +34,7 @@ main
     flex-direction: column;
 }
 
-#action-panel
+#action-panel, #ranking-panel
 {
     height: 97%;
 }
