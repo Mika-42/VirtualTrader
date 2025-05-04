@@ -18,6 +18,7 @@ const daily = () => {
                 updateChart();
                 action_update();
                 updateActionsChart();
+                ranking_update();
 
                 if(filterPriceBtn.checked)
                 {
@@ -38,6 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
         chart_selector_init();
         actions_init();
         show_username();
+        sortByName();
+        ranking_init();
 })
 
 

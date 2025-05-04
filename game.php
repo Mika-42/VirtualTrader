@@ -83,12 +83,6 @@ include('fetch_data.php');
     </div>
     </div>
     <div id="ranking-panel" style="display: none;">
-
-        <div class="rank">
-            <span class="index">1</span>
-            <span class="username">Mika</span>
-            <span class="balance">10 000€</span>
-        </div>
     </div>
     <div id="switch">
         <input type="radio" id="action-btn" name="switch" class="toggle-input" checked>

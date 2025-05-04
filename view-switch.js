@@ -8,4 +8,5 @@ switchAct.addEventListener('click', () => {
 switchRank.addEventListener('click', () => {
     document.getElementById('action-panel').style.display = 'none';
     document.getElementById('ranking-panel').style.display = 'flex';
+    ranking_update();
 });

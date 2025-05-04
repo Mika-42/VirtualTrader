@@ -303,6 +303,11 @@ main
 .username, .balance, .index
 {
     font-size: 20px;
-    width: 33.33%;
     text-align: center;
+    width: 10%;
+}
+
+.username, .balance
+{
+    width: 40%;
 }

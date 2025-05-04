@@ -30,7 +30,8 @@ filterSoldBtn.addEventListener('click', () => {
 });
 ///---
 const filterNameBtn = document.getElementById('filter-name-btn');
-filterNameBtn.addEventListener('click', () => {
+
+const sortByName = () => {
     const parent = document.getElementById('action-panel');
     const orderByName = actionsData.sort((a, b) => a.name.localeCompare(b.name)).map(e => e.code)
 
@@ -38,7 +39,9 @@ filterNameBtn.addEventListener('click', () => {
         const _ = document.getElementById(id);
         parent.appendChild(_);
     });
-});
+};
+
+filterNameBtn.addEventListener('click', sortByName);
 
 ///---
 const filterPriceBtn = document.getElementById('filter-price-btn');

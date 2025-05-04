@@ -66,19 +66,22 @@ const actions_init = () =>
             btnBuy.disabled = false;
 
             userActionsCodes = userActionsCodes.filter(f => {
-                return f === e.code;
+                return f !== e.code;
             });
-            balanceAccountValue += parseFloat(e.value);
+            SESSION_DATA['logged'].balance += parseFloat(e.value);
             balance_update();
         });
 
         btnBuy.addEventListener('click', () => {
+            if(parseFloat(e.value) <= TOTAL_WALLET)
+            {
             btnSell.disabled = false;
             btnBuy.disabled = true;
 
             userActionsCodes.push(e.code);
-            balanceAccountValue -= parseFloat(e.value);
+            SESSION_DATA['logged'].balance -= parseFloat(e.value);
             balance_update();
+            }
         });
 
         previous12.set(e.code,[NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN]);

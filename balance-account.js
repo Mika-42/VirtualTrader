@@ -1,7 +1,6 @@
 
-let balanceAccountValue = SESSION_DATA['logged'].balance;
+//let balanceAccountValue = SESSION_DATA['logged'].balance;
 let userActionsCodes = [];
-let totalAct = 0;
 let TOTAL_WALLET = 0;
 
 const formatBalanceAccount = (num) => {
@@ -18,10 +17,10 @@ const balance_update = () => {
 
     const t = userActionsCodes.map(e => Array.from(SESSION_DATA['actions']).find(j => j.code === e).value)
 
-    totalAct = 0;
-    t.forEach(e => totalAct += e);
+    SESSION_DATA['logged'].balanceAction = 0;
+    t.forEach(e => SESSION_DATA['logged'].balanceAction += e);
     const e = document.getElementById('balance-account');
-    TOTAL_WALLET = parseFloat(balanceAccountValue) + totalAct;
+    TOTAL_WALLET = parseFloat(SESSION_DATA['logged'].balance) + parseFloat(SESSION_DATA['logged'].balanceAction);
     e.innerText =  formatBalanceAccount(TOTAL_WALLET);
 }
 
