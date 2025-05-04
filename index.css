@@ -49,15 +49,19 @@ main
     height: 3%;
     display: flex;
     margin: 0;
+    align-items: center;
 }
 
 .switch-label
 {
     width: 50%;
+    height: 100%;
     background: rgba(0, 0, 0, 0.11);
     font-size: 17px;
     color: white;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #act-lbl

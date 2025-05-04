@@ -11,18 +11,19 @@ const ranking_update = () => {
     player.push(SESSION_DATA['logged']);
 
     const values = player.sort((a, b) => {
-        return (b.balance + b.balanceAction) - (a.balance + a.balanceAction);
+        return (parseFloat(b.balance) + parseFloat(b.balanceAction)) -
+            (parseFloat(a.balance) + parseFloat(a.balanceAction));
     });
+
+    console.log(values)
 
     top10.forEach((e, i) => {
         e.querySelector('.index').innerText = i + 1;
         e.querySelector('.username').innerText = values[i].username;
-
-        console.log(parseFloat(values[i].balance), SESSION_DATA['logged'].balance);
         e.querySelector('.balance').innerText = formatBalanceAccount(
             parseFloat(values[i].balance) + parseFloat(values[i].balanceAction)
         );
-        p.appendChild(e);
+       // p.appendChild(e);
     });
 }
 
