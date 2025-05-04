@@ -42,16 +42,16 @@ CREATE TABLE `action` (
 --
 
 INSERT INTO `action` (`code`, `name`, `description`, `value`, `distribDate`, `nbDetenue`, `evolution`) VALUES
-('AAPL', 'Apple Inc.', 'Technologie, fabricant de produits électroniques.', 200, '2025-04-21', 0, 0),
-('AMZN', 'Amazon.com Inc.', 'E-commerce, services cloud.', 175, '2025-04-21', 0, 0),
-('BA', 'Boeing Co.', 'Aéronautique et défense.', 160, '2025-04-21', 0, 0),
-('GOOGL', 'Alphabet Inc.', 'Secteur technologique, maison-mère de Google.', 155, '2025-04-21', 0, 0),
-('JNJ', 'Johnson & Johnson', 'Secteur pharmaceutique et produits de soins de santé.', 160, '2025-04-21', 0, 0),
-('KO', 'Coca-Cola Company', 'Boissons non alcoolisées.', 75, '2025-04-21', 0, 0),
-('MSFT', 'Microsoft Corporatio', 'Technologie, logiciels et services cloud.', 370, '2025-04-21', 0, 0),
-('NKE', 'Nike Inc.', 'Vêtements et équipements sportifs.', 55, '2025-04-21', 0, 0),
-('TSLA', 'Tesla', ' Automobile, spécialisé dans les véhicules électriques.', 240, '2025-04-21', 0, 0),
-('V', 'Visa Inc.', 'Services financiers et paiements électroniques.', 330, '2025-04-21', 0, 0);
+('AAPL', 'Apple Inc.', 'Technologie, fabricant de produits électroniques.', 200, '2025-04-21', 0, -5.07),
+('AMZN', 'Amazon.com Inc.', 'E-commerce, services cloud.', 175, '2025-04-21', 0, -8.7),
+('BA', 'Boeing Co.', 'Aéronautique et défense.', 160, '2025-04-21', 0, -4.12),
+('GOOGL', 'Alphabet Inc.', 'Secteur technologique, maison-mère de Google.', 155, '2025-04-21', 0, 4.37),
+('JNJ', 'Johnson & Johnson', 'Secteur pharmaceutique et produits de soins de santé.', 160, '2025-04-21', 0, 9.35),
+('KO', 'Coca-Cola Company', 'Boissons non alcoolisées.', 75, '2025-04-21', 0, -0.8),
+('MSFT', 'Microsoft Corporatio', 'Technologie, logiciels et services cloud.', 370, '2025-04-21', 0, -9.66),
+('NKE', 'Nike Inc.', 'Vêtements et équipements sportifs.', 55, '2025-04-21', 0, -2.88),
+('TSLA', 'Tesla', ' Automobile, spécialisé dans les véhicules électriques.', 240, '2025-04-21', 0, 0.85),
+('V', 'Visa Inc.', 'Services financiers et paiements électroniques.', 330, '2025-04-21', 0, -4.69);
 
 -- --------------------------------------------------------
 
@@ -77,7 +77,8 @@ CREATE TABLE `player` (
   `password` varchar(255) NOT NULL,
   `username` varchar(20) NOT NULL,
   `balance` float DEFAULT 10000,
-  `balanceAction` float DEFAULT 0
+  `balanceAction` float DEFAULT 0,
+  `gameDate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
