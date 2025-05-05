@@ -78,7 +78,7 @@ CREATE TABLE `player` (
   `username` varchar(20) NOT NULL,
   `balance` float DEFAULT 10000,
   `balanceAction` float DEFAULT 0,
-  `gameDate` date DEFAULT NULL
+  `gameDate` date DEFAULT '2025-01-01'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
