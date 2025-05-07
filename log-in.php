@@ -48,6 +48,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $query = "SELECT * FROM Player WHERE email = '$email' AND password = '$password'";
     global $connect;
+    
     $result = mysqli_query($connect, $query);
 
     if(mysqli_num_rows($result) > 0) {

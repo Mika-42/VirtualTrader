@@ -6,7 +6,7 @@ $password = "";
 $databaseName = "VirtualTrader";
 
 //on se connecte a la base de donnée
-$connect = mysqli_connect($servername, $username, $password, $databaseName);
+$connect =mysqli_connect($servername, $username, $password, $databaseName);
 
 //on verifie que l'on puisse bien se connecter et sinon on renvoie une erreur
 if (!$connect) {
