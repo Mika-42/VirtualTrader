@@ -1,5 +1,3 @@
-const actionsData = Array.from(SESSION_DATA['actions']);
-
 //---
 const filterAllBtn = document.getElementById('filter-all-btn');
 filterAllBtn.addEventListener('click', () => {
@@ -31,43 +29,43 @@ filterSoldBtn.addEventListener('click', () => {
 ///---
 const filterNameBtn = document.getElementById('filter-name-btn');
 
-const sortByName = () => {
+async function sortByName()
+{
     const parent = document.getElementById('action-panel');
-    const orderByName = actionsData.sort((a, b) => a.name.localeCompare(b.name)).map(e => e.code)
-
+    const orderByName = await getData('all-actions-by-name');
     orderByName.forEach((id) => {
         const _ = document.getElementById(id);
         parent.appendChild(_);
     });
-};
+}
 
 filterNameBtn.addEventListener('click', sortByName);
 
 ///---
 const filterPriceBtn = document.getElementById('filter-price-btn');
 
-const sortByPrice = () => {
+async function sortByPrice()
+{
     const parent = document.getElementById('action-panel');
-    const orderByPrice = actionsData.sort((a, b) => a.value - b.value).map(e => e.code)
-
+    const orderByPrice = await getData('all-actions-by-price');
     orderByPrice.forEach((id) => {
         const _ = document.getElementById(id);
         parent.appendChild(_);
     });
-};
+}
 
 filterPriceBtn.addEventListener('click', sortByPrice);
 ///---
 const filterEvolutionBtn = document.getElementById('filter-progression-btn');
 
-const sortByEvolution = () => {
+async function sortByEvolution() {
     const parent = document.getElementById('action-panel');
-    const orderByEvolution = actionsData.sort((a, b) => a.evolution - b.evolution).map(e => e.code)
+    const orderByEvolution = await getData('all-actions-by-evolution');
 
     orderByEvolution.forEach((id) => {
         const _ = document.getElementById(id);
         parent.appendChild(_);
     });
-};
+}
 
 filterEvolutionBtn.addEventListener('click', sortByEvolution);

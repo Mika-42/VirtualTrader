@@ -1,6 +1,6 @@
 
 const dateEl = document.getElementById('date');
-dateEl.innerText = startDate.toLocaleDateString();
+dateEl.innerText = SESSION_DATA['logged'].gameDate.toLocaleDateString();
 
 function getLastDayOfMonth(year, month) {
         // Create a date object for the first day of the next month
@@ -9,15 +9,15 @@ function getLastDayOfMonth(year, month) {
 }
 
 const daily = () => {
-        startDate.setDate(startDate.getDate() + 1);
-        dateEl.innerText = startDate.toLocaleDateString();
+        SESSION_DATA['logged'].gameDate.setDate(SESSION_DATA['logged'].gameDate.getDate() + 1);
+        dateEl.innerText = SESSION_DATA['logged'].gameDate.toLocaleDateString();
 
-        if(startDate.getDate() === getLastDayOfMonth(startDate.getFullYear(), startDate.getMonth()))
+        if(SESSION_DATA['logged'].gameDate.getDate() === getLastDayOfMonth(SESSION_DATA['logged'].gameDate.getFullYear(), SESSION_DATA['logged'].gameDate.getMonth()))
         {
                 balance_update();
                 updateChart();
                 action_update();
-                updateActionsChart();
+                update_actions_chart();
                 ranking_update();
 
                 if(filterPriceBtn.checked)

@@ -51,6 +51,6 @@ const updateChart = () =>
     walletChart.data.datasets[0].data.push(TOTAL_WALLET)
 
     walletChart.data.labels.shift();
-    walletChart.data.labels.push(startDate.toLocaleDateString('fr-FR'));
+    walletChart.data.labels.push(SESSION_DATA['logged'].gameDate.toLocaleDateString('fr-FR'));
     walletChart.update();
 };

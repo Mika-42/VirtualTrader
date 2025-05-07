@@ -1,8 +1,3 @@
-
-//let balanceAccountValue = SESSION_DATA['logged'].balance;
-let userActionsCodes = [];
-let TOTAL_WALLET = 0;
-
 const formatBalanceAccount = (num) => {
     const roundedNum = parseFloat(num).toFixed(2);
 
@@ -13,18 +8,25 @@ const formatBalanceAccount = (num) => {
     return `${formattedInteger}.${decimalPart}€`;
 }
 
-const balance_update = () => {
+async function balance_update()
+{
+    const logged = await getData('logged-user');
+    const actions = await getData('all-actions');
 
-    const t = userActionsCodes.map(e => Array.from(SESSION_DATA['actions']).find(j => j.code === e).value)
-
-    SESSION_DATA['logged'].balanceAction = 0;
-    t.forEach(e => SESSION_DATA['logged'].balanceAction += e);
     const e = document.getElementById('balance-account');
-    TOTAL_WALLET = parseFloat(SESSION_DATA['logged'].balance) + parseFloat(SESSION_DATA['logged'].balanceAction);
-    e.innerText =  formatBalanceAccount(TOTAL_WALLET);
+    const totalWallet = await getData('logged-total-wallet');
+    e.innerText =  formatBalanceAccount(parseFloat(totalWallet));
+
+    const data = {
+        balance: logged.balance,
+        id: logged.id
+    };
+
+    setData('update-logged-wallet', data);
 }
 
-const show_username = () => {
-    const e = document.getElementById('username');
-    e.innerText = SESSION_DATA['logged'].username;
+async function show_username()
+{
+    const logged = await getData('logged-user');
+    document.getElementById('username').innerText = logged.username;
 }

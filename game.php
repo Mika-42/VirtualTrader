@@ -1,7 +1,7 @@
 <?php
 global $data;
 include('db_connexion.php');
-include('fetch_data.php');
+include('get_data.php');
 ?>
 
 <!DOCTYPE html>
@@ -96,10 +96,11 @@ include('fetch_data.php');
 </body>
 
 <script>
-  let startDate = new Date('01/01/2025');
-  let SESSION_DATA = <?php echo json_encode($data); ?>;
+  //let SESSION_DATA = <?php echo json_encode($data); ?>;
+  //SESSION_DATA['logged'].gameDate = new Date(SESSION_DATA['logged'].gameDate);
 </script>
 
+<script src="fetch.js"></script>
 <script src="view-switch.js"></script>
 <script src="balance-account.js"></script>
 <script src="chart-selector.js"></script>

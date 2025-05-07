@@ -53,14 +53,16 @@ for(let i = 0; i < 3; ++i)
     graphAct[i] = newChart(graphActEl[i]);
 }
 
-const updateActionsChart = () =>
+async function update_actions_chart()
 {
     const codes = get_chart_selector_id();
+
+    const logged = await getData('logged-user');
 
     graphAct.forEach((f, i) => {
         f.data.datasets[0].data = previous12.get(codes[i]);
 
-        f.data.labels.push(startDate.toLocaleDateString('fr-FR'));
+        f.data.labels.push(new Date(logged.gameDate).toLocaleDateString('fr-FR'));
         f.data.labels.shift();
         f.update();
     });

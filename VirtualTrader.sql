@@ -72,8 +72,8 @@ CREATE TABLE `historique` (
 --
 
 CREATE TABLE `ownby` (
-  `actionCode` varchar(5) DEFAULT NULL UNIQUE,
-  `playerId` int(11) DEFAULT NULL UNIQUE
+  `actionCode` varchar(5) DEFAULT NULL,
+  `playerId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

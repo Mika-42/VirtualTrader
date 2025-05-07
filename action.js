@@ -1,4 +1,4 @@
-let previous12 = new Map;
+let previous12 = new Map; //todo remove later
 const updatePrices = (price, old_evolution) => {
 
     const variation = (Math.random() * 6) - 3; // [-3, 3]
@@ -17,74 +17,103 @@ const updatePrices = (price, old_evolution) => {
     };
 }
 
-const action_update = () =>
+async function action_update()
 {
-    SESSION_DATA['actions'].forEach(e => {
+    const actions = await getData('all-actions');
+
+    actions.forEach(e => {
         const price = document.querySelector(`#${e.code} .action-price`);
         const evolution = document.querySelector(`#${e.code} .action-price-evolution`);
 
         let _ = updatePrices(e.value, e.evolution);
-        e.value = _.price;
-        e.evolution = _.evolution;
-        price.innerText = `${e.value}€`;
-        evolution.innerText = `${(e.evolution >= 0) ? '+' : '-'}${Math.abs(e.evolution)}%`;
+        price.innerText = `${_.price}€`;
+        evolution.innerText = `${(_.evolution >= 0) ? '+' : '-'}${Math.abs(_.evolution)}%`;
 
-        previous12.get(e.code).push(e.value);
+        previous12.get(e.code).push(_.price);
         previous12.get(e.code).shift();
+
+        setData('update-actions', {value: _.price, evolution: _.evolution, code: e.code});
+
+        //todo set history
     });
-
-
 }
-const actions_init = () =>
+
+//-----------------------------//
+function create_action_html(parentID, actionData) {
+    const htmlObj = document.createElement('div');
+    htmlObj.className = 'action';
+    htmlObj.id = actionData.code;
+
+    htmlObj.innerHTML = `
+            <div class="action-name">${actionData.name}</div>
+            <div class="action-code">(${actionData.code})</div>
+            <div class="action-price">${actionData.value}€</div>
+            <div class="action-price-evolution">${(actionData.evolution >= 0) ? '+' : '-'}${Math.abs(actionData.evolution) + '%'}</div>
+            <button class="action-buy" title="buy"></button>
+            <button disabled class="action-sell" title="sell"></button>
+            <div class="action-description">${actionData.description}</div>
+        `;
+    let p = document.getElementById(parentID);
+    p.appendChild(htmlObj);
+
+    return htmlObj;
+}
+
+async function sell_callback(sellButton, buyButton, action)
+{
+    sellButton.disabled = true;
+    buyButton.disabled = false;
+
+    const logged = await getData('logged-user');
+
+    setData('remove-action-to', {actionCode: action.code, playerId: logged.id});
+
+    setData('update-logged-wallet', {
+        balance: logged.balance + parseFloat(action.value),
+        id: logged.id}
+    );
+
+    await balance_update();
+}
+
+async function buy_callback(sellButton, buyButton, action)
+{
+    const logged = await getData('logged-user');
+
+    if(parseFloat(action.value) <= logged.balance + logged.balanceAction)
+    {
+        sellButton.disabled = false;
+        buyButton.disabled = true;
+
+        setData('add-action-to', {actionCode: action.code, playerId: logged.id})
+
+        setData('update-logged-wallet', {
+            balance: logged.balance - parseFloat(action.value),
+            id: logged.id}
+        );
+
+        await balance_update();
+    }
+}
+async function actions_init()
 {
     const pid = 'action-panel';
 
-    SESSION_DATA['actions'].forEach(e =>
+    const actions = await getData('actions');
+
+    actions.forEach(action =>
     {
-        let el = document.createElement('div');
-        el.className = 'action';
-        el.id = e.code;
 
-        el.innerHTML = `
-                <div class="action-name">${e.name}</div>
-                <div class="action-code">(${e.code})</div>
-                <div class="action-price">${e.value}€</div>
-                <div class="action-price-evolution">${(e.evolution >= 0) ? '+' : '-'}${Math.abs(e.evolution) + '%'}</div>
-                <button class="action-buy" title="buy"></button>
-                <button disabled class="action-sell" title="sell"></button>
-                <div class="action-description">${e.description}</div>
-            `;
+        const htmlObj = create_action_html(pid, action);
 
-        let p = document.getElementById(pid);
-        p.appendChild(el);
+        const btnSell = htmlObj.querySelector(`.action-sell`);
+        const btnBuy = htmlObj.querySelector(`.action-buy`);
 
-        const btnSell = el.querySelector(`.action-sell`);
-        const btnBuy = el.querySelector(`.action-buy`);
+        btnSell.addEventListener('click', async () => await sell_callback(btnSell, btnBuy, action));
+        btnBuy.addEventListener('click', async () => await buy_callback(btnSell, btnBuy, action));
 
-        btnSell.addEventListener('click', () => {
-            btnSell.disabled = true;
-            btnBuy.disabled = false;
-
-            userActionsCodes = userActionsCodes.filter(f => {
-                return f !== e.code;
-            });
-            SESSION_DATA['logged'].balance += parseFloat(e.value);
-            balance_update();
-        });
-
-        btnBuy.addEventListener('click', () => {
-            if(parseFloat(e.value) <= TOTAL_WALLET)
-            {
-            btnSell.disabled = false;
-            btnBuy.disabled = true;
-
-            userActionsCodes.push(e.code);
-            SESSION_DATA['logged'].balance -= parseFloat(e.value);
-            balance_update();
-            }
-        });
-
-        previous12.set(e.code,[NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN]);
+        //todo add to table
+        previous12.set(action.code,[NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN]);
     });
 }
 

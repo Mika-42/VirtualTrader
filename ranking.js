@@ -23,7 +23,6 @@ const ranking_update = () => {
         e.querySelector('.balance').innerText = formatBalanceAccount(
             parseFloat(values[i].balance) + parseFloat(values[i].balanceAction)
         );
-       // p.appendChild(e);
     });
 }
 
