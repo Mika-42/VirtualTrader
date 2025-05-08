@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="loginPage.css">
+    <link rel="stylesheet" href="../loginPage.css">
     <title>Sign-in</title>
 </head>
 <body>
 
 <aside id="login-view">
-    <img id="title" src="images/VT.png" alt="VirtualTrading">
+    <img id="title" src="../images/VT.png" alt="VirtualTrading">
 
     <form id="log-form" method="post">
 
@@ -37,6 +37,7 @@
         </fieldset>
 
         <div id="error-msg"></div>
+        <div id="info-msg"></div>
 
     </form>
 
@@ -47,10 +48,10 @@
 </aside>
 
 <?php
-include('db_connexion.php');
+include 'interface.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+    global$pdo;
     $username = $_POST["username"];
     $email = $_POST["email"];
     $password = $_POST["password"];
@@ -60,32 +61,41 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo /** @lang javascript */
         "<script>
             const el = document.getElementById('error-msg');
+            const e = document.getElementById('info-msg');
+            
             el.innerText = 'Passwords do not match.';
+            e.innerText = '';
         </script>";
         exit;
     }
 
-    $query = "SELECT * FROM Player WHERE email = '$email'";
-    $check = mysqli_query($connect, $query);
+    $query = "SELECT * FROM Player WHERE email = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$email]);
 
-    if(mysqli_num_rows($check) > 0) {
+    if($stmt->rowCount() > 0) {
         echo /** @lang javascript */
         "<script>
             const el = document.getElementById('error-msg');
+            const e = document.getElementById('info-msg');
+            
             el.innerText = 'This email is already registered.';
+            e.innerText = '';
         </script>";
 
         die("email already taken.");
     }
     else{
-        $insert = "INSERT INTO Player (username, email, password) VALUES ('$username', '$email', '$password')";
-
-        if (mysqli_query($connect, $insert)) {
-            header('Location: log-in.php', true, 307);
+        $query = "INSERT INTO Player (username, email, password) VALUES (?, ?, ?)";
+        $stmt = $pdo->prepare($query);
+        ;
+        if ($stmt->execute([$username, $email, $password])) {
             echo /** @lang javascript */
             "<script>
             const el = document.getElementById('error-msg');
+            const e = document.getElementById('info-msg');
             el.innerText = '';
+            e.innerText = 'Successfully registered.';
             </script>";
 
             exit;
@@ -93,7 +103,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo /** @lang javascript */
             "<script>
             const el = document.getElementById('error-msg');
+            const e = document.getElementById('info-msg');
+            
             el.innerText = 'Failed to insert data in database.';
+            e.innerText = '';
             </script>";
             die("Erreur lors de l'insertion dans la base de données.");
         }

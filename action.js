@@ -1,23 +1,6 @@
 let previous12 = new Map; //todo remove later
-const updatePrices = (price, old_evolution) => {
 
-    const variation = (Math.random() * 6) - 3; // [-3, 3]
-
-    let evolution = parseFloat(old_evolution) + variation;
-
-    evolution = Math.max(-10, Math.min(10, evolution));
-
-    let p = parseFloat(price) * (1 + evolution / 100);
-
-    p = Math.max(1, p);
-
-    return {
-        price: Math.round(p * 100) / 100,
-        evolution: Math.round(evolution * 100) / 100
-    };
-}
-
-async function action_update()
+async function ui_action_update()
 {
     const actions = await getData('all-actions');
 
@@ -31,10 +14,6 @@ async function action_update()
 
         previous12.get(e.code).push(_.price);
         previous12.get(e.code).shift();
-
-        setData('update-actions', {value: _.price, evolution: _.evolution, code: e.code});
-
-        //todo set history
     });
 }
 
@@ -61,17 +40,14 @@ function create_action_html(parentID, actionData) {
 
 async function sell_callback(sellButton, buyButton, action)
 {
+    const logged = await getData('logged-user');
+
     sellButton.disabled = true;
     buyButton.disabled = false;
 
-    const logged = await getData('logged-user');
+    setData('remove-action-to', {actionCode: action.code, playerId: parseInt(logged.id)});
 
-    setData('remove-action-to', {actionCode: action.code, playerId: logged.id});
-
-    setData('update-logged-wallet', {
-        balance: logged.balance + parseFloat(action.value),
-        id: logged.id}
-    );
+    setData('update-logged-wallet', {balance: parseFloat(logged.balance) + parseFloat(action.value)});
 
     await balance_update();
 }
@@ -79,16 +55,16 @@ async function sell_callback(sellButton, buyButton, action)
 async function buy_callback(sellButton, buyButton, action)
 {
     const logged = await getData('logged-user');
-
-    if(parseFloat(action.value) <= logged.balance + logged.balanceAction)
+    const totalWallet = await getData('logged-total-wallet')
+    if(parseFloat(action.value) <= parseFloat(totalWallet.totalWallet))
     {
         sellButton.disabled = false;
         buyButton.disabled = true;
 
-        setData('add-action-to', {actionCode: action.code, playerId: logged.id})
+        setData('add-action-to', {actionCode: action.code, playerId: parseInt(logged.id)})
 
         setData('update-logged-wallet', {
-            balance: logged.balance - parseFloat(action.value),
+            balance: parseFloat(logged.balance) - parseFloat(action.value),
             id: logged.id}
         );
 
@@ -99,7 +75,7 @@ async function actions_init()
 {
     const pid = 'action-panel';
 
-    const actions = await getData('actions');
+    const actions = await getData('all-actions');
 
     actions.forEach(action =>
     {

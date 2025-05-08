@@ -1,22 +1,26 @@
 async function getData(type) {
     const response = await fetch(`get_data.php?queryType=${type}`);
-    if (!response.ok) throw new Error('Network response was not ok');
-    else return await response.json();
+        if(!response.ok)
+        {
+            new Error('Network response was not ok');
+        }
+
+    const data = await response.json();
+    console.log(data); //todo remove
+    return data;
 }
 
 function setData(type, data){
-    fetch('set_data.php', {
+    fetch(`set_data.php?action=${type}`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
     })
-        .then(res => res.json())
+        .then(res => res.text())
         .then(response => {
-            if(response.error) {
-                alert('Error: ' + response.error);
-            } else {
-                alert(response.message);
-            }
+
+            console.log('data set: ', response);
+
         })
-        .catch(err => alert('Fetch error: ' + err.message));
+        .catch(err => console.error('Fetch error: ' + err.message));
 }

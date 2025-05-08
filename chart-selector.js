@@ -23,10 +23,12 @@ async function chart_selector_init_func(e, i)
         graphAct[i].update();
     });
 }
-function chart_selector_init()
+async function chart_selector_init()
 {
     const chartList = document.querySelectorAll('.chart-container');
-    chartList.forEach((e, i) => chart_selector_init_func(e, i));
+    const callback = async (e, i) => await chart_selector_init_func(e, i);
+
+    chartList.forEach(callback);
 }
 
 const get_chart_selector_id = () =>

@@ -45,12 +45,17 @@ const walletChart = new Chart(ctx, {
     }
 });
 
-const updateChart = () =>
+async function updateChart()
 {
     walletChart.data.datasets[0].data.shift();
-    walletChart.data.datasets[0].data.push(TOTAL_WALLET)
+
+    const TOTAL_WALLET = await getData('logged-total-wallet');
+
+    walletChart.data.datasets[0].data.push(TOTAL_WALLET.totalWallet)
 
     walletChart.data.labels.shift();
-    walletChart.data.labels.push(SESSION_DATA['logged'].gameDate.toLocaleDateString('fr-FR'));
+
+    const logged = await getData('logged-user');
+    walletChart.data.labels.push(new Date(logged.gameDate).toLocaleDateString('fr-FR'));
     walletChart.update();
-};
+}

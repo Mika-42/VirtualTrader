@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="loginPage.css">
+    <link rel="stylesheet" href="../loginPage.css">
     <title>Reset password</title>
 </head>
 <body>
@@ -43,25 +43,27 @@
 </aside>
 
 <?php
-include('db_connexion.php');
+include 'interface.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    global $pdo;
 
     $email = $_POST["email"];
     $old_password = $_POST["old-password"];
     $new_password = $_POST["new-password"];
     $confirm_password = $_POST["confirm-new-password"];
 
-    $query = "SELECT * FROM Player WHERE email = '$email' AND password = '$old_password'";
+    $query = "SELECT * FROM Player WHERE email = ? AND password = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$email, $old_password]);
 
-    $result = mysqli_query($connect, $query);
-
-    if(mysqli_num_rows($result) > 0) {
+    if($stmt->rowCount() > 0) {
 
         if($new_password === $confirm_password){
 
-            $query = "UPDATE Player SET password = '$new_password' WHERE email = '$email'";
-            mysqli_query($connect, $query);
+            $query = "UPDATE Player SET password = ? WHERE email = ?";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([$new_password, $email]);
 
             echo /** @lang javascript */
             "<script>

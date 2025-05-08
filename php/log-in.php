@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="loginPage.css">
+    <link rel="stylesheet" href="../loginPage.css">
     <title>Log-in</title>
 </head>
 <body>
 
 <aside id="login-view">
-    <img id="title" src="images/VT.png" alt="VirtualTrading">
+    <img id="title" src="../images/VT.png" alt="VirtualTrading">
 
     <form id="log-form" method="post">
         <fieldset id="email" class="log-field">
@@ -37,25 +37,13 @@
 </aside>
 
 <?php
-session_start();
-
-include('db_connexion.php');
+include 'interface.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-
-    $query = "SELECT * FROM Player WHERE email = '$email' AND password = '$password'";
-    global $connect;
-    
-    $result = mysqli_query($connect, $query);
-
-    if(mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-
-        $_SESSION['id'] = $row['id'];
+    if(player_registered()) {
         header("location: menu.php?id=".urlencode($_SESSION['id']) , true, 307);
+
         echo /** @lang javascript */
         "<script>
             const el = document.getElementById('error-msg');

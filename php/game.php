@@ -1,14 +1,13 @@
 <?php
 global $data;
-include('db_connexion.php');
-include('get_data.php');
+include 'interface.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="../index.css">
   <title>VirtualTrader</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
@@ -96,19 +95,30 @@ include('get_data.php');
 </body>
 
 <script>
-  //let SESSION_DATA = <?php echo json_encode($data); ?>;
-  //SESSION_DATA['logged'].gameDate = new Date(SESSION_DATA['logged'].gameDate);
+    fetch('fetch_daily_update.php')
+    .then(response => response.json())
+    .then(data => {
+        const html = {
+            username_field: document.getElementById('username'),
+        };
+
+        //set name
+        html.username_field.innerText = data.username;
+
+        console.log(data); //todo remove
+    })
+    .catch(err => console.error("Fetch error:", err));
 </script>
 
-<script src="fetch.js"></script>
-<script src="view-switch.js"></script>
-<script src="balance-account.js"></script>
-<script src="chart-selector.js"></script>
-<script src="ranking.js"></script>
-<script src="action.js"></script>
-<script src="action-graph.js"></script>
-<script src="graph.js"></script>
-<script src="index.js"></script>
-<script src="filter.js"></script>
+<!--<script src="fetch.js"></script>-->
+<!--<script src="view-switch.js"></script>-->
+<!--<script src="balance-account.js"></script>-->
+<!--<script src="chart-selector.js"></script>-->
+<!--<script src="ranking.js"></script>-->
+<!--<script src="action.js"></script>-->
+<!--<script src="action-graph.js"></script>-->
+<!--<script src="graph.js"></script>-->
+<!--<script src="index.js"></script>-->
+<!--<script src="filter.js"></script>-->
 
 </html>

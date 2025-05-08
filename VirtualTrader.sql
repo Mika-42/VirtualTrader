@@ -20,7 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `virtualtrader`
 --
-
+DROP DATABASE IF EXISTS VirtualTrader;
+CREATE DATABASE IF NOT EXISTS VirtualTrader;
+USE VirtualTrader;
 -- --------------------------------------------------------
 
 --
@@ -28,7 +30,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `action` (
-  `code` varchar(5) NOT NULL,
+  `code` varchar(5) NOT NULL PRIMARY KEY,
   `name` varchar(20) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `value` float DEFAULT NULL,
@@ -62,18 +64,9 @@ INSERT INTO `action` (`code`, `name`, `description`, `value`, `distribDate`, `nb
 CREATE TABLE `historique` (
   `code_action` varchar(5) NOT NULL,
   `value_date` date NOT NULL,
-  `value` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `ownby`
---
-
-CREATE TABLE `ownby` (
-  `actionCode` varchar(5) DEFAULT NULL,
-  `playerId` int(11) DEFAULT NULL
+  `value` int(11) DEFAULT NULL,
+  PRIMARY KEY (`code_action`,`value_date`),
+  FOREIGN KEY (`code_action`) REFERENCES `action` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -83,7 +76,7 @@ CREATE TABLE `ownby` (
 --
 
 CREATE TABLE `player` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE,
   `email` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
   `username` varchar(20) NOT NULL,
@@ -92,44 +85,30 @@ CREATE TABLE `player` (
   `gameDate` date DEFAULT '2025-01-01'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ownby`
+--
+
+CREATE TABLE `ownby` (
+ `actionCode` varchar(5) NOT NULL,
+ `playerId` int(11) NOT NULL,
+ PRIMARY KEY (`actionCode`, `playerId`),
+ FOREIGN KEY (`actionCode`) REFERENCES action(`code`),
+ FOREIGN KEY (`playerId`) REFERENCES player(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 --
 -- Index pour les tables déchargées
 --
 
 --
--- Index pour la table `action`
---
-ALTER TABLE `action`
-  ADD PRIMARY KEY (`code`);
-
---
 -- Index pour la table `historique`
 --
-ALTER TABLE `historique`
-  ADD PRIMARY KEY (`code_action`,`value_date`);
 
 --
 -- Index pour la table `ownby`
 --
-ALTER TABLE `ownby`
-  ADD KEY `actionCode` (`actionCode`),
-  ADD KEY `playerId` (`playerId`);
-
---
--- Index pour la table `player`
---
-ALTER TABLE `player`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `player`
---
-ALTER TABLE `player`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Contraintes pour les tables déchargées
@@ -138,15 +117,11 @@ ALTER TABLE `player`
 --
 -- Contraintes pour la table `historique`
 --
-ALTER TABLE `historique`
-  ADD CONSTRAINT `historique_ibfk_1` FOREIGN KEY (`code_action`) REFERENCES `action` (`code`);
 
 --
 -- Contraintes pour la table `ownby`
 --
-ALTER TABLE `ownby`
-  ADD CONSTRAINT `ownby_ibfk_1` FOREIGN KEY (`actionCode`) REFERENCES `action` (`code`),
-  ADD CONSTRAINT `ownby_ibfk_2` FOREIGN KEY (`playerId`) REFERENCES `player` (`id`);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

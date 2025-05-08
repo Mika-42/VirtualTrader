@@ -1,6 +1,5 @@
 
 const dateEl = document.getElementById('date');
-dateEl.innerText = SESSION_DATA['logged'].gameDate.toLocaleDateString();
 
 function getLastDayOfMonth(year, month) {
         // Create a date object for the first day of the next month
@@ -8,42 +7,55 @@ function getLastDayOfMonth(year, month) {
         return date.getDate(); // Get the last day of the current month
 }
 
-const daily = () => {
-        SESSION_DATA['logged'].gameDate.setDate(SESSION_DATA['logged'].gameDate.getDate() + 1);
-        dateEl.innerText = SESSION_DATA['logged'].gameDate.toLocaleDateString();
+async function daily()
+{
+        const logged = await getData('logged-user');
+        const gameDate = new Date(logged.gameDate);
 
-        if(SESSION_DATA['logged'].gameDate.getDate() === getLastDayOfMonth(SESSION_DATA['logged'].gameDate.getFullYear(), SESSION_DATA['logged'].gameDate.getMonth()))
+        gameDate.setDate(gameDate.getDate() + 1);
+        dateEl.innerText = gameDate.toLocaleDateString();
+
+        if(gameDate.getDate() === getLastDayOfMonth(gameDate.getFullYear(), gameDate.getMonth()))
         {
-                balance_update();
-                updateChart();
-                action_update();
-                update_actions_chart();
-                ranking_update();
+                await balance_update();
+                await updateChart();
+                await ui_action_update();
+                await update_actions_chart();
+                await ranking_update();
 
                 if(filterPriceBtn.checked)
                 {
-                        sortByPrice();
+                        await sortByPrice();
                 }
 
                 if(filterEvolutionBtn.checked)
                 {
-                        sortByEvolution();
+                        await sortByEvolution();
                 }
         }
+}
 
-    }
-
-document.addEventListener('DOMContentLoaded', () => {
-        balance_update();
-        updateChart();
-        chart_selector_init();
-        actions_init();
-        show_username();
-        sortByName();
-        ranking_init();
-})
+async function init() {
 
 
-const timeout = 100 //500;
-setInterval(daily, timeout);
+        let logged = await getData('logged-user');
+        dateEl.innerText = new Date(logged.gameDate).toLocaleDateString();
+
+        balance_update()
+        .then(updateChart)
+        .then(chart_selector_init)
+        .then(actions_init);
+        //! await updateChart();
+        //! await chart_selector_init();
+        //! await actions_init();
+        // await sortByName();
+        // await ranking_init();
+}
+//document.addEventListener('DOMContentLoaded', init);
+
+init().then(() => {
+        const timeout = 100 //500;
+       // setInterval(daily, timeout);
+});
+
 

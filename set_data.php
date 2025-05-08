@@ -1,20 +1,20 @@
 <?php
+session_start();
+
+header('Content-Type: application/json');
+
 $pdo = new PDO("mysql:host=localhost;dbname=VirtualTrader", "root", "");
 
 $input = json_decode(file_get_contents('php://input'), true);
 
-if (!$input || empty($input['name']) || empty($input['email'])) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Invalid input']);
-    exit;
-}
+$action = $_GET['action'] ?? '$action is invalid.';
 
-$action = $input['action'];
-
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
 switch ($action) {
-    case 'update-logged-wallet':
-        $stmt = $pdo->prepare("UPDATE player SET balance = '?' WHERE id ='?'");
+    case 'update-logged-wallet': // ok
+        $stmt = $pdo->prepare("UPDATE player SET balance = ? WHERE id =?;");
         $stmt->execute([$input['balance'], $_SESSION['id']]);
+        echo json_encode(["success" => $action . ' successfully executed.']);
         break;
 
 //    case 'update-logged-actions':
@@ -23,17 +23,23 @@ switch ($action) {
 //        break;
 
     case 'update-actions':
-        $stmt = $pdo->prepare("UPDATE action SET value = '?', evolution = '?' WHERE code ='?'");
+        $stmt = $pdo->prepare("UPDATE action SET value = ?, evolution = ? WHERE code ='?';");
         $stmt->execute([$input['value'], $input['evolution'], $_SESSION['code']]);
         break;
 
-    case 'add-action-to':
-        $stmt = $pdo->prepare("INSERT IGNORE INTO ownBy (actionCode, playerId) VALUES ('?', '?')");
+    case 'add-action-to': // ok
+        $stmt = $pdo->prepare("INSERT IGNORE INTO ownBy (actionCode, playerId) VALUES (?, ?);");
         $stmt->execute([$input['actionCode'], $input['playerId']]);
+        echo json_encode(["success" => $action . ' successfully executed.']);
         break;
 
     case 'remove-action-to':
-        $stmt = $pdo->prepare("DELETE FROM ownBy WHERE actionCode = '?' AND playerId ='?'");
+        $stmt = $pdo->prepare("DELETE FROM ownBy WHERE actionCode = ? AND playerId = ?;");
         $stmt->execute([$input['actionCode'], $input['playerId']]);
+        echo json_encode(["success" => $action . ' successfully executed.']);
+        break;
+
     default:
+        echo json_encode(['error' => 'Unknown request: ' . $action]);
 }
+} else json_encode(['error' => 'Bad request method: ' . $_SERVER['REQUEST_METHOD']]);

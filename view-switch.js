@@ -5,8 +5,10 @@ switchAct.addEventListener('click', () => {
     document.getElementById('ranking-panel').style.display = 'none';
 });
 
-switchRank.addEventListener('click', () => {
+async function switchRank_callback()
+{
     document.getElementById('action-panel').style.display = 'none';
     document.getElementById('ranking-panel').style.display = 'flex';
-    ranking_update();
-});
+    await ranking_update();
+}
+switchRank.addEventListener('click', switchRank_callback);
