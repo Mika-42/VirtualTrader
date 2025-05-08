@@ -94,20 +94,35 @@ include 'interface.php';
 
 </body>
 
+<script src="user_data.js"></script>
+<script src="actions.js"></script>
+
 <script>
-    fetch('fetch_daily_update.php')
-    .then(response => response.json())
-    .then(data => {
-        const html = {
-            username_field: document.getElementById('username'),
-        };
+    fetch('fetch.php?action=init')
+        .then(response => response.json())
+        .then(data => {
+            init_actions(data);
+            update_player_data(data);
+            console.log(data); //todo remove
+        })
+        .catch(err => console.error("Fetch error:", err))
 
-        //set name
-        html.username_field.innerText = data.username;
+    setInterval(() => {
+        fetch('fetch.php?action=daily_update')
+            .then(response => response.json())
+            .then(data => {
 
-        console.log(data); //todo remove
-    })
-    .catch(err => console.error("Fetch error:", err));
+                if(data.wallet < 1000) {
+                    window.location.href = "game-over.php";
+                }
+
+                update_actions(data.actions);
+                update_player_data(data);
+
+
+            })
+            .catch(err => console.error("Fetch error:", err))
+    }, 500);
 </script>
 
 <!--<script src="fetch.js"></script>-->

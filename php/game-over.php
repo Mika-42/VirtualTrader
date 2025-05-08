@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="loginPage.css">
+  <link rel="stylesheet" href="../loginPage.css">
   <title>Menu</title>
 </head>
 <body>
@@ -13,7 +13,5 @@
     <a id="go-to-menu"  href="menu.php">MENU</a>
     </div>
 </aside>
-
-/// todo mathis renvoie le bouton menu vers le menu stp
 </body>
 </html>

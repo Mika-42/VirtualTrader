@@ -32,6 +32,16 @@ function get_logged_username(): string
     return $data['username'];
 }
 
+function get_logged_date(): string
+{
+    global $pdo;
+    $query = "SELECT gameDate FROM player WHERE id = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$_SESSION['id']]);
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $data['gameDate'];
+}
+
 function get_logged_total_wallet(): float
 {
     global $pdo;
@@ -68,21 +78,27 @@ function get_action_value($action_code) : float
     return $action_value['value'];
 }
 
-function buy_action($action_code) : void
+function buy_action($action_code) : bool
 {
     global $pdo;
     $total_wallet = get_logged_total_wallet();
 
     $action_value = get_action_value($action_code);
 
-    if($total_wallet >= $action_value)
+    $can_be_buy =$total_wallet >= $action_value;
+    if($can_be_buy)
     {
         $new_balance = get_logged_balance() - $action_value;
 
         $query = "UPDATE player SET balance = ? WHERE id = ?";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$new_balance,$_SESSION['id']]);
+
+        $query = "INSERT IGNORE INTO ownby(actionCode, playerId) VALUES(?,?)";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$action_code, $_SESSION['id']]);
     }
+    return $can_be_buy;
 }
 function sell_action($action_code) : void
 {
@@ -94,6 +110,9 @@ function sell_action($action_code) : void
     $stmt = $pdo->prepare($query);
     $stmt->execute([$new_balance,$_SESSION['id']]);
 
+    $query = "DELETE FROM ownby WHERE actionCode = ? AND playerId = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$action_code, $_SESSION['id']]);
 }
 
 function update_actions(): array
@@ -105,10 +124,13 @@ function update_actions(): array
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($data as $d) {
-        $_min = max(-10, floor($d['evolution'] - 3));
-        $_max = min(10, ceil($d['evolution'] + 3));
-        $d['evolution'] = rand($_min * 100.0, $_max * 100.0) / 100.0;
-        $d['value'] = max(round($d['value'] * (1 + $d['evolution'] / 100)), 1);
+
+        $randChange = rand(-3, 3);
+        // Calculate new percentage change with clamping using min and max
+        $d['evolution'] += $randChange;
+        $d['evolution'] = max(-10, min(10, $d['evolution'])); // Clamp between -10 and 10
+        $d['value'] *= (1 + $d['evolution'] / 100);
+        $d['value'] = max(1, $d['value']);
 
         $query = "UPDATE action SET value = ?, evolution = ? WHERE code = ?";
         $stmt = $pdo->prepare($query);

@@ -82,7 +82,7 @@ CREATE TABLE `player` (
   `username` varchar(20) NOT NULL,
   `balance` float DEFAULT 10000,
   `balanceAction` float DEFAULT 0,
-  `gameDate` date DEFAULT '2025-01-01'
+  `gameDate` date DEFAULT '2024-12-01'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -98,29 +98,6 @@ CREATE TABLE `ownby` (
  FOREIGN KEY (`actionCode`) REFERENCES action(`code`),
  FOREIGN KEY (`playerId`) REFERENCES player(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `historique`
---
-
---
--- Index pour la table `ownby`
---
-
---
--- Contraintes pour les tables déchargées
---
-
---
--- Contraintes pour la table `historique`
---
-
---
--- Contraintes pour la table `ownby`
---
 
 COMMIT;
 

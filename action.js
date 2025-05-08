@@ -17,60 +17,6 @@ async function ui_action_update()
     });
 }
 
-//-----------------------------//
-function create_action_html(parentID, actionData) {
-    const htmlObj = document.createElement('div');
-    htmlObj.className = 'action';
-    htmlObj.id = actionData.code;
-
-    htmlObj.innerHTML = `
-            <div class="action-name">${actionData.name}</div>
-            <div class="action-code">(${actionData.code})</div>
-            <div class="action-price">${actionData.value}€</div>
-            <div class="action-price-evolution">${(actionData.evolution >= 0) ? '+' : '-'}${Math.abs(actionData.evolution) + '%'}</div>
-            <button class="action-buy" title="buy"></button>
-            <button disabled class="action-sell" title="sell"></button>
-            <div class="action-description">${actionData.description}</div>
-        `;
-    let p = document.getElementById(parentID);
-    p.appendChild(htmlObj);
-
-    return htmlObj;
-}
-
-async function sell_callback(sellButton, buyButton, action)
-{
-    const logged = await getData('logged-user');
-
-    sellButton.disabled = true;
-    buyButton.disabled = false;
-
-    setData('remove-action-to', {actionCode: action.code, playerId: parseInt(logged.id)});
-
-    setData('update-logged-wallet', {balance: parseFloat(logged.balance) + parseFloat(action.value)});
-
-    await balance_update();
-}
-
-async function buy_callback(sellButton, buyButton, action)
-{
-    const logged = await getData('logged-user');
-    const totalWallet = await getData('logged-total-wallet')
-    if(parseFloat(action.value) <= parseFloat(totalWallet.totalWallet))
-    {
-        sellButton.disabled = false;
-        buyButton.disabled = true;
-
-        setData('add-action-to', {actionCode: action.code, playerId: parseInt(logged.id)})
-
-        setData('update-logged-wallet', {
-            balance: parseFloat(logged.balance) - parseFloat(action.value),
-            id: logged.id}
-        );
-
-        await balance_update();
-    }
-}
 async function actions_init()
 {
     const pid = 'action-panel';
