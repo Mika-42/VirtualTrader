@@ -30,7 +30,7 @@ filterSoldBtn.addEventListener('click', () => {
 ///---
 function generic_sort(type)
 {
-    fetch(`fetch.php?action=filter_by_${type}`)
+    fetch(`../php/fetch.php?action=filter_by_${type}`)
         .then(response => response.json())
         .then(data => {
             console.log(data)

@@ -9,7 +9,7 @@ function init_actions(data) {
             <div class="action-name">${action.name}</div>
             <div class="action-code">(${action.code})</div>
             <div class="action-price">${format_wallet(action.value)}</div>
-            <div class="action-price-evolution">${(action.evolution >= 0) ? '+' : '-'}${Math.abs(action.evolution) + '%'}</div>
+            <div class="action-price-evolution">${(action.evolution >= 0) ? '+' : '-'}${Math.abs(action.evolution.toFixed(2)) + '%'}</div>
             <button class="action-buy" title="buy"></button>
             <button disabled class="action-sell" title="sell"></button>
             <div class="action-description">${action.description}</div>
@@ -20,7 +20,7 @@ function init_actions(data) {
 
         btnSell.addEventListener('click', () => {
 
-            fetch(`fetch.php?action=sell&action_code=${action.code}`)
+            fetch(`../php/fetch.php?action=sell&action_code=${action.code}`)
                 .then(response => response.json())
                 .then(data => {
                     btnSell.disabled = true;
@@ -32,7 +32,7 @@ function init_actions(data) {
 
         btnBuy.addEventListener('click', () => {
 
-            fetch(`fetch.php?action=buy&action_code=${action.code}`)
+            fetch(`../php/fetch.php?action=buy&action_code=${action.code}`)
                 .then(response => response.json())
                 .then(data => {
 
@@ -57,6 +57,6 @@ function update_actions(actions)
         const evolution = document.querySelector(`#${action.code} .action-price-evolution`);
 
         price.innerText = format_wallet(action.value);
-        evolution.innerText = `${(action.evolution >= 0) ? '+' : '-'}${Math.abs(action.evolution)}%`;
+        evolution.innerText = `${(action.evolution >= 0) ? '+' : '-'}${Math.abs(action.evolution.toFixed(2))}%`;
     });
 }

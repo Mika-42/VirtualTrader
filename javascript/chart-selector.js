@@ -1,6 +1,12 @@
-async function chart_selector_init_func(e, i)
-{
+function shiftLeft(arr, n) {
+    for (let i = 0; i < n; i++) {
+        arr.push(arr.shift());
+    }
+    return arr;
+}
 
+function chart_selector_init_func(chart, i, data)
+{
     const el = document.createElement('span');
     const lbl = document.createElement('label');
     const select = document.createElement('select');
@@ -10,25 +16,22 @@ async function chart_selector_init_func(e, i)
 
     select.id = `actionSelect-${i+1}`;
 
-    const actions = await getData('all-actions');
-    actions.forEach(f => {
+    data.actions.forEach(f => {
         select.add(new Option(f.name, f.code));
     });
 
     el.appendChild(lbl);
     el.appendChild(select);
-    e.appendChild(el);
-    e.addEventListener('change', () => {
-        graphAct[i].data.datasets[0].data = previous12.get(select.value);
-        graphAct[i].update();
+    chart.appendChild(el);
+    chart.addEventListener('change', () => {
+        graphAct[i].data.datasets[0].data = Array(12).fill(NaN);
     });
 }
-async function chart_selector_init()
+function chart_selector_init(data)
 {
     const chartList = document.querySelectorAll('.chart-container');
-    const callback = async (e, i) => await chart_selector_init_func(e, i);
 
-    chartList.forEach(callback);
+    chartList.forEach((chart, i) => chart_selector_init_func(chart, i, data));
 }
 
 const get_chart_selector_id = () =>

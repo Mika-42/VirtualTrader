@@ -39,9 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
     if (isset($_POST['action']) && $_POST['action'] == 'RESET') {
-            ///$userId = $_SESSION['user_id'];
-            ///$query = "UPDATE Player SET capital = 10000 WHERE id = '$id'" AND "// todo faire le reste de la requete";
-            ///mysqli_query($connect,$query);
+        reset_logged();
         header('location: game.php?id='.urlencode($_GET['id']));
         exit();
     }

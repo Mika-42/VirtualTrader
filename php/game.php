@@ -1,5 +1,4 @@
 <?php
-global $data;
 include 'interface.php';
 ?>
 
@@ -16,7 +15,7 @@ include 'interface.php';
 <body>
 <main>
   <header id="info">
-    <div id="menu-container" class="user-data"><a id="menu-btn" href="menu.php">MENU</a></div>
+    <div id="menu-container" class="user-data"><a id="menu-btn" href="menu.php?id=<?php echo $_SESSION['id']; ?>">MENU</a></div>
     <h2 id="date" class="user-data"></h2>
     <h2 id="username" class="user-data"></h2>
     <h2 id="balance-account" class="user-data"></h2>
@@ -94,16 +93,22 @@ include 'interface.php';
 
 </body>
 
-<script src="user_data.js"></script>
-<script src="actions.js"></script>
-<script src="filter.js"></script>
-
+<script src="../javascript/user_data.js"></script>
+<script src="../javascript/actions.js"></script>
+<script src="../javascript/filter.js"></script>
+<script src="../javascript/ranking.js"></script>
+<script src="../javascript/chart-selector.js"></script>
+<script src="../javascript/action-graph.js"></script>
+<script src="../javascript/graph.js"></script>
 <script>
     fetch('fetch.php?action=init')
         .then(response => response.json())
         .then(data => {
             init_actions(data);
             update_player_data(data);
+            ranking_init(data.players);
+            chart_selector_init(data);
+            updateChart(data);
             console.log(data); //todo remove
         })
         .catch(err => console.error("Fetch error:", err))
@@ -119,6 +124,9 @@ include 'interface.php';
 
                 update_actions(data.actions);
                 update_player_data(data);
+                ranking_update(data.players);
+                update_actions_chart(data);
+                updateChart(data);
 
                 if(filterPriceBtn.checked)
                 {
@@ -134,15 +142,5 @@ include 'interface.php';
     }, 500);
 </script>
 
-<!--<script src="fetch.js"></script>-->
-<!--<script src="view-switch.js"></script>-->
-<!--<script src="balance-account.js"></script>-->
-<!--<script src="chart-selector.js"></script>-->
-<!--<script src="ranking.js"></script>-->
-<!--<script src="action.js"></script>-->
-<!--<script src="action-graph.js"></script>-->
-<!--<script src="graph.js"></script>-->
-<!--<script src="index.js"></script>-->
-<!--<script src="filter.js"></script>-->
 
 </html>

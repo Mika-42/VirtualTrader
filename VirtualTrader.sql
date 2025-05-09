@@ -56,21 +56,11 @@ INSERT INTO `action` (`code`, `name`, `description`, `value`, `distribDate`, `nb
 ('V', 'Visa Inc.', 'Services financiers et paiements électroniques.', 330, '2025-04-21', 0, -4.69);
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `historique`
 --
 
-CREATE TABLE `historique` (
-  `code_action` varchar(5) NOT NULL,
-  `value_date` date NOT NULL,
-  `value` int(11) DEFAULT NULL,
-  PRIMARY KEY (`code_action`,`value_date`),
-  FOREIGN KEY (`code_action`) REFERENCES `action` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `player`
 --
@@ -81,8 +71,7 @@ CREATE TABLE `player` (
   `password` varchar(255) NOT NULL,
   `username` varchar(20) NOT NULL,
   `balance` float DEFAULT 10000,
-  `balanceAction` float DEFAULT 0,
-  `gameDate` date DEFAULT '2024-12-01'
+  `gameDate` date DEFAULT '2024-01-01'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

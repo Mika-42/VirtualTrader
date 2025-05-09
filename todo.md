@@ -1,4 +1,5 @@
 - ajouter le reset
+- remetre les actions par défauts
 - remettre le timeout a 500
 - rentre la transition du gameover plus douce
-- si une action est possédée, empecher son achat
+- css

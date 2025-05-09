@@ -1,4 +1,5 @@
-const format_wallet = (num) => {
+function format_wallet(num)
+{
     const roundedNum = parseFloat(num).toFixed(2);
 
     const [integerPart, decimalPart] = roundedNum.split('.');
@@ -8,12 +9,14 @@ const format_wallet = (num) => {
     return `${formattedInteger}.${decimalPart}€`;
 }
 
-const update_wallet = (data) => {
+function update_wallet(data)
+{
     const wallet = document.getElementById('balance-account');
     wallet.innerText = format_wallet(data.wallet);
 }
 
-const update_player_data = (data) => {
+function update_player_data(data)
+{
     const html = {
         username_field: document.getElementById('username'),
         date_field: document.getElementById('date'),

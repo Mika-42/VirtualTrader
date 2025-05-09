@@ -3,12 +3,12 @@ const ctx = document.getElementById('graph').getContext('2d');
 const walletChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: ['','','','','','','','','','','',''],
+        labels: Array(12).fill(''),
         datasets: [{
             label: '',
-            data: [NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN],
+            data: Array(12).fill(NaN),
             borderColor: 'rgb(133,255,118)',
-            backgroundColor: 'rgba(112,181,100,0.03)',
+            backgroundColor: 'rgba(112,181,100,0.09)',
             fill: true,
             tension: 0.1 // Smooth the line
         }]
@@ -45,17 +45,14 @@ const walletChart = new Chart(ctx, {
     }
 });
 
-async function updateChart()
+function updateChart(data)
 {
     walletChart.data.datasets[0].data.shift();
 
-    const TOTAL_WALLET = await getData('logged-total-wallet');
-
-    walletChart.data.datasets[0].data.push(TOTAL_WALLET.totalWallet)
+    walletChart.data.datasets[0].data.push(data.wallet)
 
     walletChart.data.labels.shift();
 
-    const logged = await getData('logged-user');
-    walletChart.data.labels.push(new Date(logged.gameDate).toLocaleDateString('fr-FR'));
+    walletChart.data.labels.push(new Date(data.date).toLocaleDateString('fr-FR'));
     walletChart.update();
 }

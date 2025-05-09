@@ -11,10 +11,10 @@ const newChart = (g) => {
     return new Chart(g, {
         type: 'bar',
         data: {
-            labels: ['', '', '', '', '', '', '', '', '', '', '', ''],
+            labels: Array(12).fill(''),
             datasets: [{
                 label: '',
-                data: [NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN],
+                data: Array(12).fill(NaN),
                 borderColor: 'rgb(255,159,34)',
                 backgroundColor: 'rgba(255,238,0,0.84)',
                 fill: true,
@@ -53,17 +53,20 @@ for(let i = 0; i < 3; ++i)
     graphAct[i] = newChart(graphActEl[i]);
 }
 
-async function update_actions_chart()
+
+function update_actions_chart(data)
 {
     const codes = get_chart_selector_id();
 
-    const logged = await getData('logged-user');
+    graphAct.forEach((chart, i) => {
 
-    graphAct.forEach((f, i) => {
-        f.data.datasets[0].data = previous12.get(codes[i]);
+        chart.data.labels.push(new Date(data.date).toLocaleDateString('fr-FR'));
+        chart.data.labels.shift();
 
-        f.data.labels.push(new Date(logged.gameDate).toLocaleDateString('fr-FR'));
-        f.data.labels.shift();
-        f.update();
+        chart.data.datasets[0].data[0] = Array.from(data.actions).filter(e => e.code === codes[i])[0].value;
+        chart.data.datasets[0].data.push(chart.data.datasets[0].data.shift()) //;
+        ;
+
+        chart.update();
     });
-};
+}

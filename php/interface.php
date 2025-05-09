@@ -78,7 +78,7 @@ function get_action_value($action_code) : float
     return $action_value['value'];
 }
 
-function get_id_sort_actions_by_evolution()
+function get_id_sort_actions_by_evolution(): array
 {
     global $pdo;
     $query = "SELECT code FROM action ORDER BY evolution";
@@ -103,6 +103,29 @@ function get_id_sort_actions_by_value(): array
     $stmt = $pdo->prepare($query);
     $stmt->execute();
     return  $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function get_all_players_by_wallet(): array
+{
+    global $pdo;
+    $query = "SELECT player.*, IFNULL(SUM(action.value), 0) + player.balance AS totalWallet 
+            FROM player 
+            LEFT JOIN action ON (action.code, player.id) IN (SELECT actionCode, playerId FROM ownby) 
+            GROUP BY player.id 
+            ORDER BY totalWallet DESC 
+            LIMIT 10";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    return  $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function get_logged_month_as_number(): int
+{
+    global $pdo;
+    $query = "SELECT MONTH(gameDate) AS month FROM player WHERE id = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$_SESSION['id']]);
+    return $stmt->fetch(PDO::FETCH_ASSOC)['month'];
 }
 
 function buy_action($action_code) : bool
@@ -152,21 +175,24 @@ function update_actions(): array
 
     foreach ($data as $d) {
 
-        $randChange = rand(-3, 3);
-        // Calculate new percentage change with clamping using min and max
+        $randChange = -3 + mt_rand() / mt_getrandmax() * 6;
         $d['evolution'] += $randChange;
-        $d['evolution'] = max(-10, min(10, $d['evolution'])); // Clamp between -10 and 10
-        $d['value'] *= (1 + $d['evolution'] / 100);
-        $d['value'] = max(1, $d['value']);
+        $d['evolution'] = max(-10.0, min(10.0, $d['evolution'])); // Clamp between -10 and 10
+        $d['value'] *= (1 + $d['evolution'] / 100.0);
+        $d['value'] = max(1.0, $d['value']);
 
         $query = "UPDATE action SET value = ?, evolution = ? WHERE code = ?";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$d['value'], $d['evolution'], $d['code']]);
+
     }
 
     return $data;
 }
 
+/**
+ * @throws DateMalformedStringException
+ */
 function update_logged_date(): string
 {
     global $pdo;
@@ -183,4 +209,19 @@ function update_logged_date(): string
     $stmt->execute([$date->format('Y-m-d'), $_SESSION['id']]);
 
     return $date->format('Y-m-d');
+}
+
+function reset_logged ()
+{
+    global $pdo;
+    $query = "UPDATE player SET balance = DEFAULT, gameDate = DEFAULT WHERE id = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$_SESSION['id']]);
+
+    $query = "DELETE FROM ownby WHERE playerId = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$_SESSION['id']]);
+
+
+
 }
