@@ -1,3 +1,4 @@
-
+- ajouter le reset
 - remettre le timeout a 500
 - rentre la transition du gameover plus douce
+- si une action est possédée, empecher son achat

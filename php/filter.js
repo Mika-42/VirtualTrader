@@ -26,46 +26,29 @@ filterSoldBtn.addEventListener('click', () => {
         i.style.display = isOwnBySomeone ? "flex" : "none";
     });
 });
-///---
-const filterNameBtn = document.getElementById('filter-name-btn');
 
-async function sortByName()
+///---
+function generic_sort(type)
 {
-    const parent = document.getElementById('action-panel');
-    const orderByName = await getData('all-actions-by-name');
-    orderByName.forEach((id) => {
-        const _ = document.getElementById(id);
-        parent.appendChild(_);
-    });
+    fetch(`fetch.php?action=filter_by_${type}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            data.forEach((el) => {
+                const _ = document.getElementById(el.code);
+                const panel = document.getElementById('action-panel');
+                panel.appendChild(_);
+            });
+        }).catch(err => console.error(err));
 }
 
-filterNameBtn.addEventListener('click', sortByName);
+const filterNameBtn = document.getElementById('filter-name-btn');
+filterNameBtn.addEventListener('click', () => generic_sort('name'));
 
 ///---
 const filterPriceBtn = document.getElementById('filter-price-btn');
-
-async function sortByPrice()
-{
-    const parent = document.getElementById('action-panel');
-    const orderByPrice = await getData('all-actions-by-price');
-    orderByPrice.forEach((id) => {
-        const _ = document.getElementById(id);
-        parent.appendChild(_);
-    });
-}
-
-filterPriceBtn.addEventListener('click', sortByPrice);
+filterPriceBtn.addEventListener('click', () => generic_sort('value'));
 ///---
 const filterEvolutionBtn = document.getElementById('filter-progression-btn');
 
-async function sortByEvolution() {
-    const parent = document.getElementById('action-panel');
-    const orderByEvolution = await getData('all-actions-by-evolution');
-
-    orderByEvolution.forEach((id) => {
-        const _ = document.getElementById(id);
-        parent.appendChild(_);
-    });
-}
-
-filterEvolutionBtn.addEventListener('click', sortByEvolution);
+filterEvolutionBtn.addEventListener('click', () => generic_sort('evolution'));

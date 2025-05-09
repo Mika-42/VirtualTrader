@@ -78,6 +78,33 @@ function get_action_value($action_code) : float
     return $action_value['value'];
 }
 
+function get_id_sort_actions_by_evolution()
+{
+    global $pdo;
+    $query = "SELECT code FROM action ORDER BY evolution";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    return  $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function get_id_sort_actions_by_name() : array
+{
+    global $pdo;
+    $query = "SELECT code FROM action ORDER BY name";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    return  $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function get_id_sort_actions_by_value(): array
+{
+    global $pdo;
+    $query = "SELECT code FROM action ORDER BY value DESC";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    return  $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 function buy_action($action_code) : bool
 {
     global $pdo;

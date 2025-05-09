@@ -96,6 +96,7 @@ include 'interface.php';
 
 <script src="user_data.js"></script>
 <script src="actions.js"></script>
+<script src="filter.js"></script>
 
 <script>
     fetch('fetch.php?action=init')
@@ -119,7 +120,15 @@ include 'interface.php';
                 update_actions(data.actions);
                 update_player_data(data);
 
+                if(filterPriceBtn.checked)
+                {
+                    generic_sort('value');
+                }
 
+                if(filterEvolutionBtn.checked)
+                {
+                    generic_sort('evolution');
+                }
             })
             .catch(err => console.error("Fetch error:", err))
     }, 500);

@@ -3,7 +3,7 @@ include 'interface.php';
 
 header('Content-Type: application/json');
 
-$action = $_GET['action'];
+$action = $_GET['action'] ?? 'action is not set properly';
 
 switch ($action) {
     case 'init':
@@ -42,5 +42,9 @@ switch ($action) {
         echo json_encode($logged);
         break;
 
+    case 'filter_by_name': echo json_encode(get_id_sort_actions_by_name()); break;
+    case 'filter_by_value': echo json_encode(get_id_sort_actions_by_value()); break;
+    case 'filter_by_evolution': echo json_encode(get_id_sort_actions_by_evolution()); break;
     default:
+        echo json_encode(['error' => 'Unknown action']);
 }
