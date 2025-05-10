@@ -22,7 +22,6 @@ header {
     height: 70px;
     display: flex;
     align-items: center;
-    gap: 10px;
 }
 
 .redirect-button
@@ -118,9 +117,12 @@ footer
 }
 
 #utbm {
-    height: 100px;
-    width: auto;
-    right: 0;
+    background-image: url('../images/utbm.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100%;
 }
 
 main {
