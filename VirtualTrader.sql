@@ -50,13 +50,13 @@ INSERT INTO `action` (`code`, `name`, `description`, `value`, `evolution`, `defa
 ('GOOGL', 'Alphabet Inc.', 'Secteur technologique, maison-mère de Google.', 155,  4.37, 155,  4.37),
 ('JNJ', 'Johnson & Johnson', 'Secteur pharmaceutique et produits de soins de santé.', 160, 9.35, 160, 9.35),
 ('KO', 'Coca-Cola Company', 'Boissons non alcoolisées.', 75, -0.8, 75, -0.8),
-('MSFT', 'Microsoft Corporatio', 'Technologie, logiciels et services cloud.', 370,  -9.66, 370,  -9.66),
+('MSFT', 'Microsoft Corporation', 'Technologie, logiciels et services cloud.', 370,  -9.66, 370,  -9.66),
 ('NKE', 'Nike Inc.', 'Vêtements et équipements sportifs.', 55,  -2.88,  55,  -2.88),
 ('TSLA', 'Tesla', ' Automobile, spécialisé dans les véhicules électriques.', 240,  0.85,  240,  0.85),
 ('V', 'Visa Inc.', 'Services financiers et paiements électroniques.', 330, -4.69,  330, -4.69),
-('NVDA', 'NVIDIA Corporation', 'Technologie, leader dans les processeurs graphiques et l''intelligence artificielle.', 140, 1.49, 140, 1.49),
-('PG', 'Procter & Gamble Co.', 'Biens de consommation, produits d''hygiène et ménagers (marques comme Pampers, Gillette, Ariel).', 90, 2.06, 90, 2.06),
-('MCD', 'McDonald''s Corporation', 'Restauration rapide, chaîne mondiale de restauration avec un modèle de franchise puissant.', 162, 4.42,  162, 4.42);
+('NVDA', 'NVIDIA Corporation', 'Technologie, processeurs graphiques et intelligence artificielle.', 140, 1.49, 140, 1.49),
+('PG', 'Procter & Gamble Co.', 'Biens de consommation, produits d''hygiène et ménagers.', 90, 2.06, 90, 2.06),
+('MCD', 'McDonald''s Corporation', 'Restauration rapide.', 162, 4.42,  162, 4.42);
 
 -- --------------------------------------------------------
 --
@@ -90,6 +90,9 @@ CREATE TABLE `ownby` (
  FOREIGN KEY (`actionCode`) REFERENCES action(`code`),
  FOREIGN KEY (`playerId`) REFERENCES player(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+INSERT INTO player (email, password, username) VALUES ('mika@vt.com', '123', 'Mika');
 
 COMMIT;
 
