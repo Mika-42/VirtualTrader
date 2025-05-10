@@ -2,6 +2,14 @@ html, body
 {
     width: 100%;
     height: 100%;
+    margin: 0;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+
+}
+
+body{
+    display: flex;
+    flex-direction: column;
 }
 
 header, footer, main
@@ -9,10 +17,136 @@ header, footer, main
     width: 100%;
 }
 
-header, footer {
-    height: 10%;
+header {
+    background: #080808;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.redirect-button
+{
+    background: linear-gradient(45deg, #63ffac, #ffee00);
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+div img {
+    width: 150px;
+    margin-left: 20px;
+}
+
+#logo {
+    width: 92%;
+    display: flex;
+}
+
+.bg
+{
+    mix-blend-mode: lighten;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    position: absolute;
+    left: 0;
+    top: 62px;
+    right: 0;
+    bottom: 0;
+    object-fit: cover;
+    object-position: 50% 50%;
+    color: transparent;
+
+    width: 100%;
+    height: 500px;
+
+    mask-image: linear-gradient(rgba(0, 0, 0, 0.72), transparent);
+    display: block;
+
+}
+
+#content1
+{
+    position: relative;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#content1 h1 {
+    color: white;
+    font-size: 5rem;
+    text-align: center;
+}
+
+#content1 h1 mark {
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(90deg, #63ffac, #ffee00, #ffee00, #ffee00);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+section {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+footer
+{
+    height: 50px;
+
+    background: #080808;
+    display: grid;
+    grid-template-columns: 10% 10% 10% 60% 10%;
+    grid-template-rows: 50px;
+    color: white;
+    align-items: center;
+    gap: 5px;
+}
+
+#utbm {
+    height: 100px;
+    width: auto;
+    right: 0;
 }
 
 main {
-    height: 80%;
+    height: 100%;
+    background: #1e1e1e;
+    display: flex;
+    flex-direction: column;
+}
+
+#signin {
+    width: 180px;
+    height: 50px;
+}
+
+#login {
+    width: 110px;
+    height: 32px;
+}
+
+#signin:hover {
+    width: 190px;
+    font-size: 23px;
+}
+
+.name {
+    /*padding-left: 20px;*/
+    font-weight: 900;
+    text-align: center;
 }
