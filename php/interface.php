@@ -231,6 +231,8 @@ function reset_logged (): void
     $stmt = $pdo->prepare($query);
     $stmt->execute([$_SESSION['id']]);
 
-
+    $query = "UPDATE action SET value = default_value, evolution = default_evolution WHERE TRUE";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
 
 }

@@ -1,5 +1,5 @@
 - remetre les actions par défauts dans le reset
 - remettre le timeout a 500
+- fix l'argent en trop
 - rentre la transition du gameover plus douce
-- css
 - page d'accueil

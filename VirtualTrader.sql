@@ -33,27 +33,30 @@ CREATE TABLE `action` (
   `code` varchar(5) NOT NULL PRIMARY KEY,
   `name` varchar(20) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `value` float DEFAULT NULL,
-  `distribDate` date DEFAULT NULL,
-  `nbDetenue` int(11) DEFAULT 0,
-  `evolution` float DEFAULT 0
+  `value` float DEFAULT 0,
+  `evolution` float DEFAULT 0,
+  `default_value`float DEFAULT 0,
+  `default_evolution` float DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `action`
 --
 
-INSERT INTO `action` (`code`, `name`, `description`, `value`, `distribDate`, `nbDetenue`, `evolution`) VALUES
-('AAPL', 'Apple Inc.', 'Technologie, fabricant de produits électroniques.', 200, '2025-04-21', 0, -5.07),
-('AMZN', 'Amazon.com Inc.', 'E-commerce, services cloud.', 175, '2025-04-21', 0, -8.7),
-('BA', 'Boeing Co.', 'Aéronautique et défense.', 160, '2025-04-21', 0, -4.12),
-('GOOGL', 'Alphabet Inc.', 'Secteur technologique, maison-mère de Google.', 155, '2025-04-21', 0, 4.37),
-('JNJ', 'Johnson & Johnson', 'Secteur pharmaceutique et produits de soins de santé.', 160, '2025-04-21', 0, 9.35),
-('KO', 'Coca-Cola Company', 'Boissons non alcoolisées.', 75, '2025-04-21', 0, -0.8),
-('MSFT', 'Microsoft Corporatio', 'Technologie, logiciels et services cloud.', 370, '2025-04-21', 0, -9.66),
-('NKE', 'Nike Inc.', 'Vêtements et équipements sportifs.', 55, '2025-04-21', 0, -2.88),
-('TSLA', 'Tesla', ' Automobile, spécialisé dans les véhicules électriques.', 240, '2025-04-21', 0, 0.85),
-('V', 'Visa Inc.', 'Services financiers et paiements électroniques.', 330, '2025-04-21', 0, -4.69);
+INSERT INTO `action` (`code`, `name`, `description`, `value`, `evolution`, `default_value`, `default_evolution`) VALUES
+('AAPL', 'Apple Inc.', 'Technologie, fabricant de produits électroniques.', 200, -5.07, 200, -5.07),
+('AMZN', 'Amazon.com Inc.', 'E-commerce, services cloud.', 175, -8.7, 175, -8.7),
+('BA', 'Boeing Co.', 'Aéronautique et défense.', 160, -4.12, 160, -4.12),
+('GOOGL', 'Alphabet Inc.', 'Secteur technologique, maison-mère de Google.', 155,  4.37, 155,  4.37),
+('JNJ', 'Johnson & Johnson', 'Secteur pharmaceutique et produits de soins de santé.', 160, 9.35, 160, 9.35),
+('KO', 'Coca-Cola Company', 'Boissons non alcoolisées.', 75, -0.8, 75, -0.8),
+('MSFT', 'Microsoft Corporatio', 'Technologie, logiciels et services cloud.', 370,  -9.66, 370,  -9.66),
+('NKE', 'Nike Inc.', 'Vêtements et équipements sportifs.', 55,  -2.88,  55,  -2.88),
+('TSLA', 'Tesla', ' Automobile, spécialisé dans les véhicules électriques.', 240,  0.85,  240,  0.85),
+('V', 'Visa Inc.', 'Services financiers et paiements électroniques.', 330, -4.69,  330, -4.69),
+('NVDA', 'NVIDIA Corporation', 'Technologie, leader dans les processeurs graphiques et l''intelligence artificielle.', 140, 1.49, 140, 1.49),
+('PG', 'Procter & Gamble Co.', 'Biens de consommation, produits d''hygiène et ménagers (marques comme Pampers, Gillette, Ariel).', 90, 2.06, 90, 2.06),
+('MCD', 'McDonald''s Corporation', 'Restauration rapide, chaîne mondiale de restauration avec un modèle de franchise puissant.', 162, 4.42,  162, 4.42);
 
 -- --------------------------------------------------------
 --
