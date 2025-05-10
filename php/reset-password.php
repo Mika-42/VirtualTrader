@@ -50,16 +50,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $email = $_POST["email"];
     $old_password = $_POST["old-password"];
-    $new_password = $_POST["new-password"];
+    $new_password = password_hash($_POST["new-password"], PASSWORD_DEFAULT);
     $confirm_password = $_POST["confirm-new-password"];
 
-    $query = "SELECT * FROM Player WHERE email = ? AND password = ?";
+    $query = "SELECT * FROM Player WHERE email = ?";
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$email, $old_password]);
+    $stmt->execute([$email]);
 
     if($stmt->rowCount() > 0) {
 
-        if($new_password === $confirm_password){
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $old_password_match = password_verify($old_password, $data["password"]);
+        if($old_password_match && password_verify($confirm_password,$new_password)){
 
             $query = "UPDATE Player SET password = ? WHERE email = ?";
             $stmt = $pdo->prepare($query);

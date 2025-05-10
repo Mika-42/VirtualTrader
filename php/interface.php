@@ -5,21 +5,24 @@ $pdo = new PDO("mysql:host=localhost;dbname=VirtualTrader", "root", "");
 
 function player_registered() : bool
 {
-    global$pdo;
+    global $pdo;
     $email = $_POST["email"];
-    $password = $_POST["password"];
 
-    $query = "SELECT id FROM Player WHERE email = ? AND password = ?";
+    $query = "SELECT id, password FROM Player WHERE email = ?";
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$email,$password]);
+    $stmt->execute([$email]);
 
     $ret = $stmt->rowCount() > 0;
-    if($ret)
+    if(!$ret) return false;
+
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    if(password_verify($_POST["password"], $data["password"]))
     {
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
         $_SESSION['id'] = $data['id'];
+        return true;
     }
-    return $ret;
+
+    return false;
 }
 
 function get_logged_username(): string
@@ -174,6 +177,37 @@ function sell_action($action_code) : void
     $stmt->execute([$action_code, $_SESSION['id']]);
 }
 
+function updateActionPrice(float $currentPrice, float $previousVariation): array {
+    $minPrice = 1.0;
+
+    $krach = rand(1, 100) <= 5;
+    // Étape 1 : Générer un décalage aléatoire entre -3 et +3
+    $delta = rand(-300, 300) / 100.0 + $krach;
+
+    // Étape 2 : Appliquer au pourcentage précédent
+    $newVariation = $previousVariation + $delta;
+
+    // Étape 3 : Forcer la variation dans les bornes [-10%, +10%]
+    $newVariation = max(-10.0, min(10.0, $newVariation));
+
+    // Étape 4 : Calcul du nouveau prix
+    $newPrice = $currentPrice * (1 + $newVariation / 100.0);
+
+    // Étape 5 : Ne jamais descendre sous 1€
+    if ($newPrice < $minPrice) {
+        $newPrice = $minPrice;
+    }
+
+    if($newPrice > 1000000)
+    {
+        $newPrice =  $currentPrice;
+    }
+    return [
+        'new_price' => round($newPrice, 2),
+        'new_variation' => round($newVariation, 2)
+    ];
+}
+
 function update_actions(): array
 {
     global $pdo;
@@ -184,15 +218,10 @@ function update_actions(): array
 
     foreach ($data as $d) {
 
-        $randChange = -3 + mt_rand() / mt_getrandmax() * 6;
-        $d['evolution'] += $randChange;
-        $d['evolution'] = max(-10.0, min(10.0, $d['evolution'])); // Clamp between -10 and 10
-        $d['value'] *= (1 + $d['evolution'] / 100.0);
-        $d['value'] = max(1.0, $d['value']);
-
+        $new = updateActionPrice($d['value'], $d['evolution']);
         $query = "UPDATE action SET value = ?, evolution = ? WHERE code = ?";
         $stmt = $pdo->prepare($query);
-        $stmt->execute([$d['value'], $d['evolution'], $d['code']]);
+        $stmt->execute([$new['new_price'], $new['new_variation'], $d['code']]);
 
     }
 
@@ -219,7 +248,6 @@ function update_logged_date(): string
 
     return $date->format('Y-m-d');
 }
-
 function reset_logged (): void
 {
     global $pdo;

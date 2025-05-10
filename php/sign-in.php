@@ -54,10 +54,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     global$pdo;
     $username = $_POST["username"];
     $email = $_POST["email"];
-    $password = $_POST["password"];
+    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
     $confirm_password = $_POST["confirm_password"];
 
-    if ($password !== $confirm_password) {
+    if (!password_verify($confirm_password, $password)) {
         echo /** @lang javascript */
         "<script>
             const el = document.getElementById('error-msg');

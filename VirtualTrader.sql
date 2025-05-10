@@ -43,21 +43,22 @@ CREATE TABLE `action` (
 -- Déchargement des données de la table `action`
 --
 
-INSERT INTO `action` (`code`, `name`, `description`, `value`, `evolution`, `default_value`, `default_evolution`) VALUES
-('AAPL', 'Apple Inc.', 'Technologie, fabricant de produits électroniques.', 200, -5.07, 200, -5.07),
-('AMZN', 'Amazon.com Inc.', 'E-commerce, services cloud.', 175, -8.7, 175, -8.7),
-('BA', 'Boeing Co.', 'Aéronautique et défense.', 160, -4.12, 160, -4.12),
-('GOOGL', 'Alphabet Inc.', 'Secteur technologique, maison-mère de Google.', 155,  4.37, 155,  4.37),
-('JNJ', 'Johnson & Johnson', 'Secteur pharmaceutique et produits de soins de santé.', 160, 9.35, 160, 9.35),
-('KO', 'Coca-Cola Company', 'Boissons non alcoolisées.', 75, -0.8, 75, -0.8),
-('MSFT', 'Microsoft Corporation', 'Technologie, logiciels et services cloud.', 370,  -9.66, 370,  -9.66),
-('NKE', 'Nike Inc.', 'Vêtements et équipements sportifs.', 55,  -2.88,  55,  -2.88),
-('TSLA', 'Tesla', ' Automobile, spécialisé dans les véhicules électriques.', 240,  0.85,  240,  0.85),
-('V', 'Visa Inc.', 'Services financiers et paiements électroniques.', 330, -4.69,  330, -4.69),
-('NVDA', 'NVIDIA Corporation', 'Technologie, processeurs graphiques et intelligence artificielle.', 140, 1.49, 140, 1.49),
-('PG', 'Procter & Gamble Co.', 'Biens de consommation, produits d''hygiène et ménagers.', 90, 2.06, 90, 2.06),
-('MCD', 'McDonald''s Corporation', 'Restauration rapide.', 162, 4.42,  162, 4.42);
-
+INSERT INTO `action` (`code`, `name`, `description`, `value`, `evolution`) VALUES
+('AAPL', 'Apple Inc.', 'Technologie, fabricant de produits électroniques.', 20400, -5.07),
+('AMZN', 'Amazon.com Inc.', 'E-commerce, services cloud.', 3575, -8.7),
+('BA', 'Boeing Co.', 'Aéronautique et défense.', 7660, -4.12),
+('GOOGL', 'Alphabet Inc.', 'Secteur technologique, maison-mère de Google.', 155,  4.37),
+('JNJ', 'Johnson & Johnson', 'Secteur pharmaceutique et produits de soins de santé.', 160, 9.35),
+('KO', 'Coca-Cola Company', 'Boissons non alcoolisées.', 10075, -0.8),
+('MSFT', 'Microsoft Corporation', 'Technologie, logiciels et services cloud.', 370,  -9.66),
+('NKE', 'Nike Inc.', 'Vêtements et équipements sportifs.', 555,  -2.88),
+('TSLA', 'Tesla', ' Automobile, spécialisé dans les véhicules électriques.', 279,  0.85),
+('V', 'Visa Inc.', 'Services financiers et paiements électroniques.', 38739, -4.69),
+('NVDA', 'NVIDIA Corporation', 'Technologie, processeurs graphiques et intelligence artificielle.', 18880, 81.49),
+('PG', 'Procter & Gamble Co.', 'Biens de consommation, produits d''hygiène et ménagers.', 2267, 2.06),
+('MCD', 'McDonald''s Corporation', 'Restauration rapide.', 9613, 4.42),
+('BRK', 'Berkshire Hathaway', 'Géant financier dirigé par Warren Buffett.', 555000, 0);
+UPDATE `action` SET `default_value` = `value`, `default_evolution` = `evolution` WHERE TRUE;
 -- --------------------------------------------------------
 --
 -- Structure de la table `historique`
@@ -74,7 +75,7 @@ CREATE TABLE `player` (
   `password` varchar(255) NOT NULL,
   `username` varchar(20) NOT NULL,
   `balance` float DEFAULT 10000,
-  `gameDate` date DEFAULT '2024-01-01'
+  `gameDate` date DEFAULT '2000-01-01'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -90,9 +91,6 @@ CREATE TABLE `ownby` (
  FOREIGN KEY (`actionCode`) REFERENCES action(`code`),
  FOREIGN KEY (`playerId`) REFERENCES player(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
-INSERT INTO player (email, password, username) VALUES ('mika@vt.com', '123', 'Mika');
 
 COMMIT;
 
