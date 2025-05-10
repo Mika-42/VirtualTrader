@@ -1,5 +1,2 @@
-- remettre le timeout a 500
-- fix l'argent en trop
 - rentre la transition du gameover plus douce
 - page d'accueil
-- hash les mots de passes

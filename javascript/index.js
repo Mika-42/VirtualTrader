@@ -7,7 +7,7 @@ fetch('fetch.php?action=init')
         ranking_init(data.players);
         chart_selector_init(data);
         updateChart(data);
-        console.log(data); //todo remove
+        generic_sort('name');
     })
     .catch(err => console.error("Fetch error:", err))
 
@@ -17,7 +17,7 @@ setInterval(() => {
         .then(data => {
 
             if(data.wallet < 1000) {
-                window.location.href = "game-over.php";
+                window.location.href = `game-over.php?id=${data.id}`;
             }
 
             update_actions(data.actions);
@@ -37,4 +37,4 @@ setInterval(() => {
             }
         })
         .catch(err => console.error("Fetch error:", err))
-}, 500);
+}, 1200);

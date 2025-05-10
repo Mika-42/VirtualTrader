@@ -178,11 +178,9 @@ function sell_action($action_code) : void
 }
 
 function updateActionPrice(float $currentPrice, float $previousVariation): array {
-    $minPrice = 1.0;
 
-    $krach = rand(1, 100) <= 5;
     // Étape 1 : Générer un décalage aléatoire entre -3 et +3
-    $delta = rand(-300, 300) / 100.0 + $krach;
+    $delta = rand(-300, 300) / 100.0;
 
     // Étape 2 : Appliquer au pourcentage précédent
     $newVariation = $previousVariation + $delta;
@@ -190,18 +188,24 @@ function updateActionPrice(float $currentPrice, float $previousVariation): array
     // Étape 3 : Forcer la variation dans les bornes [-10%, +10%]
     $newVariation = max(-10.0, min(10.0, $newVariation));
 
+    $krach = (rand(100, 10000) / 100.0) <= 3.5;
+    if($krach)
+    {
+        $newVariation = rand(-2000, -3000) / 100.0;
+    }
+
     // Étape 4 : Calcul du nouveau prix
     $newPrice = $currentPrice * (1 + $newVariation / 100.0);
 
     // Étape 5 : Ne jamais descendre sous 1€
-    if ($newPrice < $minPrice) {
-        $newPrice = $minPrice;
-    }
+    $newPrice = max(1, $newPrice);
+
 
     if($newPrice > 1000000)
     {
         $newPrice =  $currentPrice;
     }
+
     return [
         'new_price' => round($newPrice, 2),
         'new_variation' => round($newVariation, 2)
@@ -222,7 +226,6 @@ function update_actions(): array
         $query = "UPDATE action SET value = ?, evolution = ? WHERE code = ?";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$new['new_price'], $new['new_variation'], $d['code']]);
-
     }
 
     return $data;

@@ -1,7 +1,3 @@
-<?php
-include 'interface.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +11,7 @@ include 'interface.php';
 <body>
 <main>
   <header id="info">
-    <div id="menu-container" class="user-data"><a id="menu-btn" href="menu.php?id=<?php echo $_SESSION['id']; ?>">MENU</a></div>
+    <div id="menu-container" class="user-data"><a id="menu-btn" href="menu.php?id=<?php echo $_GET['id']; ?>">MENU</a></div>
     <h2 id="date" class="user-data"></h2>
     <h2 id="username" class="user-data"></h2>
     <h2 id="balance-account" class="user-data"></h2>

@@ -54,7 +54,7 @@ INSERT INTO `action` (`code`, `name`, `description`, `value`, `evolution`) VALUE
 ('NKE', 'Nike Inc.', 'Vêtements et équipements sportifs.', 555,  -2.88),
 ('TSLA', 'Tesla', ' Automobile, spécialisé dans les véhicules électriques.', 279,  0.85),
 ('V', 'Visa Inc.', 'Services financiers et paiements électroniques.', 38739, -4.69),
-('NVDA', 'NVIDIA Corporation', 'Technologie, processeurs graphiques et intelligence artificielle.', 18880, 81.49),
+('NVDA', 'NVIDIA Corporation', 'Technologie, processeurs graphiques et intelligence artificielle.', 180880, 81.49),
 ('PG', 'Procter & Gamble Co.', 'Biens de consommation, produits d''hygiène et ménagers.', 2267, 2.06),
 ('MCD', 'McDonald''s Corporation', 'Restauration rapide.', 9613, 4.42),
 ('BRK', 'Berkshire Hathaway', 'Géant financier dirigé par Warren Buffett.', 555000, 0);
