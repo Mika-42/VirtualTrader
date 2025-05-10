@@ -6,7 +6,7 @@ include 'interface.php';
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="../index.css">
+  <link rel="stylesheet" href="../css/index.css">
   <title>VirtualTrader</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
@@ -100,47 +100,5 @@ include 'interface.php';
 <script src="../javascript/chart-selector.js"></script>
 <script src="../javascript/action-graph.js"></script>
 <script src="../javascript/graph.js"></script>
-<script>
-    fetch('fetch.php?action=init')
-        .then(response => response.json())
-        .then(data => {
-            init_actions(data);
-            update_player_data(data);
-            ranking_init(data.players);
-            chart_selector_init(data);
-            updateChart(data);
-            console.log(data); //todo remove
-        })
-        .catch(err => console.error("Fetch error:", err))
-
-    setInterval(() => {
-        fetch('fetch.php?action=daily_update')
-            .then(response => response.json())
-            .then(data => {
-
-                if(data.wallet < 1000) {
-                    window.location.href = "game-over.php";
-                }
-
-                update_actions(data.actions);
-                update_player_data(data);
-                ranking_update(data.players);
-                update_actions_chart(data);
-                updateChart(data);
-
-                if(filterPriceBtn.checked)
-                {
-                    generic_sort('value');
-                }
-
-                if(filterEvolutionBtn.checked)
-                {
-                    generic_sort('evolution');
-                }
-            })
-            .catch(err => console.error("Fetch error:", err))
-    }, 500);
-</script>
-
-
+<script src="../javascript/index.js"></script>
 </html>

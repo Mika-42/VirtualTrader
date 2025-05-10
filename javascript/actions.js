@@ -8,15 +8,24 @@ function init_actions(data) {
         htmlObj.innerHTML = `
             <div class="action-name">${action.name}</div>
             <div class="action-code">(${action.code})</div>
-            <div class="action-price">${format_wallet(action.value)}</div>
-            <div class="action-price-evolution">${(action.evolution >= 0) ? '+' : '-'}${Math.abs(action.evolution.toFixed(2)) + '%'}</div>
+            <div class="action-price"></div>
+            <div class="action-price-evolution"></div>
             <button class="action-buy" title="buy"></button>
-            <button disabled class="action-sell" title="sell"></button>
+            <button class="action-sell" title="sell"></button>
             <div class="action-description">${action.description}</div>
         `;
 
         const btnSell = htmlObj.querySelector(`.action-sell`);
         const btnBuy = htmlObj.querySelector(`.action-buy`);
+
+        if(Array.from(data.owned).map(e => e.actionCode).includes(action.code))
+        {
+            btnSell.enabled = true;
+            btnBuy.disabled = true;
+        } else {
+            btnSell.disabled = true;
+            btnBuy.enabled = true;
+        }
 
         btnSell.addEventListener('click', () => {
 
@@ -48,6 +57,8 @@ function init_actions(data) {
 
         document.getElementById('action-panel').appendChild(htmlObj);
     });
+
+    update_actions(data.actions);
 }
 
 function update_actions(actions)
@@ -58,5 +69,6 @@ function update_actions(actions)
 
         price.innerText = format_wallet(action.value);
         evolution.innerText = `${(action.evolution >= 0) ? '+' : '-'}${Math.abs(action.evolution.toFixed(2))}%`;
+        evolution.style.color = (action.evolution >= 0) ? 'rgba(91,228,96,0.72)' : 'rgb(243,68,68)';
     });
 }

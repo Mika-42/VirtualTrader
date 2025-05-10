@@ -28,6 +28,10 @@ const walletChart = new Chart(ctx, {
                 }
             },
             y: {
+                min: 1000,
+                ticks: {
+                    stepSize: 5000
+                },
                 title: {
                     display: true,
                     text: 'Balance'

@@ -128,6 +128,15 @@ function get_logged_month_as_number(): int
     return $stmt->fetch(PDO::FETCH_ASSOC)['month'];
 }
 
+function get_logged_action_code(): array
+{
+    global $pdo;
+    $query = "SELECT actionCode FROM ownby WHERE playerId = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$_SESSION['id']]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 function buy_action($action_code) : bool
 {
     global $pdo;
@@ -211,7 +220,7 @@ function update_logged_date(): string
     return $date->format('Y-m-d');
 }
 
-function reset_logged ()
+function reset_logged (): void
 {
     global $pdo;
     $query = "UPDATE player SET balance = DEFAULT, gameDate = DEFAULT WHERE id = ?";

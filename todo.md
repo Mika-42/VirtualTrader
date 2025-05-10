@@ -1,5 +1,5 @@
-- ajouter le reset
-- remetre les actions par défauts
+- remetre les actions par défauts dans le reset
 - remettre le timeout a 500
 - rentre la transition du gameover plus douce
 - css
+- page d'accueil

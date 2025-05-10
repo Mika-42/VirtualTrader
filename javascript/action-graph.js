@@ -15,8 +15,10 @@ const newChart = (g) => {
             datasets: [{
                 label: '',
                 data: Array(12).fill(NaN),
-                borderColor: 'rgb(255,159,34)',
-                backgroundColor: 'rgba(255,238,0,0.84)',
+                borderColor: '#4caf50',
+                backgroundColor: 'rgba(76,175,80,0.56)',
+                borderRadius: 5,
+                hoverBackgroundColor: '#399a3d',
                 fill: true,
                 tension: 0.1 // Smooth the line
             }]

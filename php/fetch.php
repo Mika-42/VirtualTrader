@@ -15,6 +15,7 @@ switch ($action) {
             'wallet' => get_logged_total_wallet(),
             'players' => get_all_players_by_wallet(),
             'month' => get_logged_month_as_number(),
+            'owned' => get_logged_action_code()
         ];
 
         echo json_encode($logged);

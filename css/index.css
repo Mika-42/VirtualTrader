@@ -5,14 +5,13 @@ html,body {
     display: flex;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 
-    background: rgb(255, 217, 217);
+    background: #4a4a4a;
 }
 main, #side-panel {
     border: none;
     border-radius: 7px;
     margin: 7px;
     height: auto;
-
 }
 
 main
@@ -27,7 +26,6 @@ main
 {
     width: 22%;
     min-width: 335px;
-    /*background: #b2b2ff;*/
     background: transparent;
     backdrop-filter: blur(50px) brightness(0.7) contrast(0.9);
     display: flex;
@@ -89,7 +87,8 @@ main
     border-radius: 7px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+    color: white;
 }
 
 #graph-widget
@@ -99,6 +98,7 @@ main
     display: flex;
     flex-direction: row;
     gap: 5px;
+    color: white;
 }
 
 .chart
@@ -108,6 +108,20 @@ main
     background: transparent;
     backdrop-filter: blur(50px) brightness(0.7) contrast(0.9);
     border-radius: 7px;
+    color: white;
+}
+
+.chart-container span, option
+{
+    margin: 0;
+    background: transparent;
+    backdrop-filter: blur(50px) brightness(0.7) contrast(0.9);
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    font-size: 14px;
+    padding-left: 20px;
+    height: 25px;
+    color: rgb(134, 234, 138);
 }
 
 .graph-container
@@ -116,6 +130,7 @@ main
     height: 100%;
     display: flex;
     flex-direction: column;
+    color: white;
 }
 
 #group
@@ -125,11 +140,13 @@ main
     display: flex;
     flex-direction: column;
     gap: 5px;
+    color: white;
 }
 
 .sub-graph
 {
     height: 92%;
+    color: white;
     /*width: 100%;*/
 }
 
@@ -139,8 +156,6 @@ main
     margin: 0;
     font-size: 25px;
 }
-
-
 
 .action
 {
@@ -206,12 +221,12 @@ main
 
 .action-buy
 {
-    mask: url('images/shopping-kart.svg') no-repeat center;
+    mask: url('../images/shopping-kart.svg') no-repeat center;
 }
 
 .action-sell
 {
-    mask: url('images/sell.svg') no-repeat center;
+    mask: url('../images/sell.svg') no-repeat center;
 }
 
 .action-sell:hover
@@ -235,12 +250,14 @@ main
     margin-left: 10px;
     display: flex;
     gap: 10px;
+    color: white;
 }
 
 .filterText
 {
     text-align: center;
     padding: 3px;
+    color: white;
 }
 
 .toggle-input {
@@ -267,21 +284,24 @@ main
     height: 33%;
     display: flex;
     flex-direction: column;
+    gap: 0;
 }
 .action-graph
 {
     width: 100%;
+    margin: 0;
+    border-radius: 7px 7px 0 0;
 }
 
 #menu-container
 {
     height: 100%;
     width: 100px;
-    background: rgba(255, 0, 0, 0.41);
+    background: rgba(88, 202, 92, 0.72);
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 7px;
 }
 
 #menu-btn
@@ -291,6 +311,8 @@ main
 
     font-size: 25px;
     font-weight: 900;
+
+    color: white;
 }
 
 .rank
@@ -311,7 +333,26 @@ main
     width: 10%;
 }
 
+#balance-account
+{
+    color: rgb(88, 202, 92);
+    padding-right: 30px;
+}
 .username, .balance
 {
     width: 40%;
+}
+
+select
+{
+    background: #393939;
+    border-radius: 10px;
+    border: 1px #4caf50 solid;
+    color: rgb(134, 234, 138);
+}
+
+select:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: initial; /* optional: reset border color */
 }
