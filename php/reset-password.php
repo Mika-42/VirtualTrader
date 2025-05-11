@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/loginPage.css">
+    <link rel="icon" href="../images/icon.png" type="image/png">
     <title>Reset password</title>
 </head>
 <body>

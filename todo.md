@@ -1,2 +1,1 @@
-- rentre la transition du gameover plus douce
-- page d'accueil
+- faire un read me

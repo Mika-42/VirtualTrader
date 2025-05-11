@@ -6,6 +6,7 @@ include 'interface.php';
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="../css/loginPage.css">
+  <link rel="icon" href="../images/icon.png" type="image/png">
   <title>Menu</title>
 </head>
 <body>
